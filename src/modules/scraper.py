@@ -11,7 +11,7 @@ The scraper module holds functions that actually scrape the e-commerce websites
 """
 
 import requests
-from src.modules.formatter import formatSearchQuery, formatResult, getCurrency, sortList
+from formatter import formatSearchQuery, formatResult, getCurrency, sortList
 from bs4 import BeautifulSoup
 import re
 import csv
