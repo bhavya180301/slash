@@ -1,8 +1,18 @@
 from flask import Flask, request, render_template
-from src.modules.scraper import driver
-import json
+from flask_sqlalchemy import SQLAlchemy
+
+from scraper import driver
 
 app = Flask(__name__, template_folder=".")
+app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///users.db'
+db=SQLAlchemy(app)
+
+class Users(db.Model):
+    id=db.Column(db.Integer(),primary_key=True)
+    name=db.Column(db.String(length=50),nullable=False)
+    email = db.Column(db.String(length=100), nullable=False, unique=True)
+    password = db.Column(db.String(length=30), nullable=False)
+
 
 
 @app.route("/")
