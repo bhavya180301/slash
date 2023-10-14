@@ -1,20 +1,6 @@
-from flask import Flask, request, render_template
-from flask_sqlalchemy import SQLAlchemy
-
+from webapp import app
+from flask import request,render_template
 from scraper import driver
-
-app = Flask(__name__, template_folder=".")
-app.config['SQLALCHEMY_DATABASE_URI']='sqlite:///users.db'
-db=SQLAlchemy(app)
-
-class Users(db.Model):
-    id=db.Column(db.Integer(),primary_key=True)
-    name=db.Column(db.String(length=50),nullable=False)
-    email = db.Column(db.String(length=100), nullable=False, unique=True)
-    password = db.Column(db.String(length=30), nullable=False)
-
-
-
 @app.route("/")
 def landingpage():
     return render_template("./static/landing.html")
@@ -46,3 +32,7 @@ def product_search_filtered():
     if num == "default":
         num = None
     return product_search(product, sort, currency, num)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
