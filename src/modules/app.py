@@ -1,6 +1,7 @@
 from webapp import app
 from flask import request,render_template
 from scraper import driver
+from webapp.forms import RegisterForm
 @app.route("/")
 def landingpage():
     return render_template("./static/landing.html")
@@ -32,6 +33,12 @@ def product_search_filtered():
     if num == "default":
         num = None
     return product_search(product, sort, currency, num)
+
+@app.route('/register')
+def register_page():
+    form = RegisterForm()
+    return render_template("./static/register.html", form=form)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
