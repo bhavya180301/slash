@@ -20,19 +20,21 @@
 
         <div class="container">
             <form method="post" class="form-register">
+<!--                CSRF token-->
+                {{ form.hidden_tag() }}
 
                 <h2 align="center">Welcome to Slash!</h2>
                 {{ form.name.label }}
                 {{ form.name(class="form-control", placeholder="Enter your name") }}
 
                 {{ form.email.label }}
-                {{ form.name(class="form-control", placeholder="Enter your email") }}
+                {{ form.email(class="form-control", placeholder="Enter your email") }}
 
                 {{ form.password1.label }}
-                {{ form.name(class="form-control", placeholder="Password") }}
+                {{ form.password1(class="form-control", placeholder="Password") }}
 
                 {{ form.password2.label }}
-                {{ form.name(class="form-control", placeholder="Confirm Password") }}
+                {{ form.password2(class="form-control", placeholder="Confirm Password") }}
                 <br>
                 {{ form.submit(class="btn btn-lg btn-primary") }}
             </form>
