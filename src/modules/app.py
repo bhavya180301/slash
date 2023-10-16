@@ -41,12 +41,12 @@ def landingpage():
 
 
 @app.route("/search", methods=["POST", "GET"])
-def product_search(new_product="", sort=None, currency=None, num=None):
+def product_search(new_product="", sort=None, currency=None, num=None, filter_by_rating=None):
     product = request.args.get("product_name")
     if product == None:
         product = new_product
 
-    data = driver(product, currency, num, 0, False, None, True, sort)
+    data = driver(product, currency, num, 0, False, None, True, sort, filter_by_rating)
 
     return render_template("./webapp/static/result.html", data=data, prod=product)
 
@@ -58,6 +58,7 @@ def product_search_filtered():
     sort = request.form["sort"]
     currency = request.form["currency"]
     num = request.form["num"]
+    filter_by_rating = request.form["filter-by-rating"]
 
     if sort == "default":
         sort = None
@@ -65,7 +66,10 @@ def product_search_filtered():
         currency = None
     if num == "default":
         num = None
-    return product_search(product, sort, currency, num)
+    if filter_by_rating == "default":
+        filter_by_rating = None
+
+    return product_search(product, sort, currency, num, filter_by_rating)
 
 @app.route('/register', methods=['GET','POST'])
 def register_page():
