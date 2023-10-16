@@ -1,12 +1,15 @@
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 from scraper import driver
-from forms import RegisterForm
+# from forms import RegisterForm
+from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__, template_folder=".")
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY']='504038774627ae2489c38028'
 db = SQLAlchemy(app)
+bcrypt=Bcrypt(app)
 
 class Users(db.Model):
     id=db.Column(db.Integer(),primary_key=True)
@@ -14,6 +17,13 @@ class Users(db.Model):
     email = db.Column(db.String(length=100), nullable=False, unique=True)
     password = db.Column(db.String(length=30), nullable=False)
 
+    @property
+    def passwordInput(self):
+        return self.passwordInput
+
+    @passwordInput.setter
+    def passwordInput(self,plain_text_password):
+        self.password=bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
 
 @app.route("/")
 def landingpage():
@@ -49,15 +59,23 @@ def product_search_filtered():
 
 @app.route('/register', methods=['GET','POST'])
 def register_page():
+    from forms import RegisterForm
     form = RegisterForm()
     if form.validate_on_submit():
-        user_to_create=Users(name=form.name.data,
-                             email=form.email.data,
-                             password=form.password1.data)
-        db.session.add(user_to_create)
-        db.session.commit()
-        return redirect(url_for('landingpage'))
+        try:
+            user_to_create=Users(name=form.name.data,
+                                 email=form.email.data,
+                                 passwordInput=form.password1.data)
+            db.session.add(user_to_create)
+            db.session.commit()
+            return redirect(url_for('landingpage'))
+        except IntegrityError:
+            db.session.rollback()
+            flash('An account with this email already exists. Please use a different email.', category='danger')
+    if form.errors!= {}:
+        for err_msg in form.errors.values():
+            flash(f'There was an error with creating user: {err_msg}', category='danger')
     return render_template("./webapp/static/register.html", form=form)
 
-# app.run(debug=True)
+
 
