@@ -86,12 +86,21 @@
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="{{ url_for('landingpage') }}">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('register_page') }}">Sign up</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Login</a>
-      </li>
+        {% if current_user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link">Logged in as {{ current_user.email }}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Logout</a>
+            </li>
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register_page') }}">Sign up</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login_page') }}">Login</a>
+            </li>
+        {% endif %}
     </ul>
     <h1 id="header"> Welcome to Mini Version of SLASH! </h1>
     <img src="/static/images/slash.png" alt="slash" style="width:40%;">

@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
+from flask_login import login_user, LoginManager, UserMixin
 from scraper import driver
 # from forms import RegisterForm
 from sqlalchemy.exc import IntegrityError
@@ -10,8 +11,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY']='504038774627ae2489c38028'
 db = SQLAlchemy(app)
 bcrypt=Bcrypt(app)
+login_manager=LoginManager(app)
 
-class Users(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
+
+
+class Users(db.Model, UserMixin):
     id=db.Column(db.Integer(),primary_key=True)
     name=db.Column(db.String(length=50),nullable=False)
     email = db.Column(db.String(length=100), nullable=False, unique=True)
@@ -24,6 +31,9 @@ class Users(db.Model):
     @passwordInput.setter
     def passwordInput(self,plain_text_password):
         self.password=bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+
+    def check_password_correction(self,attempted_password):
+        return bcrypt.check_password_hash(self.password,attempted_password)
 
 @app.route("/")
 def landingpage():
@@ -77,5 +87,23 @@ def register_page():
             flash(f'There was an error with creating user: {err_msg}', category='danger')
     return render_template("./webapp/static/register.html", form=form)
 
+
+@app.route('/login',methods=['GET','POST'])
+def login_page():
+    from forms import LoginForm
+    form=LoginForm()
+    if form.validate_on_submit():
+        attempted_user=Users.query.filter_by(email=form.email.data).first()
+        if attempted_user and attempted_user.check_password_correction(
+                attempted_password=form.password.data
+        ):
+            login_user(attempted_user)
+            flash(f'Success! You are logged in as: {attempted_user.email} ', category='success')
+            return redirect(url_for('landingpage'))
+
+        else:
+            flash('Email or password do not match! Please try again', category='danger')
+
+    return render_template("./webapp/static/login.html",form=form)
 
 
