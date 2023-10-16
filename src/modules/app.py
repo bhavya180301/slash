@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import login_user, LoginManager, UserMixin
+from flask_login import login_user, LoginManager, UserMixin,logout_user
 from scraper import driver
 # from forms import RegisterForm
 from sqlalchemy.exc import IntegrityError
@@ -105,5 +105,14 @@ def login_page():
             flash('Email or password do not match! Please try again', category='danger')
 
     return render_template("./webapp/static/login.html",form=form)
+
+@app.route('/logout')
+def logout_page():
+    logout_user()
+    flash("You have been logged out!", category='info')
+    return redirect(url_for('landingpage'))
+
+
+
 
 
