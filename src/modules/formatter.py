@@ -12,7 +12,7 @@ the required format.
 """
 
 from datetime import datetime
-import math
+import math, re
 import requests
 from ast import literal_eval
 
@@ -46,8 +46,11 @@ def formatResult(
         title = titles[0].get_text().strip()
     if prices:
         price = prices[0].get_text().strip()
-    if "$" not in price:
-        price = "$" + price
+        if "$" not in price:
+            price = "$" + price
+        price=price[price.index("$"):]
+        price=re.sub(r'\$(\s)+','$', price)
+        price=re.sub(r'(\d)(\s)+(\d)', r'\1.\2', price)
     if links:
         link = links[0]["href"]
     if ratings:
