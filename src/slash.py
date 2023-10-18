@@ -8,6 +8,8 @@ this file. If not, please write to: secheaper@gmail.com
 """
 
 import argparse
+
+from src.modules import app
 from src.modules.scraper import driver
 from src.modules.formatter import sortList
 from tabulate import tabulate
@@ -88,3 +90,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
