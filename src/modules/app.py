@@ -36,7 +36,7 @@ class Users(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password,attempted_password)
 
 class Wishlist(db.Model):
-    id=db.Column(db.Integer(),primary_key=True)
+    id=db.Column(db.Integer(),primary_key=True,autoincrement=True)
     user_id=db.Column(db.Integer(),db.ForeignKey('users.id'))
     product_title=db.Column(db.String(length=1000),nullable=False)
     product_link=db.Column(db.String(length=1000),nullable=False)
@@ -50,30 +50,44 @@ def landingpage():
 
 
 @app.route("/search", methods=["POST", "GET"])
-def product_search(new_product="", sort=None, currency=None, num=None):
+def product_search(new_product="", sort=None, currency=None, num=None):        
     product = request.args.get("product_name")
     if product == None:
         product = new_product
 
     data = driver(product, currency, num, 0, False, None, True, sort)
 
-    return render_template("./webapp/static/result.html", data=data, prod=product)
+    return render_template("./webapp/static/result.html", data=data, prod=product, user_login=current_user.is_authenticated)
 
 
 @app.route("/filter", methods=["POST", "GET"])
 def product_search_filtered():
 
     product = request.args.get("product_name")
-    sort = request.form["sort"]
-    currency = request.form["currency"]
-    num = request.form["num"]
+    sort, currency, num=None, None, None
+    if request.method=="POST":
+        if request.form["name"] == "filter-form":
+            print("Inside filter form")
+            sort = request.form["sort"]
+            currency = request.form["currency"]
+            num = request.form["num"]
 
-    if sort == "default":
-        sort = None
-    if currency == "usd":
-        currency = None
-    if num == "default":
-        num = None
+            if sort == "default":
+                sort = None
+            if currency == "usd":
+                currency = None
+            if num == "default":
+                num = None
+
+        if "wishlist-form" in request.form["name"]:
+            wishlist_product=Wishlist(user_id=current_user.id,
+                                    product_title=request.form["title"],
+                                    product_link=request.form["link"],
+                                    product_price=request.form["price"][1:],
+                                    product_website=request.form["website"],
+                                    product_rating=request.form["rating"])
+            db.session.add(wishlist_product)
+            db.session.commit()
     return product_search(product, sort, currency, num)
 
 @app.route('/register', methods=['GET','POST'])

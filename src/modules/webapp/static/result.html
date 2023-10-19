@@ -129,6 +129,7 @@
           <div class="col-sm">
             <br>
             <input type = "submit" class="button button1" value = "Filter Search" />
+            <input type = "text" name = "name" value = "filter-form" style="display:none;"/>
          </form>  
          </div>
           <!-- <div class="col-sm">
@@ -146,7 +147,7 @@
       <div class="results">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-           <table border='1' class="item-list" >
+           <table border='1' class="item-list" id="result-table">
               <thead>
                  <tr>
                     <th colspan="5">Products</th>
@@ -174,6 +175,15 @@
 
               </tbody>
            </table>
+           <script>
+              if ('{{user_login}}'=='True'){
+                var table=document.getElementById("result-table");
+                for (let i = 2; i < table.rows.length; i++) {
+                  const cell = table.rows[i].insertCell();
+                  cell.innerHTML = '<form action="/filter?product_name={{prod}}" method="POST"><input type="text" name="link" value="'+table.rows[i].querySelector("a").getAttribute("href")+'" style="display:none;"><input type="text" name="title" value="'+table.rows[i].cells[1].textContent+'" style="display:none;"><input type="text" name="price" value="'+table.rows[i].cells[2].textContent+'" style="display:none;"><input type="text" name="website" value="'+table.rows[i].cells[3].textContent+'" style="display:none;"><input type="text" name="rating" value="'+table.rows[i].cells[4].textContent+'" style="display:none;"><input type="text" name="name" value ="wishlist-form'+i+'" style="display:none;"/><input type="submit" class="button button1" value="Add to wishlist"/></form>';
+                }
+              }
+           </script>
         </div>
         <div class="col-md-4"></div>
      </div>
