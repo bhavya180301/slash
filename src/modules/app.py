@@ -7,7 +7,7 @@ from src.modules.scraper import driver
 import pandas as pd
 import pdfkit
 
-path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+path_wkhtmltopdf = "src/modules/wkhtmltopdf.exe"
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 
 from flask import Flask, request, render_template, url_for, redirect, flash
