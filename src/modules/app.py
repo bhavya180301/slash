@@ -13,8 +13,10 @@ config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from flask_login import login_user, LoginManager, UserMixin, logout_user
-from src.modules.scraper import driver
+
+from flask_login import login_user, LoginManager, UserMixin,logout_user, current_user
+from scraper import driver
+
 # from forms import RegisterForm
 from sqlalchemy.exc import IntegrityError
 
@@ -48,6 +50,15 @@ class Users(db.Model, UserMixin):
     def check_password_correction(self, attempted_password):
         return bcrypt.check_password_hash(self.password, attempted_password)
 
+
+class Wishlist(db.Model):
+    id=db.Column(db.Integer(),primary_key=True)
+    user_id=db.Column(db.Integer(),db.ForeignKey('users.id'))
+    product_title=db.Column(db.String(length=1000),nullable=False)
+    product_link=db.Column(db.String(length=1000),nullable=False)
+    product_price=db.Column(db.Float(),nullable=False)
+    product_website=db.Column(db.String(length=100),nullable=False)
+    product_rating=db.Column(db.Float(),nullable=False)
 
 @app.route("/")
 def landingpage():
@@ -148,3 +159,16 @@ def logout_page():
     logout_user()
     flash("You have been logged out!", category='info')
     return redirect(url_for('landingpage'))
+
+
+@app.route("/wishlist",methods=['GET'])
+def wishlist():
+    if current_user.is_authenticated:
+            wishlists= Wishlist.query.filter_by(user_id=current_user.id).all()
+            return render_template("./webapp/static/wishlist.html", user=current_user.id, data=wishlists)
+    return login_page()
+
+
+
+
+
