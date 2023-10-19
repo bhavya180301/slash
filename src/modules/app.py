@@ -89,10 +89,11 @@ def product_search_filtered():
         currency = None
     if num == "default":
         num = None
-    if request.form["name"] == "filter-form":
+    
+    if "filter-search" in request.form:
         return product_search(product, sort, currency, num)
-        
-    if "wishlist-form" in request.form["name"]:
+      
+    if "add-to-wishlist" in request.form:
         wishlist_product=Wishlist(user_id=current_user.id,
                                 product_title=request.form["title"],
                                 product_link=request.form["link"],
@@ -104,14 +105,14 @@ def product_search_filtered():
         return product_search(product, None, None, None)
 
 
-    elif "button button2" in request.form:
+    elif "convert-to-csv" in request.form:
 
         data = driver(product, currency, num, 0, None, None, True, sort)
         file_name = write_csv(data, product, r'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\csvs')
 
         return send_file(fr'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\csvs\{file_name}', as_attachment=True)
 
-    elif "button button3" in request.form:
+    elif "convert-to-pdf" in request.form:
         now = datetime.now()
         data = driver(product, currency, num, 0, None, None, True, sort)
         html_table = render_template("./webapp/static/pdf_maker.html", data=data, prod=product)
