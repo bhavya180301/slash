@@ -52,3 +52,35 @@ def test_user_logout(client):
     response = client.get('/logout', follow_redirects=True)
 
     assert b'You have been logged out!' in response.data
+
+def test_user_registration_existing_email(client):
+    # Test user registration with an existing email address
+    response = client.post('/register', data=dict(
+        name='ExistingUser',
+        email='john@example.com',  # Use an email that already exists
+        password1='newpassword',
+        password2='newpassword'
+    ), follow_redirects=True)
+
+    # Check if the registration fails with an error message
+    assert b'An account with this email already exists' in response.data
+
+def test_user_login_invalid_credentials(client):
+    # Test user login with invalid credentials
+    response = client.post('/login', data=dict(
+        email='nonexistent@example.com',  # Use an email that doesn't exist
+        password='invalidpassword'
+    ), follow_redirects=True)
+
+    # Check if the login fails with an error message
+    assert b'Email or password do not match! Please try again' in response.data
+
+def test_user_login_blank_fields(client):
+    # Test user login with blank email and password fields
+    response = client.post('/login', data=dict(
+        email='',
+        password=''
+    ), follow_redirects=True)
+
+    # Check if the login fails with an error message
+    assert b'Email or password do not match! Please try again' in response.data
