@@ -15,7 +15,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
 from flask_login import login_user, LoginManager, UserMixin, logout_user, current_user
-from scraper import driver
 
 from sqlalchemy.exc import IntegrityError
 
