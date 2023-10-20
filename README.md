@@ -1,5 +1,5 @@
 
-[CSC 510 - Project 2 - Repo Presentation](https://ncsu.zoom.us/rec/share/LX3fKUKuKso1_XNpdK2TvEdADZzpYdMughe_9e_f3-zdzuYhFoxz8k6mHf_vcJOj.QlqORp3KuCJi_boa?startTime=1638480222000)
+[CSC 510 - Project 2 - Repo Presentation](https://youtu.be/66GaChfVFrY)
 
 <p align="center"><img width="500" src="./assets/slash.png"></p>
 
