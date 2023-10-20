@@ -94,11 +94,26 @@ flask run
 6. WISHLIST: Add products to wishlist with just one click.
 7. DOWNLOAD RESULTS: Download results to a PDF or CSV.
 
-<p align="center"><img width="150.1" src="./assets/sorting.PNG"><img width="130" src="./assets/currency.PNG"><img width="150.2" src="./assets/results.PNG"></p>
+<p align="center"> <img width="250" height="200" src="./assets/sorting.PNG">   <img width="250" height="200" src="./assets/currency.PNG">   <img width="250" height="200" src="./assets/results.PNG"></p>
 
-<p align="center">
-Easy to view and access results
-<p align="center"><img width="800" src="./assets/list.PNG"></p>
+<p align="center"> 
+ 
+![Result Page](https://github.com/Yash-Chandrani/slash/blob/main/assets/slash_search_web.png)
+
+</p>
+
+<p align="center"> 
+ 
+![Sign-up Page](https://github.com/Yash-Chandrani/slash/blob/main/assets/slash_register.png)
+
+</p>
+
+<p align="center"> 
+ 
+![Login Page](https://github.com/Yash-Chandrani/slash/blob/main/assets/slash%20login.png)
+
+</p>
+
 
 
 ## :robot: Increased Code Coverage
