@@ -51,7 +51,7 @@ class Users(db.Model, UserMixin):
 
 
 class Wishlist(db.Model):
-    id=db.Column(db.Integer(),primary_key=True)
+    id=db.Column(db.Integer(),primary_key=True,autoincrement=True)
     user_id=db.Column(db.Integer(),db.ForeignKey('users.id'))
     product_title=db.Column(db.String(length=1000),nullable=False)
     product_link=db.Column(db.String(length=1000),nullable=False)
@@ -72,8 +72,7 @@ def product_search(new_product="", sort=None, currency=None, num=None, csv=None)
 
     data = driver(product, currency, num, 0, None, None, True, sort)
 
-    return render_template("./webapp/static/result.html", data=data, prod=product, currency=currency, sort=sort,
-                           num=num)
+    return render_template("./webapp/static/result.html", data=data, prod=product, currency=currency, sort=sort, num=num, user_login=current_user.is_authenticated)
 
 
 @app.route("/filter", methods=["POST", "GET"])
@@ -82,24 +81,37 @@ def product_search_filtered():
     sort = request.form["sort"]
     currency = request.form["currency"]
     num = request.form["num"]
+
     if sort == "default":
         sort = None
     if currency == "usd":
         currency = None
     if num == "default":
         num = None
-    if "button button1" in request.form:
-
+    
+    if "filter-search" in request.form:
         return product_search(product, sort, currency, num)
+      
+    if "add-to-wishlist" in request.form:
+        wishlist_product=Wishlist(user_id=current_user.id,
+                                product_title=request.form["title"],
+                                product_link=request.form["link"],
+                                product_price=request.form["price"][1:],
+                                product_website=request.form["website"],
+                                product_rating=request.form["rating"])
+        db.session.add(wishlist_product)
+        db.session.commit()
+        return product_search(product, None, None, None)
 
-    elif "button button2" in request.form:
+
+    elif "convert-to-csv" in request.form:
 
         data = driver(product, currency, num, 0, None, None, True, sort)
         file_name = write_csv(data, product, "./src/csvs")
 
         return send_file(f".\src\csvs\{file_name}", as_attachment=True)
 
-    elif "button button3" in request.form:
+    elif "convert-to-pdf" in request.form:
         now = datetime.now()
         data = driver(product, currency, num, 0, None, None, True, sort)
         html_table = render_template("./webapp/static/pdf_maker.html", data=data, prod=product)
