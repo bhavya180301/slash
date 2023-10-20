@@ -1,16 +1,17 @@
-[CSC 510 - Project 3 - Repo Presentation](https://ncsu.zoom.us/rec/share/LX3fKUKuKso1_XNpdK2TvEdADZzpYdMughe_9e_f3-zdzuYhFoxz8k6mHf_vcJOj.QlqORp3KuCJi_boa?startTime=1638480222000)
+
+[CSC 510 - Project 2 - Repo Presentation](https://ncsu.zoom.us/rec/share/LX3fKUKuKso1_XNpdK2TvEdADZzpYdMughe_9e_f3-zdzuYhFoxz8k6mHf_vcJOj.QlqORp3KuCJi_boa?startTime=1638480222000)
 
 <p align="center"><img width="500" src="./assets/slash.png"></p>
 
-[![GitHub license](https://img.shields.io/github/license/TommasU/slash)](https://github.com/TommasU/slash/blob/main/LICENSE)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5739350.svg)](https://doi.org/10.5281/zenodo.5739350)
+[![GitHub license](https://img.shields.io/github/license/Yash-Chandrani/slash)](https://github.com/Yash-Chandrani/slash/blob/main/LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10023318.svg)](https://doi.org/10.5281/zenodo.10023318)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
-[![GitHub issues](https://img.shields.io/github/issues/TommasU/slash)](https://github.com/TommasU/slash/issues)
-[![Github closes issues](https://img.shields.io/github/issues-closed-raw/TommasU/slash)](https://github.com/TommasU/slash/issues?q=is%3Aissue+is%3Aclosed)
-[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/SEProjGrp5/slash)](https://github.com/TommasU/slash/pulls?q=is%3Apr+is%3Aclosed)
-[![codecov](https://codecov.io/gh/TommasU/slash/branch/main/graph/badge.svg?token=MGTU44PI4F)](https://codecov.io/gh/TommasU/slash)
-[![Pylint](https://github.com/SEProjGrp5/slash/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/TommasU/slash/actions/workflows/pylint.yml)
-[![Python Style Checker](https://github.com/SEProjGrp5/slash/actions/workflows/style_checker.yml/badge.svg?branch=main)](https://github.com/TommasU/slash/actions/workflows/style_checker.yml)
+[![GitHub issues](https://img.shields.io/github/issues/Yash-Chandrani/slash)](https://github.com/Yash-Chandrani/slash/issues)
+[![Github closes issues](https://img.shields.io/github/issues-closed-raw/Yash-Chandrani/slash)](https://github.com/Yash-Chandrani/slash/issues?q=is%3Aissue+is%3Aclosed)
+[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/Yash-Chandrani/slash)](https://github.com/Yash-Chandrani/slash/pulls?q=is%3Apr+is%3Aclosed)
+[![codecov](https://codecov.io/gh/Yash-Chandrani/slash/branch/main/graph/badge.svg?token=MGTU44PI4F)](https://codecov.io/gh/Yash-Chandrani/slash)
+[![Pylint](https://github.com/Yash-Chandrani/slash/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/Yash-Chandrani/slash/actions/workflows/pylint.yml)
+[![Python Style Checker](https://github.com/Yash-Chandrani/slash/actions/workflows/style_checker.yml/badge.svg?branch=main)](https://github.com/Yash-Chandrani/slash/actions/workflows/style_checker.yml)
 
 Slash is a tool that scrapes the most popular e-commerce websites to get the best deals on searched items across these websites. 
 - **Fast**: With slash, you can save over 50% of your time by comparing deals across websites within seconds
@@ -26,7 +27,7 @@ Checkout our newest Features! Mini Version and Full version now showcasing new s
  - First, pre-install [git](https://git-scm.com/) on  your machine. 
  - Then, clone the following repo:
  ```
- https://github.com/TommasU/slash.git
+ https://github.com/Yash-Chandrani/slash.git
  ```
  * Finally, ```cd``` into the local repository.
 ```
@@ -47,20 +48,18 @@ python3 -m src.slash --search socks
 <p>
 
 
-# :dizzy: What's New in Phase 3
+# :dizzy: What's New in Phase 4
 
 
-## :computer: User Friendly UI
+## :computer: Extended Web version
 
 
-Now featuring a friendly user interface for the Mini Version of SLASH including the best of a search bar and easy to read results. Interface provides options to 
-- Sort results
-- Change currency displayed
-- Filter number of items displayed
-- Prices
-- Product link
-- Timestamps for up to date results
-- Ratings
+Now featuring a friendly extended web version of SLASH including all the features of the full version. Interface provides options to 
+- Filter results based on rating and price range
+- Download filtered results to a csv or pdf in a click
+- Log in and sign up to save your progress
+- Add items to a wishlist in the web
+
 <p align="center"><img width="700" src="./assets/slash.gif"></p>
 
 
@@ -71,7 +70,7 @@ Now featuring a friendly user interface for the Mini Version of SLASH including 
 1. After completing the <a href="#rocket-installation">Installation</a> and all project dependencies are installed. 
 
 2. Make sure you are in the base directory. 
-3. Use the ```flask run``` command.
+3. Use the ```python -m flask run``` command.
 ```
 MAC
 export FLASK_APP=./src/modules/app
@@ -90,6 +89,10 @@ flask run
 1. SORTING: Based on rating or price.
 2. CURRENCY: View prices in the currency of your choice.
 3. RESULTS: Narrow your search based on Result Length.
+4. FILTER: Filter based on rating or price
+5. ACCOUNT: Create an account and login to save products to your wishlists
+6. WISHLIST: Add products to wishlist with just one click.
+7. DOWNLOAD RESULTS: Download results to a PDF or CSV.
 
 <p align="center"><img width="150.1" src="./assets/sorting.PNG"><img width="130" src="./assets/currency.PNG"><img width="150.2" src="./assets/results.PNG"></p>
 
@@ -97,11 +100,6 @@ flask run
 Easy to view and access results
 <p align="center"><img width="800" src="./assets/list.PNG"></p>
 
-## :gift: 2 New Attributes!
-
-We have expanded the command line attributes to include:
-- `no of ratings`: Having just the ratings does not provide a buyer the complete picture, but with number of ratings, users can obtain a holistic view
-- `trending`: This mentions any special tags associated with the item such as "FREE shipping" and "Bestseller".
 
 ## :robot: Increased Code Coverage
 We have increased the code coverage from `11%` to `70%`!
@@ -348,13 +346,14 @@ File Name: C:\Anant\NCSU\slash_test_csv\socks211104_1223.csv
 
 # :sparkles: Contributors
 
-- Jessica Vargas(jrvargas)
-- Parth Parikh(pmparikh)
-- Radhika Toravi(rtoravi)
-- Rushikesh Deodhar(rdeodha)
-- Saurabh Nanda(snanda)
+- Yash Chandrani (ychandr)
+- Ashaka Mehta(atmehta)
+- Smit Patel(spatel68)
+- Marmik Patel(mpatel28)
+
 
 ## :email: Support
 
 
-For any queries and help, please reach out to us at: fall2021se@gmail.com
+For any queries and help, please reach out to us at: ychandr@ncsu.edu
+
