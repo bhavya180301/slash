@@ -50,7 +50,7 @@ def main():
         type=str,
         help="Change directory to save CSV file with search results",
         default=os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "csvs"
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "modules/csvs"
         ),
     )
     parser.add_argument(

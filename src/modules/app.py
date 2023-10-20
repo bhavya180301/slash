@@ -14,7 +14,7 @@ from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
-from flask_login import login_user, LoginManager, UserMixin,logout_user, current_user
+from flask_login import login_user, LoginManager, UserMixin, logout_user, current_user
 from scraper import driver
 
 from sqlalchemy.exc import IntegrityError
@@ -51,6 +51,7 @@ class Users(db.Model, UserMixin):
 
 
 class Wishlist(db.Model):
+
     id=db.Column(db.Integer(),primary_key=True,autoincrement=True)
     user_id=db.Column(db.Integer(),db.ForeignKey('users.id'))
     product_title=db.Column(db.String(length=1000),nullable=False)
@@ -58,6 +59,7 @@ class Wishlist(db.Model):
     product_price=db.Column(db.Float(),nullable=False)
     product_website=db.Column(db.String(length=100),nullable=False)
     product_rating=db.Column(db.Float(),nullable=False)
+
 
 @app.route("/")
 def landingpage():
@@ -111,9 +113,11 @@ def product_search_filtered():
     elif "convert-to-csv" in request.form:
 
         data = driver(product, currency, num, 0, None, None, True, sort)
-        file_name = write_csv(data, product, "./src/csvs")
 
-        return send_file(f".\src\csvs\{file_name}", as_attachment=True)
+        file_name = write_csv(data, product, "./src/modules/csvs")
+
+        return send_file(f"./csvs/{file_name}", as_attachment=True)
+
 
     elif "convert-to-pdf" in request.form:
         now = datetime.now()
@@ -122,11 +126,11 @@ def product_search_filtered():
         file_name = product + now.strftime("%m%d%y_%H%M") + '.pdf'
 
         pdfkit.from_string(html_table,
-                           f"src/pdfs/{file_name}",
+                           f"./src/modules/pdfs/{file_name}",
                            configuration=config,
                            options={"enable-local-file-access": ""})
         return send_file(
-            fr"src\pdfs\{file_name}",
+            f"./pdfs/{file_name}",
             as_attachment=True)
 
 
@@ -180,14 +184,9 @@ def logout_page():
     return redirect(url_for('landingpage'))
 
 
-@app.route("/wishlist",methods=['GET'])
+@app.route("/wishlist", methods=['GET'])
 def wishlist():
     if current_user.is_authenticated:
-            wishlists= Wishlist.query.filter_by(user_id=current_user.id).all()
-            return render_template("./webapp/static/wishlist.html", user=current_user.id, data=wishlists)
+        wishlists = Wishlist.query.filter_by(user_id=current_user.id).all()
+        return render_template("./webapp/static/wishlist.html", user=current_user.id, data=wishlists)
     return login_page()
-
-
-
-
-
