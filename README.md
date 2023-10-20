@@ -60,7 +60,7 @@ Now featuring a friendly extended web version of SLASH including all the feature
 - Log in and sign up to save your progress
 - Add items to a wishlist in the web
 
-<p align="center"><img width="700" src="./assets/slash.gif"></p>
+<p align="center"><img width="700" src="./assets/SLASH_UI.gif"></p>
 
 
 ### :key: Accesing Mini Version UI
