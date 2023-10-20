@@ -44,7 +44,7 @@
                 {% for product in data %}
                 <tr>
                     <td><a href={{product.product_link}} target="_blank">{{product.product_title}}</a></td>
-                    <td>{{product.product_price}}</td>
+                    <td>${{product.product_price}}</td>
                     <td>{{product.product_website}}</td>
                     <td>{{product.product_rating}}</td>
                     </tr>
