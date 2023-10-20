@@ -45,6 +45,15 @@ pip3 install -r requirements.txt
 ```
 python3 -m src.slash --search socks
 ```
+- To run UI version, execute the following commands
+  * cd src/modules
+  * python (Inside the python console, implement these commands sequentially)
+  * from app  import app,db    
+  * app.app_context().push()
+  * db.create_all()
+  * from app import Users
+  * from app import Wishlist
+  * db.session.commit()
 <p>
 
 
