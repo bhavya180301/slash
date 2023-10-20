@@ -78,6 +78,18 @@ def product_search(new_product="", sort=None, currency=None, num=None, filter_by
 @app.route("/filter", methods=["POST", "GET"])
 def product_search_filtered():
     product = request.args.get("product_name")
+
+    if "add-to-wishlist" in request.form:
+        wishlist_product=Wishlist(user_id=current_user.id,
+                                product_title=request.form["title"],
+                                product_link=request.form["link"],
+                                product_price=request.form["price"][1:],
+                                product_website=request.form["website"],
+                                product_rating=request.form["rating"])
+        db.session.add(wishlist_product)
+        db.session.commit()
+        return product_search(product, None, None, None, None, None)
+
     sort = request.form["sort"]
     currency = request.form["currency"]
     num = request.form["num"]
@@ -95,29 +107,16 @@ def product_search_filtered():
     if "filter-search" in request.form:
         return product_search(product, sort, currency, num, filter_by_rating, None)
       
-    if "add-to-wishlist" in request.form:
-        wishlist_product=Wishlist(user_id=current_user.id,
-                                product_title=request.form["title"],
-                                product_link=request.form["link"],
-                                product_price=request.form["price"][1:],
-                                product_website=request.form["website"],
-                                product_rating=request.form["rating"])
-        db.session.add(wishlist_product)
-        db.session.commit()
-        return product_search(product, None, None, None, None, None)
-
-
-
     elif "convert-to-csv" in request.form:
 
-        data = driver(product, currency, num, 0, None, None, True, sort)
+        data = driver(product, currency, num, 0, None, None, True,sort, filter_by_rating )
         file_name = write_csv(data, product, "./src/csvs")
 
         return send_file(f".\src\csvs\{file_name}", as_attachment=True)
 
     elif "convert-to-pdf" in request.form:
         now = datetime.now()
-        data = driver(product, currency, num, 0, None, None, True, sort)
+        data = driver(product, currency, num, 0, None, None, True, sort, filter_by_rating)
         html_table = render_template("./webapp/static/pdf_maker.html", data=data, prod=product)
         file_name = product + now.strftime("%m%d%y_%H%M") + '.pdf'
 
