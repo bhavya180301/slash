@@ -95,7 +95,7 @@ def product_search_filtered():
 
     if "button button1" in request.form:
 
-        return product_search(product, sort, currency, num,filter_by_rating)
+        return product_search(product, sort, currency, num,filter_by_rating, None)
 
     elif "button button2" in request.form:
 
