@@ -1,0 +1,16 @@
+# Changelog
+
+## [4.0.0] - 2023-10-19
+
+### Added
+- New user registration/login feature in UI verison.
+- New feature to add product in wishlist after login in UI verison.
+- New feature to show products in wishlist after login in UI verison.
+- New feature to download products in CSV file in UI version.
+- New feature to download products in PDF file in UI version.
+
+### Changed
+- Improved user interface for better user experience.
+
+### Fixed
+- Fixed bug in currency conversion and price display in UI version.
