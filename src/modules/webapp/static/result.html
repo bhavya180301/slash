@@ -92,7 +92,26 @@
                   </select>
                 </div>
               </div>
-           
+
+              <div class="col-sm">
+                <div class="form-group">
+                   <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+                    <div class="col-sm-6 col-md-4">
+                      <form action = "/filter?product_name={{prod}}" method = "post" id="filter2">
+                      <select id="choice1" name="filter-by-rating" class="form-control">
+                        <option value="default" >Filter By Rating</option>
+                        <option value="4.5">4.5 and Above</option>
+                        <option value="4.0">4.0 and Above</option>
+                        <option value="3.5">3.5 and Above</option>
+                        <option value="3.0">3.0 and Above</option>
+                        <option value="2.5">2.5 and Above</option>
+                        <option value="2.0">2.0 and Above</option>
+                        <option value="1.5">1.5 and Above</option>
+                        <br>
+                      </select>
+                    </div>
+                  </div>
+              </div>        
           </div>
           <div class="col-sm">
             <div class="form-group">
