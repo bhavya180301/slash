@@ -14,7 +14,7 @@ from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 
-from flask_login import login_user, LoginManager, UserMixin,logout_user, current_user
+from flask_login import login_user, LoginManager, UserMixin, logout_user, current_user
 from scraper import driver
 
 # from forms import RegisterForm
@@ -52,13 +52,14 @@ class Users(db.Model, UserMixin):
 
 
 class Wishlist(db.Model):
-    id=db.Column(db.Integer(),primary_key=True)
-    user_id=db.Column(db.Integer(),db.ForeignKey('users.id'))
-    product_title=db.Column(db.String(length=1000),nullable=False)
-    product_link=db.Column(db.String(length=1000),nullable=False)
-    product_price=db.Column(db.Float(),nullable=False)
-    product_website=db.Column(db.String(length=100),nullable=False)
-    product_rating=db.Column(db.Float(),nullable=False)
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column(db.Integer(), db.ForeignKey('users.id'))
+    product_title = db.Column(db.String(length=1000), nullable=False)
+    product_link = db.Column(db.String(length=1000), nullable=False)
+    product_price = db.Column(db.Float(), nullable=False)
+    product_website = db.Column(db.String(length=100), nullable=False)
+    product_rating = db.Column(db.Float(), nullable=False)
+
 
 @app.route("/")
 def landingpage():
@@ -96,21 +97,22 @@ def product_search_filtered():
     elif "button button2" in request.form:
 
         data = driver(product, currency, num, 0, None, None, True, sort)
-        file_name = write_csv(data, product, r'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\csvs')
+        file_name = write_csv(data, product, "./src/modules/csvs")
 
-        return send_file(fr'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\csvs\{file_name}', as_attachment=True)
+        return send_file(f"./csvs/{file_name}", as_attachment=True)
 
     elif "button button3" in request.form:
         now = datetime.now()
         data = driver(product, currency, num, 0, None, None, True, sort)
         html_table = render_template("./webapp/static/pdf_maker.html", data=data, prod=product)
+        file_name = product + now.strftime("%m%d%y_%H%M") + '.pdf'
 
         pdfkit.from_string(html_table,
-                           fr'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\pdfs\{product + now.strftime("%m%d%y_%H%M")}.pdf',
+                           f"./src/modules/pdfs/{file_name}",
                            configuration=config,
                            options={"enable-local-file-access": ""})
         return send_file(
-            fr'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\pdfs\{product + now.strftime("%m%d%y_%H%M")}.pdf',
+            f"./pdfs/{file_name}",
             as_attachment=True)
 
 
@@ -161,14 +163,9 @@ def logout_page():
     return redirect(url_for('landingpage'))
 
 
-@app.route("/wishlist",methods=['GET'])
+@app.route("/wishlist", methods=['GET'])
 def wishlist():
     if current_user.is_authenticated:
-            wishlists= Wishlist.query.filter_by(user_id=current_user.id).all()
-            return render_template("./webapp/static/wishlist.html", user=current_user.id, data=wishlists)
+        wishlists = Wishlist.query.filter_by(user_id=current_user.id).all()
+        return render_template("./webapp/static/wishlist.html", user=current_user.id, data=wishlists)
     return login_page()
-
-
-
-
-
