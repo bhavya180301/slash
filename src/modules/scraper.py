@@ -11,7 +11,7 @@ The scraper module holds functions that actually scrape the e-commerce websites
 """
 
 import requests
-from formatter import formatSearchQuery, formatResult, getCurrency, sortList
+from src.modules.formatter import formatSearchQuery, formatResult, getCurrency, sortList
 from bs4 import BeautifulSoup
 import re
 import csv
@@ -251,7 +251,7 @@ def condense_helper(result_condensed, list, num):
 
 
 def driver(
-    product, currency, num=None, df_flag=0, csv=False, cd=None, ui=False, sort=None, filter_by_rating=None
+    product, currency, num=None, df_flag=0, csv=None, cd=None, ui=False, sort=None, filter_by_rating=None
 ):
     """Returns csv is the user enters the --csv arg,
     else will display the result table in the terminal based on the args entered by the user"""
