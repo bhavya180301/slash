@@ -95,21 +95,22 @@ def product_search_filtered():
     elif "button button2" in request.form:
 
         data = driver(product, currency, num, 0, None, None, True, sort)
-        file_name = write_csv(data, product, r'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\csvs')
+        file_name = write_csv(data, product, "./src/csvs")
 
-        return send_file(fr'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\csvs\{file_name}', as_attachment=True)
+        return send_file(f".\src\csvs\{file_name}", as_attachment=True)
 
     elif "button button3" in request.form:
         now = datetime.now()
         data = driver(product, currency, num, 0, None, None, True, sort)
         html_table = render_template("./webapp/static/pdf_maker.html", data=data, prod=product)
+        file_name = product + now.strftime("%m%d%y_%H%M") + '.pdf'
 
         pdfkit.from_string(html_table,
-                           fr'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\pdfs\{product + now.strftime("%m%d%y_%H%M")}.pdf',
+                           f"src/pdfs/{file_name}",
                            configuration=config,
                            options={"enable-local-file-access": ""})
         return send_file(
-            fr'C:\Users\smith\Desktop\NCSU-SEM-1\SE\slash\src\pdfs\{product + now.strftime("%m%d%y_%H%M")}.pdf',
+            fr"src\pdfs\{file_name}",
             as_attachment=True)
 
 
