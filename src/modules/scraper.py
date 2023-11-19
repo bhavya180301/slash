@@ -175,10 +175,16 @@ def searchGoogleShopping(query, df_flag, currency):
     pattern = re.compile(r"[0-9]+ product reviews")
     for res in results:
         titles, prices, links = (
-            res.select("h4"),
+            res.select("h3"),
             res.select("span.a8Pemb"),
-            res.select("a"),
+            res.select("a")
         )
+        image = res.find("img", {"data-image-src": True})
+        if image :
+            image_url = image.get("data-image-src").strip()
+        else :
+            image_url = ""
+        print(image_url)
         ratings = res.findAll("span", {"class": "Rsc7Yb"})
         try:
             num_ratings = pattern.findall(str(res.findAll("span")[1]))[0].replace(
@@ -201,6 +207,7 @@ def searchGoogleShopping(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            image_url
         )
         products.append(product)
     return products

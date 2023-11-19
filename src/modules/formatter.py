@@ -21,7 +21,7 @@ EXCHANGES = literal_eval(requests.get(CURRENCY_URL).text)
 
 
 def formatResult(
-    website, titles, prices, links, ratings, num_ratings, trending, df_flag, currency
+    website, titles, prices, links, ratings, num_ratings, trending, df_flag, currency, image_url=""
 ):
     """
     The formatResult function takes the scraped HTML as input, and extracts the
@@ -83,6 +83,7 @@ def formatResult(
         "no of ratings": num_rating,
         "trending": trending_stmt,
         "converted price": converted_cur,
+        "image_url" : image_url
     }
 
     return product

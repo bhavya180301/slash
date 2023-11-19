@@ -37,7 +37,7 @@
          {
 
          padding-left: 60px;   
-         width: 3800px;  
+         width: auto;   
 
          }
 
@@ -69,6 +69,54 @@
   background-color: rgb(63, 155, 112);
   color: white;
 }
+
+
+.product-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    max-width: 300px;
+    margin: 20px;
+}
+
+.product-card img {
+    max-width: 100%;
+    height: 250px;
+    border-radius: 8px;
+}
+
+h3 {
+    margin-top: 10px;
+    font-size: 20px;
+    color: #333;
+}
+
+.price {
+    font-weight: bold;
+    color: #e44d26;
+    margin: 10px 0;
+}
+
+.description {
+    color: #777;
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f8f8f8;
+}
+.product-img{
+  height: 200px;
+  width: 200px;
+}
+
 
     </style>
     
@@ -161,36 +209,16 @@
     
    <br>
       <div class="results">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
-           <table border='1' class="item-list" id="result-table">
-              <thead>
-                 <tr>
-                    <th colspan="5">Products</th>
-                 </tr>
-                 <tr>
-                    <td>Timestamp</td>
-                    <td>Title</td>
-                    <td>Price</td>
-                    <td>Website</td>
-                    <td>Rating</td>
-               </tr>
-              </thead>
-              <tbody>
-                
-               {% for product in data %}
-               <tr>
-                  <td>{{product.timestamp}}</td>
-                  <td><a href={{product.link}} target="_blank">{{product.title}}</a></td>
-                  <td>{{product.price}}</td>
-                  <td>{{product.website}}</td>
-                  <td>{{product.rating}}</td>
-               </tr>
-
-               {% endfor %}
-
-              </tbody>
-           </table>
+        <div class="grid">
+          {% for product in data %}
+            <div class="product-card">
+                <img class="product-img" src={{product.image_url}} alt="Product 1">
+                <h3><a href={{product.link}} target="_blank">{{product.title}}</a></h3>
+                <p class="price">{{product.price}}</p>
+                <p class="description">{{product.website}}</p>
+                <h3>{{product.rating}}</h3>
+            </div>
+          {% endfor %}
            <script>
               if ('{{user_login}}'=='True'){
                 var table=document.getElementById("result-table");
@@ -201,7 +229,6 @@
               }
            </script>
         </div>
-        <div class="col-md-4"></div>
      </div>
 
 </body>
