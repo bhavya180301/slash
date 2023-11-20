@@ -217,17 +217,20 @@ h3 {
                 <p class="price">{{product.price}}</p>
                 <p class="description">{{product.website}}</p>
                 <h3>{{product.rating}}</h3>
+                
+                {% if user_login %}
+                  <form action="/filter?product_name={{ product.title }}" method="POST">
+                      <input type="text" name="link" value="{{ product.link }}" style="display:none;">
+                      <input type="text" name="title" value="{{ product.title }}" style="display:none;">
+                      <input type="text" name="price" value="{{ product.price }}" style="display:none;">
+                      <input type="text" name="website" value="{{ product.website }}" style="display:none;">
+                      <input type="text" name="rating" value="{{ product.rating }}" style="display:none;">
+                      <input type="text" name="image_url" value="{{ product.image_url }}" style="display:none;">
+                      <Button type="submit" class="button button1" value="Add to wishlist" name="add-to-wishlist">Add to Wishlist</Button>
+                  </form>
+                {% endif %}
             </div>
           {% endfor %}
-           <script>
-              if ('{{user_login}}'=='True'){
-                var table=document.getElementById("result-table");
-                for (let i = 2; i < table.rows.length; i++) {
-                  const cell = table.rows[i].insertCell();
-                  cell.innerHTML = '<form action="/filter?product_name={{prod}}" method="POST"><input type="text" name="link" value="'+table.rows[i].querySelector("a").getAttribute("href")+'" style="display:none;"><input type="text" name="title" value="'+table.rows[i].cells[1].textContent+'" style="display:none;"><input type="text" name="price" value="'+table.rows[i].cells[2].textContent+'" style="display:none;"><input type="text" name="website" value="'+table.rows[i].cells[3].textContent+'" style="display:none;"><input type="text" name="rating" value="'+table.rows[i].cells[4].textContent+'" style="display:none;"><input type="text" name="name" value ="wishlist-form'+i+'" style="display:none;"/><input type="submit" class="button button1" value="Add to wishlist" name="add-to-wishlist"/></form>';
-                }
-              }
-           </script>
         </div>
      </div>
 
