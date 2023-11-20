@@ -57,7 +57,9 @@ class Wishlist(db.Model):
     product_link=db.Column(db.String(length=1000),nullable=False)
     product_price=db.Column(db.Float(),nullable=False)
     product_website=db.Column(db.String(length=100),nullable=False)
+    product_image_url=db.Column(db.String(length=10000),nullable=False)
     product_rating=db.Column(db.Float(),nullable=False)
+
 
 
 @app.route("/")
@@ -86,7 +88,8 @@ def product_search_filtered():
                                 product_link=request.form["link"],
                                 product_price=request.form["price"][1:],
                                 product_website=request.form["website"],
-                                product_rating=request.form["rating"])
+                                product_rating=request.form["rating"],
+                                product_image_url=request.form["image_url"])
         db.session.add(wishlist_product)
         db.session.commit()
         return product_search(product, None, None, None, None, None)
