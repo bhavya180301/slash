@@ -31,10 +31,24 @@
 
   .container1
   {
+    
       height: 270px;
       width: 100%;
   }
-  
+  .navbar {
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            width: 90px;
+            height: 70px;
+        }
+
+        .navbar-toggler {
+            border-color: #343a40;
+        }
+
   .sb-example-1 .search {
       width: 75%;
       position: relative;
@@ -72,39 +86,47 @@
       color: green;
     }
 
-    img {
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        padding-top: 30px;
-    }
+
 
     </style>
    </head>
    <body>
-    <ul class="nav justify-content-center">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{{ url_for('landingpage') }}">Home</a>
-      </li>
-        {% if current_user.is_authenticated %}
-            <li class="nav-item">
-                <a class="nav-link">Logged in as {{ current_user.email }}</a>
-            </li> 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('wishlist') }}">Wishlists</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('register_page') }}">Sign up</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('login_page') }}">Login</a>
-            </li>
-        {% endif %}
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px">
+      <a class="navbar-brand" href="{{ url_for('landingpage') }}">
+          <img src="https://raw.githubusercontent.com/Yash-Chandrani/slash/main/src/modules/webapp/static/images/slash.png" alt="Slash Logo" width="90" height="70">
+      </a>
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+              {% if current_user.is_authenticated %}
+                  <li class="nav-item">
+                      <a class="nav-link text-dark">Logged in as {{ current_user.email }}</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link text-dark" href="{{ url_for('wishlist') }}">Wishlists</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link text-dark" href="{{ url_for('logout_page') }}">Logout</a>
+                  </li>
+              {% else %}
+                  <li class="nav-item">
+                      <a class="nav-link text-dark" href="{{ url_for('register_page') }}">Sign up</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link text-dark" href="{{ url_for('login_page') }}">Login</a>
+                  </li>
+              {% endif %}
+          </ul>
+      </div>
+  </nav>
+  
+  
+  
+  
 
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -120,7 +142,6 @@
     {% endwith %}
 
     <h1 id="header"> Welcome to Mini Version of SLASH! </h1>
-    <img src="https://raw.githubusercontent.com/Yash-Chandrani/slash/main/src/modules/webapp/static/images/slash.png" alt="slash" style="width:20%;">
     <br>
     <br>
     <hr>
