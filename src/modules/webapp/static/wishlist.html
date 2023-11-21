@@ -86,6 +86,7 @@ h3 {
                   <p class="price">${{product.product_price}}</p>
                   <p class="description">{{product.product_website}}</p>
                   <h3>{{product.product_rating}}</h3>
+
               </div>
             {% endfor %}
         </div>
@@ -98,7 +99,9 @@ h3 {
                   <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                   </button>
+
                   {{ message }}
+                  
               </div>
            {% endfor %}
         {% endif %}
