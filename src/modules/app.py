@@ -68,7 +68,7 @@ def landingpage():
     return render_template("./webapp/static/landing.html")
 
 @app.route("/checkpricedrop", methods=["POST"])
-def check():
+def checkpricedrop():
     product_name = request.form.get("product_name")
     product_price = request.form.get("product_price")
     results = driver(product_name,"")
@@ -79,12 +79,12 @@ def check():
             break
         else : 
             product=None
+    product_price_new = float(product['price'].replace("$", ""))
+    product_price = float(product_price)
     
-    if(product['price']==product_price):
-        return jsonify("true")
-    
-    
-    return jsonify("false")
+    if(product_price_new >= product_price):
+        return jsonify("false")
+    return jsonify("true")
 
 @app.route("/category/<category_query>", methods=["GET"])
 def category_result(category_query):

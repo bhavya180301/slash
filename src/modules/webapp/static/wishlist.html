@@ -53,6 +53,52 @@ h3 {
 }
 
     </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all forms and buttons
+            var forms = document.querySelectorAll(".price-check-form");
+            var buttons = document.querySelectorAll(".check-price-button");
+
+            // Iterate over each form
+            forms.forEach(function (form, index) {
+                var spinner = form.querySelector(".spinner");
+                var resultMessage = form.querySelector(".result-message");
+
+                // Add event listener to the button of each form
+                buttons[index].addEventListener("click", function () {
+                    // Show the spinner
+                    spinner.style.display = "inline-block";
+
+                    // Fetch the result asynchronously
+                    fetch("/checkpricedrop", {
+                        method: "POST",
+                        body: new FormData(form),
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Hide the spinner
+                        spinner.style.display = "none";
+
+                        // Display the result message based on the boolean result
+                        resultMessage.style.display = "block";
+                        console.log(data)
+                        if (data=="true") {
+                            resultMessage.innerHTML = "Price drop detected!";
+                        } else {
+                            resultMessage.innerHTML = "No price drop.";
+                        }
+
+                        // Optionally, you can further manipulate the data or UI based on the result
+                        console.log(data);
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        // Handle errors if needed
+                    });
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -86,8 +132,17 @@ h3 {
                   <p class="price">${{product.product_price}}</p>
                   <p class="description">{{product.product_website}}</p>
                   <h3>{{product.product_rating}}</h3>
-                  <button class="btn btn-primary">Check Price</button>
-
+                  <form class="price-check-form" action="/checkpricedrop" method="post">
+                    <input type="text" name="product_name" value="{{product.product_title}}" style="display: none;">
+                    <input type="text" name="product_price" value="{{product.product_price}}" style="display: none;">
+                    <button type = "button" class="btn btn-primary check-price-button" id="checkPriceButton">Check Price</button>
+                    <div class="spinner" style="display: none;">
+                        <i class="fa fa-spinner fa-spin"></i> Loading...
+                    </div>
+                    <div class="result-message" style="display: none;"></div>
+                
+                  </form>
+                  
               </div>
             {% endfor %}
         </div>
@@ -107,6 +162,8 @@ h3 {
            {% endfor %}
         {% endif %}
     {% endwith %}
+    
 </body>
+
 
 </html>
