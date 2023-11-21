@@ -257,7 +257,9 @@ h3 {
                 <p class="price">{{product.price}}</p>
                 <p class="description">{{product.website}}</p>
                 <h3>{{product.rating}}</h3>
-                
+                {% if product['no of ratings'] != '' %}
+                    <p>No. of Ratings: {{ product['no of ratings'] }}</p>
+                {% endif %}
                 {% if user_login %}
                   <form action="/filter?product_name={{ product.title }}" method="POST">
                       <input type="text" name="link" value="{{ product.link }}" style="display:none;">
