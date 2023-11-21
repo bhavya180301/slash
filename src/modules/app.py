@@ -1,9 +1,10 @@
 from datetime import datetime
 
-from flask import Flask, request, render_template, send_file, make_response
+from flask import Flask, request, render_template, send_file, make_response,jsonify
 from src.modules.csv_writer import write_csv
 
 from src.modules.scraper import driver
+from src.modules.data import categories
 import pandas as pd
 import pdfkit
 
@@ -65,6 +66,30 @@ class Wishlist(db.Model):
 @app.route("/")
 def landingpage():
     return render_template("./webapp/static/landing.html")
+
+@app.route("/checkpricedrop", methods=["POST"])
+def check():
+    product_name = request.form.get("product_name")
+    product_price = request.form.get("product_price")
+    results = driver(product_name,"")
+    json_data = results.to_dict(orient='records')
+    for res in json_data:
+        if(res['title'] == product_name):
+            product = res
+            break
+        else : 
+            product=None
+    
+    if(product['price']==product_price):
+        return jsonify("true")
+    
+    
+    return jsonify("false")
+
+@app.route("/category/<category_query>", methods=["GET"])
+def category_result(category_query):
+    data = categories[category_query]
+    return render_template("./webapp/static/category_result.html", data=data)
 
 
 @app.route("/search", methods=["POST", "GET"])
