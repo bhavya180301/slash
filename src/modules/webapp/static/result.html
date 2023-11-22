@@ -1,235 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Slash Mini-Version</title>
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-	<link rel="stylesheet" href="/static/style.css">
-	<link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slash Mini-Version</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"  ></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-      
-    <style>
-        .item-list {
-         text-align:center;
-         width: 100%;
-         margin-top: 20px;
-         padding: 5px 5px 5px 5px;
-         }
-         .td,th {
-         border: 1px solid;
-         padding: 7px;
-         }
-         .item-list tr:nth-child(even){background-color: rgb(232, 255, 235);}
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-         .col-sm
-         {
-            padding-top: 25px;
-            
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-         }
-         .results
-         {
+  <style>
+    .item-list {
+      text-align: center;
+      width: 100%;
+      margin-top: 20px;
+      padding: 5px 5px 5px 5px;
+    }
 
-         padding-left: 60px;   
-         width: auto;   
+    .td,
+    th {
+      border: 1px solid;
+      padding: 7px;
+    }
 
-         }
+    .item-list tr:nth-child(even) {
+      background-color: rgb(232, 255, 235);
+    }
 
-         .button 
-         {
-            border: none;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-         }
-
-.button {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #4CAF50;
- 
-}
-#choice1
-{
-   width: 200px;
-
-}
-.button1:hover {
-  background-color: rgb(63, 155, 112);
-  color: white;
-}
+    .col-sm {
+      padding-top: 25px;
 
 
-.product-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    max-width: 300px;
-    margin: 20px;
-}
+    }
 
-.product-card img {
-    max-width: 100%;
-    height: 250px;
-    border-radius: 8px;
-}
+    .results {
 
-h3 {
-    margin-top: 10px;
-    font-size: 20px;
-    color: #333;
-}
+      padding-left: 60px;
+      width: auto;
 
-.price {
-    font-weight: bold;
-    color: #e44d26;
-    margin: 10px 0;
-}
+    }
 
-.description {
-    color: #777;
-}
+    .button {
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
 
-.grid {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f8f8f8;
-}
-.product-img{
-  height: 200px;
-  width: 200px;
-}
+    .button {
+      background-color: white;
+      color: black;
+      border: 2px solid #4CAF50;
+
+    }
+
+    #choice1 {
+      width: 200px;
+
+    }
+
+    .button1:hover {
+      background-color: rgb(63, 155, 112);
+      color: white;
+    }
 
 
-    </style>
-    
-   </head>
-   <body>   
-   
-    <div class="container" id="abc">
-        <div class="row">
-          <div class="col-sm">
-            <div class="form-group">
-               <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
-                <div class="col-sm-6 col-md-4">
-                  <form action = "/filter?product_name={{prod}}" method = "post" id="filter1">
-                  <select id="choice1" name="sort" class="form-control">
-                    <option value="default" >Sort by</option>
-                    <option value="rades" >Rating High to Low</option>
-                    <option value="raasc" >Rating Low to High</option>
-                    <option value="pasc">Price Low to High</option>
-                    <option value="pdes">Price High to Low</option>
-                    <br>
-                  </select>
-                </div>
-              </div>
+    .product-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      max-width: 300px;
+      margin: 20px;
+    }
 
-              <div class="col-sm">
-                <div class="form-group">
-                   <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
-                    <div class="col-sm-6 col-md-4">
-                      <form action = "/filter?product_name={{prod}}" method = "post" id="filter2">
-                      <select id="choice1" name="filter-by-rating" class="form-control">
-                        <option value="default" >Filter By Rating</option>
-                        <option value="4.5">4.5 and Above</option>
-                        <option value="4.0">4.0 and Above</option>
-                        <option value="3.5">3.5 and Above</option>
-                        <option value="3.0">3.0 and Above</option>
-                        <option value="2.5">2.5 and Above</option>
-                        <option value="2.0">2.0 and Above</option>
-                        <option value="1.5">1.5 and Above</option>
-                        <br>
-                      </select>
-                    </div>
-                  </div>
-              </div>        
+    .product-card img {
+      max-width: 100%;
+      height: 250px;
+      border-radius: 8px;
+    }
+
+    h3 {
+      margin-top: 10px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #e44d26;
+      margin: 10px 0;
+    }
+
+    .description {
+      color: #777;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f8f8f8;
+    }
+
+    .product-img {
+      height: 200px;
+      width: 200px;
+    }
+
+    .checkbox-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .checkbox-dropdown input {
+      display: none;
+    }
+
+    .checkbox-dropdown label {
+      display: block;
+      padding: 8px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+    }
+
+    .checkbox-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      z-index: 1;
+      display: none;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkbox-dropdown ul li {
+      display: block;
+    }
+
+    .checkbox-dropdown input:checked+label+ul {
+      display: block;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container" id="abc">
+    <div class="row">
+      <div class="col-sm">
+        <div class="form-group">
+          <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+          <div class="col-sm-6 col-md-4">
+            <form action="/filter?product_name={{prod}}" method="post" id="filter1">
+              <select id="choice1" name="sort" class="form-control">
+                <option value="default">Sort by</option>
+                <option value="rades">Rating High to Low</option>
+                <option value="raasc">Rating Low to High</option>
+                <option value="pasc">Price Low to High</option>
+                <option value="pdes">Price High to Low</option>
+                <br>
+              </select>
           </div>
-          <div class="col-sm">
-            <div class="form-group">
-               <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
-                <div class="col-sm-6 col-md-4">
-                  <select id="choice1" name="currency" class="form-control">
-                    <option value="usd" >USD</option>
-                    <option value="inr">INR</option>
-                    <option value="euro">EURO</option>
-                    <option value="yuan">YUAN</option>
-                    <option value="aud">AUD</option>
-                    <option value="pound">POUND</option>
-                    <br>
-                  </select>
-                </div>
-              </div>
-          </div>
-          <div class="col-sm">
-    
-            <div class="form-group">
-               <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
-                <div class="col-sm-6 col-md-4">
-                  <select id="choice1" name="num" class="form-control">
-                    <option value="default">Result Length</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
-                </div>
-              </div>
+        </div>
 
+        <div class="col-sm">
+          <div class="form-group">
+            <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+            <div class="col-sm-6 col-md-4">
+              <form action="/filter?product_name={{prod}}" method="post" id="filter2">
+                <select id="choice1" name="filter-by-rating" class="form-control">
+                  <option value="default">Filter By Rating</option>
+                  <option value="4.5">4.5 and Above</option>
+                  <option value="4.0">4.0 and Above</option>
+                  <option value="3.5">3.5 and Above</option>
+                  <option value="3.0">3.0 and Above</option>
+                  <option value="2.5">2.5 and Above</option>
+                  <option value="2.0">2.0 and Above</option>
+                  <option value="1.5">1.5 and Above</option>
+                  <br>
+                </select>
+            </div>
           </div>
-          <div class="col-sm">
-            <br>
-            <input type = "submit" class="button" name ="filter-search" value = "Filter Search" />
-            <br>
-            <input type = "submit" class="button" name ="convert-to-csv" value = "Convert into CSV" />
-            <br>
-            <input type = "submit" class="button" name ="convert-to-pdf" value = "Convert into PDF" />
-         </form>  
-         </div>
         </div>
       </div>
-   </form>
-   <hr>
-    
-   <br>
-      <div class="results">
-        <div class="grid">
-          {% for product in data %}
-            <div class="product-card">
-                <img class="product-img" src={{product.image_url}} alt="Product 1">
-                <h3><a href={{product.link}} target="_blank">{{product.title}}</a></h3>
-                <p class="price">{{product.price}}</p>
-                <p class="description">{{product.website}}</p>
-                <h3>{{product.rating}}</h3>
-            </div>
-          {% endfor %}
-           <script>
-              if ('{{user_login}}'=='True'){
-                var table=document.getElementById("result-table");
-                for (let i = 2; i < table.rows.length; i++) {
-                  const cell = table.rows[i].insertCell();
-                  cell.innerHTML = '<form action="/filter?product_name={{prod}}" method="POST"><input type="text" name="link" value="'+table.rows[i].querySelector("a").getAttribute("href")+'" style="display:none;"><input type="text" name="title" value="'+table.rows[i].cells[1].textContent+'" style="display:none;"><input type="text" name="price" value="'+table.rows[i].cells[2].textContent+'" style="display:none;"><input type="text" name="website" value="'+table.rows[i].cells[3].textContent+'" style="display:none;"><input type="text" name="rating" value="'+table.rows[i].cells[4].textContent+'" style="display:none;"><input type="text" name="name" value ="wishlist-form'+i+'" style="display:none;"/><input type="submit" class="button button1" value="Add to wishlist" name="add-to-wishlist"/></form>';
+
+      <!-- CHECK-BOX -->
+      <div class="col-sm">
+        <div class="form-group">
+          <form action="/filter?product_name={{prod}}" method="post" id="filter3">
+            <label><input type="checkbox" name="amazon" value="amazon" onchange="handleCheckboxChange(this)">
+              Amazon</label>
+            <label><input type="checkbox" name="walmart" value="walmart" onchange="handleCheckboxChange(this)">
+              Walmart</label>
+            <label><input type="checkbox" name="etsy" value="etsy" onchange="handleCheckboxChange(this)">Etsy</label>
+            <label><input type="checkbox" name="google" value="google"
+                onchange="handleCheckboxChange(this)">Google</label>
+            <label><input type="checkbox" name="bj" value="bj" onchange="handleCheckboxChange(this)"> BJ</label>
+            <!-- <input type="submit" class="button" name="filter-search" value="Filter Search" /> -->
+
+
+            <script>
+              var selectedOptions = [];
+              function handleCheckboxChange(checkbox) {
+                var value = checkbox.value;
+
+                if (checkbox.checked) {
+                  selectedOptions.push(value);
+                } else {
+                  var index = selectedOptions.indexOf(value);
+                  if (index !== -1) {
+                    selectedOptions.splice(index, 1);
+                  }
                 }
+                console.log(selectedOptions);
               }
-           </script>
+
+              document.getElementById('filter3').addEventListener('change', function (event) {
+                // Append selectedOptions to form data
+                var formData = new FormData(document.getElementById('filter3'));
+                formData.append('selectedOptions', JSON.stringify(selectedOptions));
+                // Replace the original form data with the modified one
+                event.formData = formData;
+                console.log(event.formData);
+              });
+            </script>
+
+
+            <!-- <script>
+                document.getElementById('checkboxForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+            
+                    // Get selected checkboxes
+                    var selectedOptions = Array.from(document.querySelectorAll('input[name="options[]"]:checked')).map(function(checkbox) {
+                        return checkbox.value;
+                    });
+            
+                    // Log selected options (you can send them to the server using AJAX or include in form data)
+                    console.log(selectedOptions);
+                });
+            </script> -->
+
+            <!-- <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+              <form action="/filter?product_name={{prod}}" method="post" id="filter3">
+                <div class="form-control checkbox-dropdown">
+                    <input type="checkbox" id="toggleCheckboxes" />
+                    <label for="toggleCheckboxes">Websites</label>
+                    <ul>
+                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="amazon"> Amazon</label></li>
+                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="walmart"> Walmart</label></li>
+                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="etsy"> Etsy</label></li>
+                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="google"> Google</label></li>
+                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="bj"> BJ</label></li>
+                    </ul>
+                </div> -->
+            <!-- <input type="submit" class="button" name="submit" value="Submit" /> -->
+            <!-- <script>
+              selectedOptions = [];
+              function handleCheckboxChange(checkbox) {
+                    console.log("handle");
+                    var value = checkbox.value;
+                    console.log(value);
+                    if (checkbox.checked) {
+                        selectedOptions.push(value);
+                    } else {
+                        var index = selectedOptions.indexOf(value);
+                        if (index !== -1) {
+                            selectedOptions.splice(index, 1);
+                        }
+                    }
+                    console.log(selectedOptions);
+                    //document.getElementById('form-submit').value = JSON.stringify(selectedOptions);
+                }
+            </script> -->
         </div>
-     </div>
+      </div>
+      <!-- CHECK-BOX -->
+      <div class="col-sm">
+        <div class="form-group">
+          <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+          <div class="col-sm-6 col-md-4">
+            <select id="choice1" name="currency" class="form-control">
+              <option value="usd">USD</option>
+              <option value="inr">INR</option>
+              <option value="euro">EURO</option>
+              <option value="yuan">YUAN</option>
+              <option value="aud">AUD</option>
+              <option value="pound">POUND</option>
+              <br>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm">
+        <div class="form-group">
+          <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+          <div class="col-sm-6 col-md-4">
+            <select id="choice1" name="num" class="form-control">
+              <option value="default">Result Length</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm">
+        <br>
+        <input type="submit" class="button" name="filter-search" value="Filter Search" />
+        <br>
+        <input type="submit" class="button" name="convert-to-csv" value="Convert into CSV" />
+        <br>
+        <input type="submit" class="button" name="convert-to-pdf" value="Convert into PDF" />
+        </form>
+      </div>
+    </div>
+  </div>
+  </form>
+  </form>
+  <hr>
+
+  <br>
+  <div class="results">
+    <div class="grid">
+      {% if websites and websites|length %}
+      {% for product in data %}
+      {% if product.website and product.website in websites %}
+      <div class="product-card">
+        <img class="product-img" src={{product.image_url}} alt="Product 1">
+        <h3><a href={{product.link}} target="_blank">{{product.title}}</a></h3>
+        <p class="price">{{product.price}}</p>
+        <p class="description">{{product.website}}</p>
+        <h3>{{product.rating}}</h3>
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% else %}
+        {% for product in data %}
+            <div class="product-card">
+            <img class="product-img" src={{product.image_url}} alt="Product 1">
+            <h3><a href={{product.link}} target="_blank">{{product.title}}</a></h3>
+            <p class="price">{{product.price}}</p>
+            <p class="description">{{product.website}}</p>
+            <h3>{{product.rating}}</h3>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+
+
+
+    </div>
+
+
+    <script>
+      if ('{{user_login}}' == 'True') {
+        var table = document.getElementById("result-table");
+        for (let i = 2; i < table.rows.length; i++) {
+          const cell = table.rows[i].insertCell();
+          cell.innerHTML = '<form action="/filter?product_name={{prod}}" method="POST"><input type="text" name="link" value="' + table.rows[i].querySelector("a").getAttribute("href") + '" style="display:none;"><input type="text" name="title" value="' + table.rows[i].cells[1].textContent + '" style="display:none;"><input type="text" name="price" value="' + table.rows[i].cells[2].textContent + '" style="display:none;"><input type="text" name="website" value="' + table.rows[i].cells[3].textContent + '" style="display:none;"><input type="text" name="rating" value="' + table.rows[i].cells[4].textContent + '" style="display:none;"><input type="text" name="name" value ="wishlist-form' + i + '" style="display:none;"/><input type="submit" class="button button1" value="Add to wishlist" name="add-to-wishlist"/></form>';
+        }
+      }
+    </script>
+  </div>
+  </div>
 
 </body>
+
 </html>

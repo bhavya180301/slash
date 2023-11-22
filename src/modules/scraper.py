@@ -26,13 +26,14 @@ def httpsGet(URL):
     """
 
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36",
-        "Accept-Encoding": "gzip, deflate",
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "DNT": "1",
-        "Connection": "close",
-        "Upgrade-Insecure-Requests": "1",
-    }
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "DNT": "1",
+    "Connection": "close",
+    "Upgrade-Insecure-Requests": "1",
+}
+
     page = requests.get(URL, headers=headers)
     soup1 = BeautifulSoup(page.content, "html.parser")
     return BeautifulSoup(soup1.prettify(), "html.parser")
@@ -49,6 +50,8 @@ def searchAmazon(query, df_flag, currency):
     page = httpsGet(URL)
     results = page.findAll("div", {"data-component-type": "s-search-result"})
     products = []
+    #print(results)
+
     for res in results:
         titles, prices, links = (
             res.select("h2 a span"),
@@ -74,8 +77,9 @@ def searchAmazon(query, df_flag, currency):
             currency,
         )
         products.append(product)
-    return products
+    print(f"Amazon is {len(products)}")
 
+    return products
 
 def searchWalmart(query, df_flag, currency):
     """
@@ -84,10 +88,9 @@ def searchWalmart(query, df_flag, currency):
     Returns a list of items available on walmart.com that match the product entered by the user
     """
     query = formatSearchQuery(query)
-    URL = f"https://www.walmart.com/search?q={query}"
+    URL = f"https://www.walmart.com/s?query={query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"data-item-id": True})
-    # print(results)
     products = []
     pattern = re.compile(r"out of 5 Stars")
     for res in results:
@@ -102,7 +105,7 @@ def searchWalmart(query, df_flag, currency):
         if len(trending) > 0:
             trending = trending[0]
         else:
-            trending = None
+            trending = None 
         product = formatResult(
             "walmart",
             titles,
@@ -115,6 +118,7 @@ def searchWalmart(query, df_flag, currency):
             currency,
         )
         products.append(product)
+    print(f"Walmart is {len(products)}")
     return products
 
 
@@ -128,8 +132,14 @@ def searchEtsy(query, df_flag, currency):
     url = f"https://www.etsy.com/search?q={query}"
     products = []
     headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
-    }
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.123 Safari/537.36",
+    #"User-Agent":"Adsbot-Google",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "DNT": "1",
+    "Connection": "close",
+    "Upgrade-Insecure-Requests": "1",
+}
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, "lxml")
     for item in soup.select(".wt-grid__item-xs-6"):
@@ -158,6 +168,8 @@ def searchEtsy(query, df_flag, currency):
             currency,
         )
         products.append(product)
+    print(f"Etsy is {len(products)}")
+
     return products
 
 
@@ -184,7 +196,7 @@ def searchGoogleShopping(query, df_flag, currency):
             image_url = image.get("data-image-src").strip()
         else :
             image_url = ""
-        print(image_url)
+
         ratings = res.findAll("span", {"class": "Rsc7Yb"})
         try:
             num_ratings = pattern.findall(str(res.findAll("span")[1]))[0].replace(
@@ -210,6 +222,8 @@ def searchGoogleShopping(query, df_flag, currency):
             image_url
         )
         products.append(product)
+    print(f"Google is {len(products)}")
+
     return products
 
 
@@ -223,7 +237,7 @@ def searchBJs(query, df_flag, currency):
     URL = f"https://www.bjs.com/search/{query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"class": "product"})
-    # print(results)
+    #print(page)
     products = []
     for res in results:
         titles, prices, links = (
@@ -244,6 +258,7 @@ def searchBJs(query, df_flag, currency):
         if len(ratings) != 0:
             product["rating"] = len(ratings)
         products.append(product)
+    print(f"BJs is {len(products)}")
     return products
 
 
@@ -258,7 +273,7 @@ def condense_helper(result_condensed, list, num):
 
 
 def driver(
-    product, currency, num=None, df_flag=0, csv=None, cd=None, ui=False, sort=None, filter_by_rating=None
+    product, currency, num=None, df_flag=0, csv=None, cd=None, ui=False, sort=None, filter_by_rating=None, websites=None
 ):
     """Returns csv is the user enters the --csv arg,
     else will display the result table in the terminal based on the args entered by the user"""
@@ -339,4 +354,7 @@ def driver(
                 file_name, index=False, header=results.columns
             )
             print(result_condensed)
+        if websites != None:
+            print("HERE HERE HERE")
+            print(type(websites))
     return result_condensed
