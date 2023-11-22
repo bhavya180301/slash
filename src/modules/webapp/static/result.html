@@ -204,97 +204,6 @@
         </div>
       </div>
 
-      <!-- CHECK-BOX -->
-      <div class="col-sm">
-        <div class="form-group">
-          <form action="/filter?product_name={{prod}}" method="post" id="filter3">
-            <label><input type="checkbox" name="amazon" value="amazon" onchange="handleCheckboxChange(this)">
-              Amazon</label>
-            <label><input type="checkbox" name="walmart" value="walmart" onchange="handleCheckboxChange(this)">
-              Walmart</label>
-            <label><input type="checkbox" name="etsy" value="etsy" onchange="handleCheckboxChange(this)">Etsy</label>
-            <label><input type="checkbox" name="google" value="google"
-                onchange="handleCheckboxChange(this)">Google</label>
-            <label><input type="checkbox" name="bj" value="bj" onchange="handleCheckboxChange(this)"> BJ</label>
-            <!-- <input type="submit" class="button" name="filter-search" value="Filter Search" /> -->
-
-
-            <script>
-              var selectedOptions = [];
-              function handleCheckboxChange(checkbox) {
-                var value = checkbox.value;
-
-                if (checkbox.checked) {
-                  selectedOptions.push(value);
-                } else {
-                  var index = selectedOptions.indexOf(value);
-                  if (index !== -1) {
-                    selectedOptions.splice(index, 1);
-                  }
-                }
-                console.log(selectedOptions);
-              }
-
-              document.getElementById('filter3').addEventListener('change', function (event) {
-                // Append selectedOptions to form data
-                var formData = new FormData(document.getElementById('filter3'));
-                formData.append('selectedOptions', JSON.stringify(selectedOptions));
-                // Replace the original form data with the modified one
-                event.formData = formData;
-                console.log(event.formData);
-              });
-            </script>
-
-
-            <!-- <script>
-                document.getElementById('checkboxForm').addEventListener('submit', function(event) {
-                    event.preventDefault();
-            
-                    // Get selected checkboxes
-                    var selectedOptions = Array.from(document.querySelectorAll('input[name="options[]"]:checked')).map(function(checkbox) {
-                        return checkbox.value;
-                    });
-            
-                    // Log selected options (you can send them to the server using AJAX or include in form data)
-                    console.log(selectedOptions);
-                });
-            </script> -->
-
-            <!-- <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
-              <form action="/filter?product_name={{prod}}" method="post" id="filter3">
-                <div class="form-control checkbox-dropdown">
-                    <input type="checkbox" id="toggleCheckboxes" />
-                    <label for="toggleCheckboxes">Websites</label>
-                    <ul>
-                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="amazon"> Amazon</label></li>
-                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="walmart"> Walmart</label></li>
-                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="etsy"> Etsy</label></li>
-                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="google"> Google</label></li>
-                        <li><label class="checkbox-option"><input type="checkbox" onchange="handleCheckboxChange(this)" name="websites[]" value="bj"> BJ</label></li>
-                    </ul>
-                </div> -->
-            <!-- <input type="submit" class="button" name="submit" value="Submit" /> -->
-            <!-- <script>
-              selectedOptions = [];
-              function handleCheckboxChange(checkbox) {
-                    console.log("handle");
-                    var value = checkbox.value;
-                    console.log(value);
-                    if (checkbox.checked) {
-                        selectedOptions.push(value);
-                    } else {
-                        var index = selectedOptions.indexOf(value);
-                        if (index !== -1) {
-                            selectedOptions.splice(index, 1);
-                        }
-                    }
-                    console.log(selectedOptions);
-                    //document.getElementById('form-submit').value = JSON.stringify(selectedOptions);
-                }
-            </script> -->
-        </div>
-      </div>
-      <!-- CHECK-BOX -->
       <div class="col-sm">
         <div class="form-group">
           <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
@@ -326,6 +235,24 @@
           </div>
         </div>
       </div>
+
+        <!-- CHECK-BOX -->
+        <div class="col-sm">
+          <div class="form-group">
+            <form action="/filter?product_name={{prod}}" method="post" id="filter3">
+              <label><input type="checkbox" name="amazon" value="amazon" onchange="handleCheckboxChange(this)">
+                Amazon</label><br>
+              <label><input type="checkbox" name="walmart" value="walmart" onchange="handleCheckboxChange(this)">
+                Walmart</label><br>
+              <label><input type="checkbox" name="etsy" value="etsy" onchange="handleCheckboxChange(this)"> Etsy</label><br>
+              <label><input type="checkbox" name="google" value="google"
+                  onchange="handleCheckboxChange(this)"> Google</label><br>
+              <label><input type="checkbox" name="bj" value="bj" onchange="handleCheckboxChange(this)"> BJ</label>
+              <!-- <input type="submit" class="button" name="filter-search" value="Filter Search" /> -->
+  
+          </div>
+        </div>
+        <!-- CHECK-BOX -->
 
       <div class="col-sm">
         <br>

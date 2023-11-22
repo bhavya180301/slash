@@ -50,16 +50,23 @@ def searchAmazon(query, df_flag, currency):
     page = httpsGet(URL)
     results = page.findAll("div", {"data-component-type": "s-search-result"})
     products = []
-    #print(results)
-
     for res in results:
         titles, prices, links = (
             res.select("h2 a span"),
             res.select("span.a-price span"),
             res.select("h2 a.a-link-normal"),
         )
+        # print("....Res.....")
+        # print(res)
+        image = res.find("img", {"src": True})
+   
+        if image :
+            image_url = image.get("src").strip()
+        else :
+            image_url = ""
         ratings = res.select("span.a-icon-alt")
         num_ratings = res.select("span.a-size-base")
+        
         trending = res.select("span.a-badge-text")
         if len(trending) > 0:
             trending = trending[0]
@@ -75,6 +82,7 @@ def searchAmazon(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            image_url
         )
         products.append(product)
     print(f"Amazon is {len(products)}")
