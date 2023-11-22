@@ -76,7 +76,6 @@ def searchAmazon(query, df_flag, currency):
             currency,
         )
         products.append(product)
-    print(len(products))
     
     return products
 
@@ -119,7 +118,6 @@ def searchWalmart(query, df_flag, currency):
             currency,
         )
         products.append(product)
-    print(len(products))
 
     return products
 
@@ -164,7 +162,6 @@ def searchEtsy(query, df_flag, currency):
             currency,
         )
         products.append(product)
-    print(len(products))
 
     return products
 
@@ -217,7 +214,6 @@ def searchGoogleShopping(query, df_flag, currency):
             image_url
         )
         products.append(product)
-    print(len(products))
     
     return products
 

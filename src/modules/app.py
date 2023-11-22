@@ -2,12 +2,12 @@ from datetime import datetime
 
 from flask import Flask, request, render_template, send_file, make_response,jsonify
 from src.modules.csv_writer import write_csv
-
+from apscheduler.schedulers.background import BackgroundScheduler
 from src.modules.scraper import driver
 from src.modules.data import categories
 import pandas as pd
 import pdfkit
-
+from src.modules.price_checker import check_price_drop
 path_wkhtmltopdf = "src/modules/wkhtmltopdf.exe"
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 
@@ -25,7 +25,8 @@ app.config['SECRET_KEY'] = '504038774627ae2489c38028'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-
+scheduler = BackgroundScheduler()
+scheduler.start()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -85,6 +86,27 @@ def checkpricedrop():
     if(product_price_new >= product_price):
         return jsonify("false")
     return jsonify("true")
+
+
+
+def scheduled_price_check(**kwargs):
+    with app.app_context():
+        check_price_drop(kwargs['product_name'],kwargs['product_price'])
+
+
+@app.route('/check_price_drop', methods=['POST'])
+def initiate_price_check():
+    product_name = request.form.get('product_name')
+    product_price = request.form.get("product_price")
+
+
+    # Add the job to the scheduler with parameters
+    with app.app_context():
+        scheduler.add_job(scheduled_price_check, 'interval', minutes=0.5,
+                  kwargs={'product_name': product_name,'product_price':product_price})
+
+
+    return 'Price drop check initiated!'
 
 @app.route("/category/<category_query>", methods=["GET"])
 def category_result(category_query):
