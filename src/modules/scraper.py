@@ -26,8 +26,13 @@ def httpsGet(URL):
     """
 
     headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36',  # noqa: E501
-        }
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,/;q=0.8",
+    "DNT": "1",
+    "Connection": "close",
+    "Upgrade-Insecure-Requests": "1",
+}
     s = requests.Session()
     page = s.get(URL, headers=headers)
     
@@ -71,6 +76,8 @@ def searchAmazon(query, df_flag, currency):
             currency,
         )
         products.append(product)
+    print(len(products))
+    
     return products
 
 
@@ -112,6 +119,8 @@ def searchWalmart(query, df_flag, currency):
             currency,
         )
         products.append(product)
+    print(len(products))
+
     return products
 
 
@@ -155,6 +164,8 @@ def searchEtsy(query, df_flag, currency):
             currency,
         )
         products.append(product)
+    print(len(products))
+
     return products
 
 
@@ -181,7 +192,6 @@ def searchGoogleShopping(query, df_flag, currency):
             image_url = image.get("data-image-src").strip()
         else :
             image_url = ""
-        print(image_url)
         ratings = res.findAll("span", {"class": "Rsc7Yb"})
         try:
             num_ratings = pattern.findall(str(res.findAll("span")[1]))[0].replace(
@@ -207,6 +217,8 @@ def searchGoogleShopping(query, df_flag, currency):
             image_url
         )
         products.append(product)
+    print(len(products))
+    
     return products
 
 
@@ -224,23 +236,26 @@ def searchBJs(query, df_flag, currency):
     products = []
     for res in results:
         titles, prices, links = (
-            res.select("h2"),
+            res.select("p.no-select.d-none.d-sm-block.auto-height"),
             res.select("span.price"),
             res.select("a"),
         )
         ratings = res.findAll("span", {"class": "on"})
         num_ratings = 0
         trending = res.select("p.instantSavings")
+        image_url = res.select("img.img-link")[0].get('src')
+        
         if len(trending) > 0:
             trending = trending[0]
         else:
             trending = None
         product = formatResult(
-            "bjs", titles, prices, links, "", num_ratings, trending, df_flag, currency
+            "bjs", titles, prices, links, "", num_ratings, trending, df_flag, currency, image_url
         )
         if len(ratings) != 0:
             product["rating"] = len(ratings)
         products.append(product)
+    
     return products
 
 

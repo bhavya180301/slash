@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Choose Your Product</h1>
+    </header>
+
+    <div class="card-container">
+        <!-- Loop through data to generate cards dynamically -->
+        {% for category in data %}
+            <div class="card">
+                <form action = "/search" method = "get">
+                    <div class="search">
+                       <input type="text" name="product_name" class="searchTerm" value="{{category}}" style="display:none;" >
+                       
+                        <button type="submit" style="border: none;background-color: white;"><h2>{{ category }}</h2></button>
+                       
+                    </div>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
