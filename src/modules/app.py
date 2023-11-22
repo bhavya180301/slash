@@ -14,14 +14,23 @@ config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-
 from flask_login import login_user, LoginManager, UserMixin, logout_user, current_user
-
+from flask_mail import Mail, Message
 from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__, template_folder=".")
+
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'seproject37@gmail.com'
+app.config['MAIL_PASSWORD'] = 'ffyi cwen stql peyj'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY'] = '504038774627ae2489c38028'
+
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
@@ -91,7 +100,13 @@ def checkpricedrop():
 
 def scheduled_price_check(**kwargs):
     with app.app_context():
-        check_price_drop(kwargs['product_name'],kwargs['product_price'])
+        price_drop = check_price_drop(kwargs['product_name'],kwargs['product_price'])
+        
+        if price_drop == "true" : 
+            msg = Message('Price Drop Alert', sender = 'seproject37@gmail.com', recipients = ['bhavyahii@gmail.com'])
+            msg.body= "New Price Drop recorded in " + kwargs['product_name']
+            mail.send(msg)
+        
 
 
 @app.route('/check_price_drop', methods=['POST'])

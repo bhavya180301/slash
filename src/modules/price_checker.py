@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, send_file, make_response,jsonify
 from src.modules.scraper import driver
 
+
 def check_price_drop(product_name,product_price):
     print("Checking Price!!")
     results = driver(product_name,"")
@@ -19,7 +20,9 @@ def check_price_drop(product_name,product_price):
     
     if(product_price_new >= product_price):
         print("false")
-        return jsonify("false")
+        return "false"
+    
+    
     print("true")
-    return jsonify("true")
+    return "true"
 
