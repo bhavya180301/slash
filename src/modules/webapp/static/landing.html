@@ -1,41 +1,548 @@
-
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+<head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Slash Mini-Version</title>
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <title>Slash Mini-Version</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-	<link rel="stylesheet" href="/static/style.css">
-	<link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"  ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-      
+
     <style>
 
-#header{
-  font-family:Trebuchet MS, sa ns-serif;
-  font-size:32px;
-  color:#333;
-  font-style:italic;
-  font-weight:bold;
-  text-align:center;
-  padding-right:10px;
-  padding-top:35px;
-  padding-left:10px;
-  }
+:root {
+  --black: rgba(0, 0, 0, 1);
+  --spectra-2: rgba(38, 93, 86, 0.231);
+  --spectra: rgba(43, 100, 92, 1);
+  --casal-3: rgba(44, 103, 93, 1);
+  --casal-2: rgba(44, 103, 96, 1);
+  --casal: rgba(50, 113, 105, 1);
+  --algae-green: rgba(145, 228, 188, 1);
+  --quick-silver: rgba(165, 165, 165, 0.161);
+  --cornflower-lilac: rgba(248, 168, 171, 1);
+  --white: rgba(255, 255, 255, 1);
+  --font-size-xs: 21px;
+  --font-size-s: 24px;
+  --font-size-m: 35px;
+  --font-size-1: 50px;
+  --font-size-xl: 55px;
+  --font-family-helveticaneue-bold: "HelveticaNeue-Bold";
+  --font-family-helveticaneue-medium: "HelveticaNeue-Medium";
+  --font-family-helveticaneue-regular: "HelveticaNeue-Regular";
+}
 
-  .container1
-  {
-    
-      height: 270px;
-      width: 100%;
-  }
-  .navbar {
+/* Classes */
+
+.helveticaneue-bold-casal-50px {
+  color: var(--casal);
+  font-family: var(--font-family-helveticaneue-bold);
+  font-size: var(--font-size-1);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.helveticaneue-bold-casal-55px {
+  color: var(--casal-3);
+  font-family: var(--font-family-helveticaneue-bold);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.helveticaneue-medium-casal-21px {
+  color: var(--casal-2);
+  font-family: var(--font-family-helveticaneue-medium);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  font-style: normal;
+}
+
+.helveticaneue-bold-black-24px {
+  color: var(--black);
+  font-family: var(--font-family-helveticaneue-bold);
+  font-size: var(--font-size-s);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.helveticaneue-regular-normal-spectra-35px {
+  color: var(--spectra);
+  font-family: var(--font-family-helveticaneue-regular);
+  font-size: var(--font-size-m);
+  font-weight: 400;
+  font-style: normal;
+}
+
+      @font-face {
+    font-family: "HelveticaNeue-Bold";
+    font-style: normal;
+    font-weight: 700;
+    src: url("https://fonts.animaapp.com/HelveticaNeue-Bold") format("opentype");
+}
+
+@font-face {
+    font-family: "HelveticaNeue-Medium";
+    font-style: normal;
+    font-weight: 500;
+    src: url("https://fonts.animaapp.com/HelveticaNeue-Medium") format("truetype");
+}
+
+@font-face {
+    font-family: "HelveticaNeue-Regular";
+    font-style: normal;
+    font-weight: 400;
+    src: url("https://fonts.animaapp.com/HelveticaNeue-Regular") format("truetype");
+}
+
+/* Hidden elements */
+hidden,
+hidden * {
+    pointer-events: none;
+    visibility: hidden;
+}
+
+/* Slash styling */
+#slash {
+    align-items: center;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 123px;
+    height: 2108px;
+    width: 1920px;
+}
+
+/* Overlap group 2 styling */
+.overlap-group2 {
+    align-items: flex-start;
+    background-image: url(https://cdn.animaapp.com/projects/655aeb7d8c17a2032c6173c2/releases/655aebb0b8e6b3012c87cf9d/img/path-35@1x.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    gap: 69px;
+    min-height: 1089px;
+    padding: 156px 430px;
+    width: 1920px;
+}
+
+/* Discover more choose styling */
+.discover-more-choos {
+    align-self: center;
+    color: #2c675d;
+    font-family: var(--font-family-helveticaneue-bold);
+    font-size: var(--font-size-1);
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 55px;
+    margin-right: 68px;
+    min-height: 136px;
+    min-width: 794px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Flex row 1 styling */
+.flex-row-1 {
+    align-items: flex-start;
+    display: flex;
+    gap: 77px;
+    height: 547px;
+    min-width: 1024px;
+}
+
+/* Group container styling */
+.group-container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 57px;
+    min-height: 547px;
+    width: 290px;
+}
+
+/* Electronics container styling */
+.electronics-container {
+    align-items: flex-end;
+    background-color: var(--white);
+    border-radius: 48px;
+    box-shadow: 10px 10px 10px #00000029;
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+    min-height: 245px;
+    padding: 41px 79px;
+    width: 290px;
+}
+
+/* Electronics 1 styling */
+.electronics-1 {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 30px;
+    min-width: 130px;
+    opacity: 0.86;
+    text-align: center;
+    white-space: nowrap;
+    align-self: center;
+    height: 89px;
+    margin-left: 7px;
+    object-fit: cover;
+    width: 89px;
+}
+
+/* Group 15 styling */
+.group-15 {
+    align-items: flex-start;
+    background-color: var(--white);
+    border-radius: 48px;
+    box-shadow: 10px 10px 10px #00000029;
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    min-height: 245px;
+    padding: 53px 93px;
+    width: 290px;
+}
+
+/* Clothes rack styling */
+.clothes-rack {
+    align-self: center;
+    height: 87px;
+    margin-left: 1px;
+    object-fit: cover;
+    width: 87px;
+}
+
+/* Clothing styling */
+.clothing {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 30px;
+    min-width: 98px;
+    opacity: 0.86;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Group 1 styling */
+.group-1 {
+    display: flex;
+    height: 245px;
+    width: 290px;
+}
+
+/* Group 12 styling */
+.group-12 {
+    align-items: flex-end;
+    background-color: var(--white);
+    border-radius: 48px;
+    box-shadow: 10px 10px 10px #00000029;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    min-height: 100%;
+    padding: 43px 87px;
+    width: 290px;
+}
+
+/* Grocery 1 styling */
+.grocery-1 {
+    align-self: center;
+    height: 90px;
+    object-fit: cover;
+    width: 90px;
+}
+
+/* Groceries styling */
+.groceries {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 30px;
+    min-width: 114px;
+    opacity: 0.86;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Overlap group 1 styling */
+.overlap-group1 {
+    border-radius: 48px;
+    height: 245px;
+    position: relative;
+    width: 290px;
+}
+
+/* Travel luggage styling */
+.travel-luggage {
+    height: 98px;
+    left: 88px;
+    object-fit: cover;
+    position: absolute;
+    top: 41px;
+    width: 98px;
+}
+
+/* Group 4 styling */
+.group-4 {
+    align-items: flex-end;
+    background-color: var(--white);
+    border-radius: 48px;
+    box-shadow: 10px 10px 10px #00000029;
+    display: flex;
+    height: 245px;
+    justify-content: flex-end;
+    left: 0;
+    min-width: 290px;
+    padding: 56px 106px;
+    position: absolute;
+    top: 0;
+}
+
+/* Travel styling */
+.travel {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 38px;
+    min-width: 76px;
+    opacity: 0.86;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Group 13 styling */
+.group-13 {
+    align-items: flex-end;
+    background-color: var(--white);
+    border-radius: 48px;
+    box-shadow: 10px 10px 10px #00000029;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 23px;
+    min-height: 100%;
+    padding: 42px 62px;
+    width: 290px;
+}
+
+/* Skincare styling */
+.skincare {
+    align-self: center;
+    height: 98px;
+    margin-left: 6px;
+    object-fit: cover;
+    width: 98px;
+}
+
+/* Personal care styling */
+.personal-care {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 30px;
+    min-width: 164px;
+    opacity: 0.86;
+    text-align: center;
+    white-space: nowrap;
+}
+
+/* Group 14 styling */
+.group-14 {
+    align-items: flex-end;
+    background-color: var(--white);
+    border-radius: 48px;
+    box-shadow: 10px 10px 10px #00000029;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    min-height: 245px;
+    padding: 51px 81px;
+    width: 290px;
+}
+
+/* Furniture styling */
+.furniture {
+    align-self: center;
+    height: 88px;
+    margin-left: 18px;
+    object-fit: cover;
+    width: 88px;
+}
+
+/* Furniture 1 styling */
+.furniture-1 {
+    letter-spacing: 0;
+    line-height: 24px;
+    min-height: 30px;
+    min-width: 106px;
+    opacity: 0.86;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.flex-row {
+        align-items: center;
+        flex-direction: row;
+        display: flex;
+        gap: 2%; /* Adjust the gap as needed */
+        width: 100%;
+        height: 80vh
+    }
+
+    .flex-col {
+        align-items: flex-end;
+        display: flex;
+        flex-direction: column;
+        width: 100%; /* Set the width to 48% to allow for a small gap between overlap-group4 and overlap-group */
+        margin: 0 auto; /* Center the .flex-row horizontally */
+    }
+
+
+/* Screenshot styling */
+.screenshot-2023-11-19-at-65119-pm {
+    align-self: flex-start;
+    height: 94px;
+    object-fit: cover;
+    width: 264px;
+}
+
+/* Group container 1 styling */
+.group-container-1 {
+    align-items: flex-start;
+    display: flex;
+    margin-right: 2px;
+    margin-top: 68px;
+    min-width: 934px;
+}
+
+/* Overlap group 3 styling */
+.overlap-group3 {
+    align-items: flex-end;
+    background-color: #91e4bc;
+    border-radius: 10px;
+    box-shadow: 8px 8px 8px #00000029;
+    display: flex;
+    height: 63px;
+    justify-content: flex-end;
+    min-width: 280px;
+    padding: 14px 17px;
+}
+
+/* Discover ultimate deals styling */
+.discover-ultimate-deals {
+    color: #2c6760;
+    font-family: var(--font-family-helveticaneue-medium);
+    font-size: var(--font-size-Xs);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 21px;
+    min-height: 27px;
+    min-width: 235px;
+    mix-blend-mode: darken;
+    white-space: nowrap;
+}
+
+/* Group 8 styling */
+.group-8 {
+    background-color: #a5a5a529;
+    border: 2px solid;
+    border-color: #265d563b;
+    border-radius: 10px;
+    box-shadow: 2px 8px 8px #00000029;
+    height: 63px;
+    opacity: 0.59;
+    width: 654px;
+}
+
+
+/* Overlap group 4 styling */
+.overlap-group4 {
+    width: 60%;
+    position: relative;
+    flex: 1; /* Grow to fill the remaining space */
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Overlap group styling */
+.overlap-group {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3%;
+}
+
+
+
+/* Welcome to your one styling */
+.welcome-to-your-one {
+    color: #2b645c;
+    font-family: var(--font-family helveticaneue-regular);
+    font-size: var(--font-size-m);
+    font-weight: 400;
+    height: 101px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 35px;
+    position: absolute;
+    top: 67px;
+    width: 936px;
+}
+
+/* Unlock savings styling */
+.unlock-savings {
+    color: #327169;
+    font-family: var(--font-family-helveticaneue-bold);
+    font-size: var(--font-size-1);
+    font-weight: 700;
+    height: 69px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 50px;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 936px;
+}
+
+/* Slash styling */
+#slash path {
+    object-fit: cover;
+    position: absolute;
+}
+
+/* Path 19 styling */
+.path-19 {
+    height: 50px;
+    left: 467px;
+    top: 261px;
+    width: 33px;
+}
+
+        #header {
+            font-family: Trebuchet MS, sans-serif;
+            font-size: 32px;
+            color: #333;
+            font-style: italic;
+            font-weight: bold;
+            text-align: center;
+            padding-right: 10px;
+            padding-top: 35px;
+            padding-left: 10px;
+        }
+
+        .container1 {
+            height: 270px;
+            width: 100%;
+        }
+
+        .navbar {
             background-color: #f8f9fa;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -49,125 +556,182 @@
             border-color: #343a40;
         }
 
-  .sb-example-1 .search {
-      width: 75%;
-      position: relative;
-      display: flex;
-      padding-top:15px;
-      padding-left:380px;
-    
-    }
-  
-    .sb-example-1 .searchTerm {
-      width: 100%;
-      border: 3px solid rgb(63, 155, 112);
-      border-right: none;
-      padding: 5px;
-      border-radius: 5px 0 0 5px;
-      outline: none;
-      color:  rgb(63, 155, 112);
-    }
-    .sb-example-1 .searchTerm:focus{
-      color: green;
-    }
+        .sb-example-1 .search {
+            width: 75%;
+            position: relative;
+            display: flex;
+            padding-top: 15px;
+            padding-left: 380px;
+        }
 
-    .sb-example-1 .searchButton {
-      width: 40px;
-      height: 50px;
-      border: 1px solid rgb(63, 155, 112);
-      background: rgb(145, 228, 189);
-      text-align: center;
-      color: #fff;
-      border-radius: 0 5px 5px 0;
-      cursor: pointer;
-      font-size: 20px;
-    }
-    .sb-example-1 .searchButton i{
-      color: green;
-    }
+        .sb-example-1 .searchTerm {
+            width: 100%;
+            border: 3px solid rgb(63, 155, 112);
+            border-right: none;
+            padding: 5px;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+            color: rgb(63, 155, 112);
+        }
 
+        .sb-example-1 .searchTerm:focus {
+            color: green;
+        }
 
+        .sb-example-1 .searchButton {
+            width: 40px;
+            height: 50px;
+            border: 1px solid rgb(63, 155, 112);
+            background: rgb(145, 228, 189);
+            text-align: center;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
 
+        .sb-example-1 .searchButton i {
+            color: green;
+        }
+
+        @font-face {
+            font-family: "HelveticaNeue-Bold";
+            font-style: normal;
+            font-weight: 700;
+            src: url("https://fonts.animaapp.com/HelveticaNeue-Bold") format("opentype");
+        }
+
+        .heading-text {
+            color: 0#327169;
+            font-family: var(--font-family-helveticaneue-bold);
+            font-size: var(--font-size-1);
+            font-weight: 700;
+            height: 69px;
+            left: 0;
+            letter-spacing: 0;
+            line-height: 50px;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            width: 936px;
+        }
     </style>
-   </head>
-   <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px">
-      <a class="navbar-brand" href="{{ url_for('landingpage') }}">
-          <img src="https://raw.githubusercontent.com/Yash-Chandrani/slash/main/src/modules/webapp/static/images/slash.png" alt="Slash Logo" width="90" height="70">
-      </a>
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-              {% if current_user.is_authenticated %}
-                  <li class="nav-item">
-                      <a class="nav-link text-dark">Logged in as {{ current_user.email }}</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link text-dark" href="{{ url_for('wishlist') }}">Wishlists</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link text-dark" href="{{ url_for('logout_page') }}">Logout</a>
-                  </li>
-              {% else %}
-                  <li class="nav-item">
-                      <a class="nav-link text-dark" href="{{ url_for('register_page') }}">Sign up</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link text-dark" href="{{ url_for('login_page') }}">Login</a>
-                  </li>
-              {% endif %}
-          </ul>
-      </div>
-  </nav>
-  
-  
-  
-  
+</head>
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-           {% for category, message in messages %}
-              <div class="alert alert-{{ category }}">
-                  <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                  </button>
-                  {{ message }}
+<body>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px">
+    <a class="navbar-brand" href="{{ url_for('landingpage') }}">
+        <img src="https://raw.githubusercontent.com/Yash-Chandrani/slash/main/src/modules/webapp/static/images/slash.png" alt="Slash Logo">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link text-dark">Logged in as {{ current_user.email }}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ url_for('wishlist') }}">Wishlists</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ url_for('logout_page') }}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ url_for('register_page') }}">Sign up</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ url_for('login_page') }}">Login</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }}">
+    <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<div class="slash screen">
+    <div class="flex-col">
+        <div class="flex-row">
+            <div class="overlap-group4">
+                <div class="unlock-savings">Unlock Savings</div>
+                <p class="welcome-to-your-one">Welcome to your One-Stop Shop for the Best Prices of Your Favorite Products!</p>
+                <div class="group-container-1">
+                    <div class="group-8"></div>
+                    <div class="overlap-group3">
+                        <div class="discover-ultimate-deals">Discover ultimate deals!</div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlap-group">
+              <img class="path-8 path" src="https://raw.githubusercontent.com/bhavya180301/slash/4e88cee8b261203dfdd63996c4ab7d287680ddd1/src/modules/webapp/static/images/shopping-illustration.svg" alt="Path 8" width="400" height="400"/>
+          </div>
+        </div>
+
+
+
+
+    <div class="overlap-group2">
+      <h1 class="discover-more-choos">Discover More, Choose Better <br/>
+          Explore Products Here!
+      </h1>
+      <div class="flex-row-1">
+          <div class="group-container">
+              <div class="group-1">
+                  <div class="group-12">
+                      <img class="grocery-1" src="grocery-1.png" alt="grocery (1)" />
+                      <div class="groceries helveticaneue-bold-black-24px">Groceries</div>
+                  </div>
               </div>
-           {% endfor %}
-        {% endif %}
-    {% endwith %}
-
-    <h1 id="header"> Welcome to Mini Version of SLASH! </h1>
-    <br>
-    <br>
-    <hr>
-    <br>
-
-    
-  <!--------------Search----------------------------------------------------------------------->
- 
-  <div class="container1" style="background-color:  rgb(232, 255, 235);">
-    <div class="w-100 p-3" id="header" style="background-color: rgb(232, 255, 235);">
-      <h3>What are you</h3>
-      <h3>looking for?</h3>   
-  </div>
-
-  <div class="sb-example-1">
-    <form action = "/search" method = "get">
-      <div class="search">
-         <input type="text" name="product_name" class="searchTerm" placeholder="Type here">
-         <button type="submit" class="searchButton">
-           <i class="fa fa-search"></i>
-        </button>
+              <div class="overlap-group1">
+                  <div class="group-4">
+                      <div class="travel helveticaneue-bold-black-24px">Travel</div>
+                  </div>
+                  <img class="travel-luggage" src="travel-luggage.png" alt="travel-luggage" />
+              </div>
+          </div>
+          <div class="group-container">
+              <div class="electronics-container">
+                  <img class="electronics" src="electronics.png" alt="electronics" />
+                  <div class="electronics-1 helveticaneue-bold-black-24px">Electronics</div>
+              </div>
+              <div class="group-15">
+                  <img class="clothes-rack" src="clothes-rack.png" alt="clothes-rack" />
+                  <div class="clothing helveticaneue-bold-black-24px">Clothing</div>
+              </div>
+          </div>
+          <div class="group-container">
+              <div class="group-1">
+                  <div class="group-13">
+                      <img class="skincare" src="skincare.png" alt="skincare" />
+                      <div class="personal-care helveticaneue-bold-black-24px">Personal Care</div>
+                  </div>
+              </div>
+              <div class="group-14">
+                  <img class="furniture" src="furniture.png" alt="furniture" />
+                  <div class="furniture-1 helveticaneue-bold-black-24px">Furniture</div>
+              </div>
+          </div>
       </div>
-    </form>
-   </div>
   </div>
-   <br> 
-  <hr>
+</div>
+</div>
+<br>
+<hr>
 </body>
 </html>
