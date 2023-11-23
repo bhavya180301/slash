@@ -222,13 +222,8 @@ h3 {
             <div class="form-group">
                <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
                 <div class="col-sm-6 col-md-4">
-                  <select id="choice1" name="num" class="form-control">
-                    <option value="default">Result Length</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                  </select>
+                  <input id="choice1" name="num" class="form-control" placeholder="Add a value">
+                </input>
                 </div>
               </div>
 
@@ -257,7 +252,9 @@ h3 {
                 <p class="price">{{product.price}}</p>
                 <p class="description">{{product.website}}</p>
                 <h3>{{product.rating}}</h3>
-                
+                {% if product['no of ratings'] != '' %}
+                    <p>No. of Ratings: {{ product['no of ratings'] }}</p>
+                {% endif %}
                 {% if user_login %}
                   <form action="/filter?product_name={{ product.title }}" method="POST">
                       <input type="text" name="link" value="{{ product.link }}" style="display:none;">
