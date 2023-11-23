@@ -386,13 +386,15 @@ hidden * {
 }
 
 .flex-row {
-        align-items: center;
-        flex-direction: row;
-        display: flex;
-        gap: 2%; /* Adjust the gap as needed */
-        width: 100%;
-        height: 80vh
-    }
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2%;
+    width: 100%;
+    height: 78vh;
+}
+
+
 
     .flex-col {
         align-items: flex-end;
@@ -411,13 +413,23 @@ hidden * {
     width: 264px;
 }
 
+
+/* Overlap group styling */
+.home-page-image {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3%;
+    margin-top: 15%;
+}
+
 /* Group container 1 styling */
-.group-container-1 {
+.search-input {
     align-items: flex-start;
     display: flex;
+    flex: 1;
     margin-right: 2px;
-    margin-top: 68px;
-    min-width: 934px;
+    margin-top: 10px; /* Adjust as needed */
 }
 
 /* Overlap group 3 styling */
@@ -434,7 +446,7 @@ hidden * {
 }
 
 /* Discover ultimate deals styling */
-.discover-ultimate-deals {
+.search-button {
     color: #2c6760;
     font-family: var(--font-family-helveticaneue-medium);
     font-size: var(--font-size-Xs);
@@ -445,10 +457,11 @@ hidden * {
     min-width: 235px;
     mix-blend-mode: darken;
     white-space: nowrap;
+    padding: 10px; /* Add padding as needed */
 }
 
 /* Group 8 styling */
-.group-8 {
+/* .search-bar {
     background-color: #a5a5a529;
     border: 2px solid;
     border-color: #265d563b;
@@ -456,59 +469,58 @@ hidden * {
     box-shadow: 2px 8px 8px #00000029;
     height: 63px;
     opacity: 0.59;
-    width: 654px;
-}
+    width: 100%;
+ } */
 
 
 /* Overlap group 4 styling */
-.overlap-group4 {
+.search-bar-area {
     width: 60%;
-    position: relative;
-    flex: 1; /* Grow to fill the remaining space */
     padding: 10px;
     justify-content: center;
     align-items: center;
-}
-
-/* Overlap group styling */
-.overlap-group {
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    margin-right: 3%;
-}
-
-
-
-/* Welcome to your one styling */
-.welcome-to-your-one {
-    color: #2b645c;
-    font-family: var(--font-family helveticaneue-regular);
-    font-size: var(--font-size-m);
-    font-weight: 400;
-    height: 101px;
-    left: 0;
-    letter-spacing: 0;
-    line-height: 35px;
-    position: absolute;
-    top: 67px;
-    width: 936px;
+    margin-top: 15%;
 }
 
 /* Unlock savings styling */
-.unlock-savings {
+.homepage-text-1 {
     color: #327169;
     font-family: var(--font-family-helveticaneue-bold);
     font-size: var(--font-size-1);
     font-weight: 700;
-    height: 69px;
-    left: 0;
-    letter-spacing: 0;
     line-height: 50px;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    width: 936px;
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+/* Welcome to your one styling */
+.homepage-text-2 {
+    color: #2b645c;
+    font-family: var(--font-family helveticaneue-regular);
+    font-size: var(--font-size-m);
+    font-weight: 400;
+    line-height: 35px;
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+.slash.screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.flex-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2%;
+    width: 85%;
+    height: 85vh;
 }
 
 /* Slash styling */
@@ -524,6 +536,43 @@ hidden * {
     top: 261px;
     width: 33px;
 }
+
+.search-bar .search {
+      width: 75%;
+      position: relative;
+      display: flex;
+      padding-top:15px;
+      padding-left:0px;
+    
+    }
+  
+    .search-bar .search-term {
+      width: 100%;
+      border: 3px solid rgb(63, 155, 112);
+      border-right: none;
+      padding: 5px;
+      border-radius: 5px 0 0 5px;
+      outline: none;
+      color:  rgb(63, 155, 112);
+    }
+    .search-bar .search-term:focus{
+      color: green;
+    }
+
+    .search-bar .search-button {
+      width: 40px;
+      height: 50px;
+      border: 1px solid rgb(63, 155, 112);
+      background: rgb(145, 228, 189);
+      text-align: center;
+      color: #fff;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .search-bar .search-button i{
+      color: green;
+    }
 
         #header {
             font-family: Trebuchet MS, sans-serif;
@@ -556,43 +605,43 @@ hidden * {
             border-color: #343a40;
         }
 
-        .sb-example-1 .search {
-            width: 75%;
-            position: relative;
-            display: flex;
-            padding-top: 15px;
-            padding-left: 380px;
-        }
+        .search-bar .search {
+    width: 75%;
+    position: relative;
+    display: flex;
+    padding-top: 15px;
+    padding-left: 0px;
+}
 
-        .sb-example-1 .searchTerm {
-            width: 100%;
-            border: 3px solid rgb(63, 155, 112);
-            border-right: none;
-            padding: 5px;
-            border-radius: 5px 0 0 5px;
-            outline: none;
-            color: rgb(63, 155, 112);
-        }
+.search-bar .search-term {
+    width: 100%; /* Set the width to 100% to fill the available space */
+    border: 3px solid rgb(63, 155, 112);
+    border-right: none;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: rgb(63, 155, 112);
+}
 
-        .sb-example-1 .searchTerm:focus {
-            color: green;
-        }
+.search-bar .search-term:focus {
+    color: green;
+}
 
-        .sb-example-1 .searchButton {
-            width: 40px;
-            height: 50px;
-            border: 1px solid rgb(63, 155, 112);
-            background: rgb(145, 228, 189);
-            text-align: center;
-            color: #fff;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            font-size: 20px;
-        }
+.search-bar .search-button {
+    width: 80px; /* Adjust the width as needed */
+    height: 50px;
+    border: 1px solid rgb(63, 155, 112);
+    background: rgb(145, 228, 189);
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
 
-        .sb-example-1 .searchButton i {
-            color: green;
-        }
+.search-bar .search-button i {
+    color: green;
+}
 
         @font-face {
             font-family: "HelveticaNeue-Bold";
@@ -668,18 +717,22 @@ hidden * {
 <div class="slash screen">
     <div class="flex-col">
         <div class="flex-row">
-            <div class="overlap-group4">
-                <div class="unlock-savings">Unlock Savings</div>
-                <p class="welcome-to-your-one">Welcome to your One-Stop Shop for the Best Prices of Your Favorite Products!</p>
-                <div class="group-container-1">
-                    <div class="group-8"></div>
-                    <div class="overlap-group3">
-                        <div class="discover-ultimate-deals">Discover ultimate deals!</div>
+            <div class="search-bar-area">
+                <div class="homepage-text-1">Unlock Savings</div>
+                <p class="homepage-text-2">Welcome to your One-Stop Shop for the Best Prices of Your Favorite Products!</p>
+                <div class="search-bar">
+                  <form action = "/search" method = "get">
+                    <div class="search">
+                       <input type="text" name="product_name" class="search-term" placeholder="Enter Product Name">
+                       <button type="submit" class="search-button">
+                         <i class="fa fa-search"></i>
+                      </button>
                     </div>
-                </div>
+                  </form>
+                 </div>
             </div>
-            <div class="overlap-group">
-              <img class="path-8 path" src="https://raw.githubusercontent.com/bhavya180301/slash/4e88cee8b261203dfdd63996c4ab7d287680ddd1/src/modules/webapp/static/images/shopping-illustration.svg" alt="Path 8" width="400" height="400"/>
+            <div class="home-page-image">
+              <img src="https://raw.githubusercontent.com/bhavya180301/slash/4e88cee8b261203dfdd63996c4ab7d287680ddd1/src/modules/webapp/static/images/shopping-illustration.svg" alt="shopping-illustration" width="400" height="400"/>
           </div>
         </div>
 
