@@ -143,19 +143,6 @@ def product_search(new_product="", sort=None, currency=None, num=None, filter_by
 @app.route("/filter", methods=["POST", "GET"])
 def product_search_filtered():
     product = request.args.get("product_name")
-
-    if "add-to-wishlist" in request.form:
-        wishlist_product=Wishlist(user_id=current_user.id,
-                                product_title=request.form["title"],
-                                product_link=request.form["link"],
-                                product_price=request.form["price"][1:],
-                                product_website=request.form["website"],
-                                product_rating=request.form["rating"],
-                                product_image_url=request.form["image_url"])
-        db.session.add(wishlist_product)
-        db.session.commit()
-        return product_search(product, None, None, None, None, None)
-
     sort = request.form["sort"]
     currency = request.form["currency"]
     num = request.form["num"]
@@ -195,6 +182,40 @@ def product_search_filtered():
         return send_file(
             f"./pdfs/{file_name}",
             as_attachment=True)
+
+@app.route("/add-to-wishlist", methods=["POST", "GET"])
+def add_to_wishlist():
+    # Retrieve user ID from the session
+
+    
+
+    # Retrieve product details from the request JSON
+    product_title = request.json.get("product_title")
+    product_link = request.json.get("product_link")
+    product_price = request.json.get("product_price")[1:]
+    product_website = request.json.get("product_website")
+    product_rating = request.json.get("product_rating")
+    product_image_url = request.json.get("product_image_url")
+
+    print("here")
+    # Perform validation as needed
+
+    # Assuming you have a Wishlist model
+    wishlist_product = Wishlist(
+        user_id=current_user.id,
+        product_title=product_title,
+        product_link=product_link,
+        product_price=float(product_price),
+        product_website=product_website,
+        product_rating=product_rating,
+        product_image_url=product_image_url
+    )
+
+    db.session.add(wishlist_product)
+    db.session.commit()
+    
+
+    return "true"
 
 
 @app.route('/register', methods=['GET', 'POST'])
