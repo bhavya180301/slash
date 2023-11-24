@@ -7,6 +7,7 @@ from src.modules.scraper import driver
 from src.modules.data import categories
 import pandas as pd
 import pdfkit
+from product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
 from src.modules.price_checker import check_price_drop
 path_wkhtmltopdf = "src/modules/wkhtmltopdf.exe"
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
@@ -66,10 +67,10 @@ class Wishlist(db.Model):
     user_id=db.Column(db.Integer(),db.ForeignKey('users.id'))
     product_title=db.Column(db.String(length=1000),nullable=False)
     product_link=db.Column(db.String(length=1000),nullable=False)
-    product_price=db.Column(db.Float(),nullable=False)
+    product_price=db.Column(db.Float(),nullable=True)
     product_website=db.Column(db.String(length=100),nullable=False)
     product_image_url=db.Column(db.String(length=10000),nullable=False)
-    product_rating=db.Column(db.Float(),nullable=False)
+    product_rating=db.Column(db.String(length=10),nullable=True)
 
 
 
@@ -79,49 +80,74 @@ def landingpage():
 
 @app.route("/checkpricedrop", methods=["POST"])
 def checkpricedrop():
-    product_name = request.form.get("product_name")
+    product_url = request.form.get("product_url")
     product_price = request.form.get("product_price")
-    results = driver(product_name,"")
-    json_data = results.to_dict(orient='records')
-    for res in json_data:
-        if(res['title'] == product_name):
-            product = res
-            break
-        else : 
-            product=None
-    product_price_new = float(product['price'].replace("$", ""))
-    product_price = float(product_price)
+    product_website = request.form.get("product_website")
+    if(product_website == 'bjs') :
+        product_price_new = product_price_bjs(product_url)
+
+    if(product_website == 'google'):
+        product_price_new = product_price_google(product_url)
+
+    if(product_website == 'amazon'):
+        product_price_new = product_price_amazon(product_url)
+   
+    product_price_new = float(product_price_new.replace("$", ""))
+    product_price = float(product_price.replace("$", ""))
     
     if(product_price_new >= product_price):
         return jsonify("false")
+    
     return jsonify("true")
 
-
+job_registry = {}
 
 def scheduled_price_check(**kwargs):
     with app.app_context():
-        price_drop = check_price_drop(kwargs['product_name'],kwargs['product_price'])
-        
+        price_drop = check_price_drop(kwargs['product_url'],kwargs['product_price'],kwargs['product_website'])
+        email = kwargs['email']
+        print(price_drop)
         if price_drop == "true" : 
-            msg = Message('Price Drop Alert', sender = 'seproject37@gmail.com', recipients = ['bhavyahii@gmail.com'])
-            msg.body= "New Price Drop recorded in " + kwargs['product_name']
+            msg = Message('Price Drop Alert', sender = 'seproject37@gmail.com', recipients = [email])
+            msg.body= "New Price Drop recorded in " + kwargs['product_url']
             mail.send(msg)
         
 
 
-@app.route('/check_price_drop', methods=['POST'])
+@app.route('/set_price_alert', methods=['POST'])
 def initiate_price_check():
-    product_name = request.form.get('product_name')
-    product_price = request.form.get("product_price")
+    product_url = request.form.get('product_url')
+    product_price = request.form.get('product_price')
+    email = request.form.get('email')
+    product_website = request.form.get('product_website')
 
-
+    
     # Add the job to the scheduler with parameters
     with app.app_context():
-        scheduler.add_job(scheduled_price_check, 'interval', minutes=0.5,
-                  kwargs={'product_name': product_name,'product_price':product_price})
+        job = scheduler.add_job(scheduled_price_check, 'interval', minutes=0.5,
+                  kwargs={'product_url': product_url,'product_price':product_price,'email':email,'product_website':product_website})
+        job_registry[product_url] = job
 
 
-    return 'Price drop check initiated!'
+    return jsonify('Price drop check initiated!')
+
+@app.route('/stop_price_alert', methods=['POST'])
+def stop_price_check():
+    # Retrieve the job from the registry based on the product URL
+    product_url = request.form.get('product_url')
+    job = job_registry.get(product_url)
+
+    if job:
+        try:
+            # Remove the job from the scheduler
+            scheduler.remove_job(job.id)
+            del job_registry[product_url]
+            return jsonify({'status': 'success', 'message': 'Price check stopped successfully'})
+        except :
+            return jsonify({'status': 'error', 'message': 'Job not found in the scheduler'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Job not found in the registry'})
+
 
 @app.route("/category/<category_query>", methods=["GET"])
 def category_result(category_query):
