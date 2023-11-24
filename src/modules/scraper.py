@@ -32,7 +32,7 @@ def httpsGet(URL):
     "DNT": "1",
     "Connection": "close",
     "Upgrade-Insecure-Requests": "1",
-}
+    }
     s = requests.Session()
     page = s.get(URL, headers=headers)
     
@@ -263,6 +263,14 @@ def condense_helper(result_condensed, list, num):
         else:
             if p["title"] != None and p["title"] != "":
                 result_condensed.append(p)
+
+
+def product_price(product_url) :
+    page = httpsGet(product_url)
+    results = page.findAll("div", {"data-item-id": True})
+
+    print(results)
+
 
 
 def driver(
