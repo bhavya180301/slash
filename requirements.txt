@@ -60,3 +60,4 @@ zope.interface==6.1
 apscheduler
 flask_mail
 selenium
+webdriver_manager
