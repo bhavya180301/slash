@@ -5,6 +5,7 @@ from src.modules.csv_writer import write_csv
 
 from src.modules.scraper import driver
 from src.modules.data import categories
+from src.modules.data import category_images
 import pandas as pd
 import pdfkit
 
@@ -65,7 +66,8 @@ class Wishlist(db.Model):
 
 @app.route("/")
 def landingpage():
-    return render_template("./webapp/static/landing.html")
+    data = category_images
+    return render_template("./webapp/static/landing.html", data=data)
 
 @app.route("/checkpricedrop", methods=["POST"])
 def checkpricedrop():
