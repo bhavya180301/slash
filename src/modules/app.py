@@ -2,31 +2,42 @@ from datetime import datetime
 
 from flask import Flask, request, render_template, send_file, make_response,jsonify
 from src.modules.csv_writer import write_csv
-
+from apscheduler.schedulers.background import BackgroundScheduler
 from src.modules.scraper import driver
 from src.modules.data import categories
 from src.modules.data import category_images
 import pandas as pd
 import pdfkit
-
+from product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
+from src.modules.price_checker import check_price_drop
 path_wkhtmltopdf = "src/modules/wkhtmltopdf.exe"
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
 
 from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-
 from flask_login import login_user, LoginManager, UserMixin, logout_user, current_user
-
+from flask_mail import Mail, Message
 from sqlalchemy.exc import IntegrityError
 
 app = Flask(__name__, template_folder=".")
+
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'seproject37@gmail.com'
+app.config['MAIL_PASSWORD'] = 'ffyi cwen stql peyj'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY'] = '504038774627ae2489c38028'
+
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
-
+scheduler = BackgroundScheduler()
+scheduler.start()
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -57,10 +68,10 @@ class Wishlist(db.Model):
     user_id=db.Column(db.Integer(),db.ForeignKey('users.id'))
     product_title=db.Column(db.String(length=1000),nullable=False)
     product_link=db.Column(db.String(length=1000),nullable=False)
-    product_price=db.Column(db.Float(),nullable=False)
+    product_price=db.Column(db.Float(),nullable=True)
     product_website=db.Column(db.String(length=100),nullable=False)
     product_image_url=db.Column(db.String(length=10000),nullable=False)
-    product_rating=db.Column(db.Float(),nullable=False)
+    product_rating=db.Column(db.String(length=10),nullable=True)
 
 
 
@@ -71,22 +82,74 @@ def landingpage():
 
 @app.route("/checkpricedrop", methods=["POST"])
 def checkpricedrop():
-    product_name = request.form.get("product_name")
+    product_url = request.form.get("product_url")
     product_price = request.form.get("product_price")
-    results = driver(product_name,"")
-    json_data = results.to_dict(orient='records')
-    for res in json_data:
-        if(res['title'] == product_name):
-            product = res
-            break
-        else : 
-            product=None
-    product_price_new = float(product['price'].replace("$", ""))
-    product_price = float(product_price)
+    product_website = request.form.get("product_website")
+    if(product_website == 'bjs') :
+        product_price_new = product_price_bjs(product_url)
+
+    if(product_website == 'google'):
+        product_price_new = product_price_google(product_url)
+
+    if(product_website == 'amazon'):
+        product_price_new = product_price_amazon(product_url)
+   
+    product_price_new = float(product_price_new.replace("$", ""))
+    product_price = float(product_price.replace("$", ""))
     
     if(product_price_new >= product_price):
         return jsonify("false")
+    
     return jsonify("true")
+
+job_registry = {}
+
+def scheduled_price_check(**kwargs):
+    with app.app_context():
+        price_drop = check_price_drop(kwargs['product_url'],kwargs['product_price'],kwargs['product_website'])
+        email = kwargs['email']
+        print(price_drop)
+        if price_drop == "true" : 
+            msg = Message('Price Drop Alert', sender = 'seproject37@gmail.com', recipients = [email])
+            msg.body= "New Price Drop recorded in " + kwargs['product_url']
+            mail.send(msg)
+        
+
+
+@app.route('/set_price_alert', methods=['POST'])
+def initiate_price_check():
+    product_url = request.form.get('product_url')
+    product_price = request.form.get('product_price')
+    email = request.form.get('email')
+    product_website = request.form.get('product_website')
+
+    
+    # Add the job to the scheduler with parameters
+    with app.app_context():
+        job = scheduler.add_job(scheduled_price_check, 'interval', minutes=0.5,
+                  kwargs={'product_url': product_url,'product_price':product_price,'email':email,'product_website':product_website})
+        job_registry[product_url] = job
+
+
+    return jsonify('Price drop check initiated!')
+
+@app.route('/stop_price_alert', methods=['POST'])
+def stop_price_check():
+    # Retrieve the job from the registry based on the product URL
+    product_url = request.form.get('product_url')
+    job = job_registry.get(product_url)
+
+    if job:
+        try:
+            # Remove the job from the scheduler
+            scheduler.remove_job(job.id)
+            del job_registry[product_url]
+            return jsonify({'status': 'success', 'message': 'Price check stopped successfully'})
+        except :
+            return jsonify({'status': 'error', 'message': 'Job not found in the scheduler'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Job not found in the registry'})
+
 
 @app.route("/category/<category_query>", methods=["GET"])
 def category_result(category_query):
@@ -108,19 +171,6 @@ def product_search(new_product="", sort=None, currency=None, num=None, filter_by
 @app.route("/filter", methods=["POST", "GET"])
 def product_search_filtered():
     product = request.args.get("product_name")
-
-    if "add-to-wishlist" in request.form:
-        wishlist_product=Wishlist(user_id=current_user.id,
-                                product_title=request.form["title"],
-                                product_link=request.form["link"],
-                                product_price=request.form["price"][1:],
-                                product_website=request.form["website"],
-                                product_rating=request.form["rating"],
-                                product_image_url=request.form["image_url"])
-        db.session.add(wishlist_product)
-        db.session.commit()
-        return product_search(product, None, None, None, None, None)
-
     sort = request.form["sort"]
     currency = request.form["currency"]
     num = request.form["num"]
@@ -160,6 +210,40 @@ def product_search_filtered():
         return send_file(
             f"./pdfs/{file_name}",
             as_attachment=True)
+
+@app.route("/add-to-wishlist", methods=["POST", "GET"])
+def add_to_wishlist():
+    # Retrieve user ID from the session
+
+    
+
+    # Retrieve product details from the request JSON
+    product_title = request.json.get("product_title")
+    product_link = request.json.get("product_link")
+    product_price = request.json.get("product_price")[1:]
+    product_website = request.json.get("product_website")
+    product_rating = request.json.get("product_rating")
+    product_image_url = request.json.get("product_image_url")
+
+    print("here")
+    # Perform validation as needed
+
+    # Assuming you have a Wishlist model
+    wishlist_product = Wishlist(
+        user_id=current_user.id,
+        product_title=product_title,
+        product_link=product_link,
+        product_price=float(product_price),
+        product_website=product_website,
+        product_rating=product_rating,
+        product_image_url=product_image_url
+    )
+
+    db.session.add(wishlist_product)
+    db.session.commit()
+    
+
+    return "true"
 
 
 @app.route('/register', methods=['GET', 'POST'])
