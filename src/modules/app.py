@@ -5,6 +5,7 @@ from src.modules.csv_writer import write_csv
 from apscheduler.schedulers.background import BackgroundScheduler
 from src.modules.scraper import driver
 from src.modules.data import categories
+from src.modules.data import category_images
 import pandas as pd
 import pdfkit
 from product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
@@ -76,7 +77,8 @@ class Wishlist(db.Model):
 
 @app.route("/")
 def landingpage():
-    return render_template("./webapp/static/landing.html")
+    data = category_images
+    return render_template("./webapp/static/landing.html", data=data)
 
 @app.route("/checkpricedrop", methods=["POST"])
 def checkpricedrop():
