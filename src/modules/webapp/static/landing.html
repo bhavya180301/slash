@@ -3,29 +3,26 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Slash Mini-Version</title>
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <style>
 
 :root {
   --black: rgba(0, 0, 0, 1);
-  --spectra-2: rgba(38, 93, 86, 0.231);
   --spectra: rgba(43, 100, 92, 1);
-  --casal-3: rgba(44, 103, 93, 1);
-  --casal-2: rgba(44, 103, 96, 1);
   --casal: rgba(50, 113, 105, 1);
-  --algae-green: rgba(145, 228, 188, 1);
-  --quick-silver: rgba(165, 165, 165, 0.161);
-  --cornflower-lilac: rgba(248, 168, 171, 1);
+  --casal-2: rgba(44, 103, 96, 1);
+  --casal-3: rgba(44, 103, 93, 1);
+  --algae-green: rgba(192, 235, 216, 1 );
   --white: rgba(255, 255, 255, 1);
   --font-size-xs: 21px;
   --font-size-s: 24px;
@@ -107,7 +104,7 @@ hidden * {
     visibility: hidden;
 }
 
-/* Slash styling */
+
 #slash {
     align-items: center;
     background-color: var(--white);
@@ -118,10 +115,9 @@ hidden * {
     width: 1920px;
 }
 
-/* Overlap group 2 styling */
 .second-screen {
     align-items: center;
-    background-image: url(https://cdn.animaapp.com/projects/655aeb7d8c17a2032c6173c2/releases/655aebb0b8e6b3012c87cf9d/img/path-35@1x.png);
+    background-color: var(--algae-green);
     background-position: 50% 50%;
     background-size: cover;
     display: flex;
@@ -131,7 +127,6 @@ hidden * {
     padding-top: 8%;
 }
 
-/* Discover more choose styling */
 .second-screen-heading {
     align-self: center;
     color: #2c675d;
@@ -145,9 +140,9 @@ hidden * {
     min-width: 794px;
     text-align: center;
     white-space: nowrap;
+    padding-left: 2%;
 }
 
-/* Flex row 1 styling */
 .category-area {
     display: flex;
     gap: 20px;
@@ -156,10 +151,6 @@ hidden * {
     flex-direction: column;
 }
 
-
-
-
-/* Group 1 styling */
 .all-categories {
     display: flex;
     height: 245px;
@@ -168,10 +159,9 @@ hidden * {
     text-align: center;
     flex-wrap: wrap;
     gap: 6%;
+    padding-left: 4%;
 }
 
-
-/* Grocery 1 styling */
 .image {
     align-self: center;
     height: 90px;
@@ -179,7 +169,6 @@ hidden * {
     width: 90px;
 }
 
-/* Groceries styling */
 .category-card {
     letter-spacing: 0;
     line-height: 24px;
@@ -187,18 +176,23 @@ hidden * {
     text-align: center;
     white-space: nowrap;
     margin-bottom: 10%;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     background-color: var(--white);
     border-radius: 48px;
-    box-shadow: 10px 10px 10px #00000029;
     display: flex;
     flex-direction: column;
     gap: 23px;
     min-height: 100%;
     padding: 43px 87px;
     width: 290px;
+    transition: box-shadow 0.3s; /* Smooth transition for box shadow */
+    box-shadow: none; /* Initial box shadow (no hover) */
 }
 
+.category-card:hover {
+    box-shadow: 10px 10px 10px #00000029; /* Box shadow on hover */
+}
 
 .flex-row {
     display: flex;
@@ -209,20 +203,14 @@ hidden * {
     height: 78vh;
 }
 
-
-
     .flex-col {
         align-items: flex-end;
         display: flex;
         flex-direction: column;
-        width: 100%; /* Set the width to 48% to allow for a small gap between overlap-group4 and overlap-group */
-        margin: 0 auto; /* Center the .flex-row horizontally */
+        width: 100%; 
+        margin: 0 auto; 
     }
 
-
-
-
-/* Overlap group styling */
 .home-page-image {
     position: relative;
     justify-content: center;
@@ -231,18 +219,14 @@ hidden * {
     margin-top: 15%;
 }
 
-/* Group container 1 styling */
 .search-input {
     align-items: flex-start;
     display: flex;
     flex: 1;
     margin-right: 2px;
-    margin-top: 10px; /* Adjust as needed */
+    margin-top: 10px; 
 }
 
-
-
-/* Discover ultimate deals styling */
 .search-button {
     color: #2c6760;
     font-family: var(--font-family-helveticaneue-medium);
@@ -254,12 +238,9 @@ hidden * {
     min-width: 235px;
     mix-blend-mode: darken;
     white-space: nowrap;
-    padding: 10px; /* Add padding as needed */
+    padding: 10px; 
 }
 
-
-
-/* Overlap group 4 styling */
 .search-bar-area {
     width: 60%;
     padding: 10px;
@@ -268,24 +249,22 @@ hidden * {
     margin-top: 15%;
 }
 
-/* Unlock savings styling */
 .homepage-text-1 {
     color: #327169;
     font-family: var(--font-family-helveticaneue-bold);
     font-size: var(--font-size-1);
     font-weight: 700;
     line-height: 50px;
-    margin-bottom: 10px; /* Adjust as needed */
+    margin-bottom: 10px;
 }
 
-/* Welcome to your one styling */
 .homepage-text-2 {
     color: #2b645c;
     font-family: var(--font-family helveticaneue-regular);
     font-size: var(--font-size-m);
     font-weight: 400;
     line-height: 35px;
-    margin-bottom: 10px; /* Adjust as needed */
+    margin-bottom: 10px; 
 }
 
 .slash.screen {
@@ -309,15 +288,11 @@ hidden * {
     height: 85vh;
 }
 
-/* Slash styling */
 #slash path {
     object-fit: cover;
     position: absolute;
 }
 
-
-
-  
     .search-bar .search-term {
       width: 100%;
       border: 3px solid rgb(63, 155, 112);
@@ -369,7 +344,7 @@ hidden * {
         }
 
         .navbar-brand img {
-            width: 90px;
+            width: 90%;
             height: 70px;
         }
 
@@ -387,7 +362,7 @@ hidden * {
 
 
 .search-bar .search-term {
-    width: 100%; /* Set the width to 100% to fill the available space */
+    width: 100%;
     border: 3px solid rgb(63, 155, 112);
     border-right: none;
     padding: 5px;
@@ -401,7 +376,7 @@ hidden * {
 }
 
 .search-bar .search-button {
-    width: 80px; /* Adjust the width as needed */
+    width: 80px; 
     height: 50px;
     border: 1px solid rgb(63, 155, 112);
     background: rgb(145, 228, 189);
@@ -444,7 +419,7 @@ hidden * {
 <body>
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px">
     <a class="navbar-brand" href="{{ url_for('landingpage') }}">
-        <img src="https://raw.githubusercontent.com/Yash-Chandrani/slash/main/src/modules/webapp/static/images/slash.png" alt="Slash Logo">
+        <img src="https://github.com/bhavya180301/slash/blob/main/src/modules/webapp/static/images/slash.png?raw=true" alt="Slash Logo">
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
