@@ -182,26 +182,33 @@
 </head>
 
 <body>
-    <ul class="nav justify-content-center">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('landingpage') }}">Home</a>
-        </li>
-        {% if current_user.is_authenticated %}
-        <li class="nav-item">
-            <a class="nav-link">Logged in as {{ current_user.email }}</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('logout_page') }}">Logout</a>
-        </li>
-        {% else %}
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('register_page') }}">Sign up</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('login_page') }}">Login</a>
-        </li>
-        {% endif %}
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+        <a class="navbar-brand" href="{{ url_for('landingpage') }}">
+            <img src="https://github.com/bhavya180301/slash/blob/main/src/modules/webapp/static/images/slash.png?raw=true" alt="Slash Logo" width="90" height="50">
+        </a>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link text-dark">Logged in as {{ current_user.email }}</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ url_for('logout_page') }}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{{ url_for('register_page') }}">Sign up</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
     <!-- To-do: Change apperance of this webpage -->
     <div class="container">
         <div class="grid">
