@@ -172,18 +172,6 @@ def product_search(new_product="", sort=None, currency=None, num=None, filter_by
 def product_search_filtered():
     product = request.args.get("product_name")
 
-    # if "add-to-wishlist" in request.form:
-    #     wishlist_product=Wishlist(user_id=current_user.id,
-    #                             product_title=request.form["title"],
-    #                             product_link=request.form["link"],
-    #                             product_price=request.form["price"][1:],
-    #                             product_website=request.form["website"],
-    #                             product_rating=request.form["rating"],
-    #                             product_image_url=request.form["image_url"])
-    #     db.session.add(wishlist_product)
-    #     db.session.commit()
-    #     return product_search(product, None, None, None, None, None, None)
-
     websites=[]
     sort = request.form["sort"]
     currency = request.form["currency"]

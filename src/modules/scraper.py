@@ -106,6 +106,16 @@ def searchWalmart(query, df_flag, currency):
             res.select("div.lh-copy"),
             res.select("a"),
         )
+        image = res.find("img", {"src": True})
+   
+        if image :
+            image_url = image.get("src").strip()
+        else :
+            image_url = ""
+        # print("Generating Images...")
+        # print(image_url)
+        # print("Generating Prices...")
+        # print(prices)
         ratings = res.findAll("span", {"class": "w_DE"}, text=pattern)
         num_ratings = res.findAll("span", {"class": "sans-serif gray f7"})
         trending = res.select("span.w_Cs")
@@ -123,6 +133,7 @@ def searchWalmart(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            image_url
         )
         products.append(product)
     print(f"Walmart is {len(products)}")
@@ -335,6 +346,16 @@ def driver(
         # Fix URLs so that they contain http before www
         # TODO Fix issue with Etsy links -> For some reason they have www.Etsy.com prepended to the begining of the link
         for p in result_condensed:
+            
+            if p["website"] == "walmart":
+                print("getting price")
+                print(p["price"])
+                cleaned_price = p["price"].replace('$', '').replace(',', '').strip()
+                cleaned_price = cleaned_price.replace(' ', '')
+                p["price"] = float(cleaned_price)
+                p["price"] = "${:.2f}".format(p["price"])
+                print(p["price"])
+                print(type(p["price"]))
             link = p["link"]
             if p["website"] == "Etsy":
                 link = link[12:]
