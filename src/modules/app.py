@@ -10,8 +10,8 @@ import pandas as pd
 import pdfkit
 from product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
 from src.modules.price_checker import check_price_drop
-path_wkhtmltopdf = "src/modules/wkhtmltopdf.exe"
-config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+#path_wkhtmltopdf = "src/modules/wkhtmltopdf.exe"
+config = pdfkit.configuration(wkhtmltopdf="/Users/siddharthshah/Desktop/slash/src/modules/wkhtmltopdf.exe")
 
 from flask import Flask, request, render_template, url_for, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
@@ -158,19 +158,33 @@ def category_result(category_query):
 
 
 @app.route("/search", methods=["POST", "GET"])
-def product_search(new_product="", sort=None, currency=None, num=None, filter_by_rating=None, csv=None):
+def product_search(new_product="", sort=None, currency=None, num=None, filter_by_rating=None, csv=None, websites=None):
     product = request.args.get("product_name")
     if product is None:
         product = new_product
 
-    data = driver(product, currency, num, 0, None, None, True, sort, filter_by_rating)
+    data = driver(product, currency, num, 0, None, None, True, sort, filter_by_rating,websites)
 
-    return render_template("./webapp/static/result.html", data=data, prod=product, currency=currency, sort=sort, num=num, user_login=current_user.is_authenticated)
+    return render_template("./webapp/static/result.html", data=data, prod=product, currency=currency, sort=sort, num=num, user_login=current_user.is_authenticated,websites=websites)
 
 
 @app.route("/filter", methods=["POST", "GET"])
 def product_search_filtered():
     product = request.args.get("product_name")
+
+    # if "add-to-wishlist" in request.form:
+    #     wishlist_product=Wishlist(user_id=current_user.id,
+    #                             product_title=request.form["title"],
+    #                             product_link=request.form["link"],
+    #                             product_price=request.form["price"][1:],
+    #                             product_website=request.form["website"],
+    #                             product_rating=request.form["rating"],
+    #                             product_image_url=request.form["image_url"])
+    #     db.session.add(wishlist_product)
+    #     db.session.commit()
+    #     return product_search(product, None, None, None, None, None, None)
+
+    websites=[]
     sort = request.form["sort"]
     currency = request.form["currency"]
     num = request.form["num"]
@@ -186,7 +200,34 @@ def product_search_filtered():
         filter_by_rating = None
     
     if "filter-search" in request.form:
-        return product_search(product, sort, currency, num, filter_by_rating, None)
+        print("Filter Search Detected and Websites found")
+        amazon=-1
+        walmart=-1
+        etsy=-1
+        bj=-1
+        google=-1
+        print(request.form)
+        amazon=request.form.get("amazon")
+        print(amazon)
+        etsy=request.form.get("etsy")
+        print(etsy)
+        walmart=request.form.get("walmart")
+        print(walmart)
+        bj=request.form.get("bj")
+        print(bj)
+        google=request.form.get("google")
+        print(google)
+        if amazon!=-1:
+            websites.append(amazon)
+        if walmart!=-1:
+            websites.append(walmart)
+        if google!=-1:
+            websites.append(google)
+        if bj!=-1:
+            websites.append(bj)
+        if etsy!=-1:
+            websites.append(etsy)
+        return product_search(product, sort, currency, num, filter_by_rating, None, websites)
       
     elif "convert-to-csv" in request.form:
 
@@ -199,7 +240,7 @@ def product_search_filtered():
 
     elif "convert-to-pdf" in request.form:
         now = datetime.now()
-        data = driver(product, currency, num, 0, None, None, True, sort, filter_by_rating)
+        data = driver(product, currency, num, 0, None, None, True, sort, filter_by_rating,websites)
         html_table = render_template("./webapp/static/pdf_maker.html", data=data, prod=product)
         file_name = product + now.strftime("%m%d%y_%H%M") + '.pdf'
 

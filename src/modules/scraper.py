@@ -57,6 +57,12 @@ def searchAmazon(query, df_flag, currency):
             res.select("span.a-price span"),
             res.select("h2 a.a-link-normal"),
         )
+        image = res.find("img", {"src": True})
+   
+        if image :
+            image_url = image.get("src").strip()
+        else :
+            image_url = ""
         ratings = res.select("span.a-icon-alt")
         num_ratings = res.select("span.a-size-base")
         trending = res.select("span.a-badge-text")
@@ -74,9 +80,10 @@ def searchAmazon(query, df_flag, currency):
             trending,
             df_flag,
             currency,
+            image_url
         )
         products.append(product)
-    
+    print(f"Amazon is {len(products)}")
     return products
 
 
@@ -118,7 +125,7 @@ def searchWalmart(query, df_flag, currency):
             currency,
         )
         products.append(product)
-
+    print(f"Walmart is {len(products)}")
     return products
 
 
@@ -132,8 +139,14 @@ def searchEtsy(query, df_flag, currency):
     url = f"https://www.etsy.com/search?q={query}"
     products = []
     headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_2) AppleWebKit/601.3.9 (KHTML, like Gecko) Version/9.0.2 Safari/601.3.9"
-    }
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.123 Safari/537.36",
+    #"User-Agent":"Adsbot-Google",
+    "Accept-Encoding": "gzip, deflate",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "DNT": "1",
+    "Connection": "close",
+    "Upgrade-Insecure-Requests": "1",
+}
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, "lxml")
     for item in soup.select(".wt-grid__item-xs-6"):
@@ -162,7 +175,7 @@ def searchEtsy(query, df_flag, currency):
             currency,
         )
         products.append(product)
-
+    print(f"Etsy is {len(products)}")
     return products
 
 
@@ -214,6 +227,7 @@ def searchGoogleShopping(query, df_flag, currency):
             image_url
         )
         products.append(product)
+    print(f"Google is {len(products)}")
     
     return products
 
@@ -251,14 +265,14 @@ def searchBJs(query, df_flag, currency):
         if len(ratings) != 0:
             product["rating"] = len(ratings)
         products.append(product)
-    
+    print(f"BJs is {len(products)}")
     return products
 
 
 def condense_helper(result_condensed, list, num):
     """This is a helper function to limit number of entries in the result"""
     for p in list:
-        if num != None and len(result_condensed) >= int(num):
+        if num is not None and len(result_condensed) >= int(num):
             break
         else:
             if p["title"] != None and p["title"] != "":
@@ -274,7 +288,7 @@ def product_price(product_url) :
 
 
 def driver(
-    product, currency, num=None, df_flag=0, csv=None, cd=None, ui=False, sort=None, filter_by_rating=None
+    product, currency, num=None, df_flag=0, csv=None, cd=None, ui=False, sort=None, filter_by_rating=None,websites=None
 ):
     """Returns csv is the user enters the --csv arg,
     else will display the result table in the terminal based on the args entered by the user"""

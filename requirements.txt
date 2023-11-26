@@ -36,6 +36,7 @@ numpy==1.26.0
 packaging==21.0
 pandas~=2.1.0
 pdfkit~=1.0.0
+WKhtmlToPdf
 pip==21.2.4
 pluggy==0.13.1
 py==1.10.0

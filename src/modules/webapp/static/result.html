@@ -1,311 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Slash Mini-Version</title>
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-	<link rel="stylesheet" href="/static/style.css">
-	<link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slash Mini-Version</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" ></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"  ></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-      
-    <style>
-        .item-list {
-         text-align:center;
-         width: 100%;
-         margin-top: 20px;
-         padding: 5px 5px 5px 5px;
-         }
-         .td,th {
-         border: 1px solid;
-         padding: 7px;
-         }
-         .item-list tr:nth-child(even){background-color: rgb(232, 255, 235);}
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-         .col-sm
-         {
-            padding-top: 25px;
-            
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-         }
-         .results
-         {
+  <style>
+    .item-list {
+      text-align: center;
+      width: 100%;
+      margin-top: 20px;
+      padding: 5px 5px 5px 5px;
+    }
 
-         padding-left: 60px;   
-         width: auto;   
+    .td,
+    th {
+      border: 1px solid;
+      padding: 7px;
+    }
 
-         }
-         .navbar {
-            background-color: #f8f9fa;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        } 
-            
-            .navbar-toggler {
-                border-color: #343a40;
-        }
+    .item-list tr:nth-child(even) {
+      background-color: rgb(232, 255, 235);
+    }
 
-            .navbar-nav .nav-link {
-                color: #343a40;
-        }
-
-         .button 
-         {
-            border: none;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            transition-duration: 0.4s;
-            cursor: pointer;
-         }
-
-.button {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #4CAF50;
- 
-}
-#choice1
-{
-   width: 200px;
-
-}
-.button1:hover {
-  background-color: rgb(63, 155, 112);
-  color: white;
-}
+    .col-sm {
+      padding-top: 25px;
 
 
-.product-card {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    text-align: center;
-    max-width: 300px;
-    margin: 20px;
-}
+    }
 
-.product-card img {
-    max-width: 100%;
-    height: 250px;
-    border-radius: 8px;
-}
+    .results {
 
-h3 {
-    margin-top: 10px;
-    font-size: 20px;
-    color: #333;
-}
+      padding-left: 60px;
+      width: auto;
 
-.price {
-    font-weight: bold;
-    color: #e44d26;
-    margin: 10px 0;
-}
+    }
 
-.description {
-    color: #777;
-}
+    .navbar {
+      background-color: #f8f9fa;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-.grid {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    background-color: #f8f8f8;
-}
-.product-img{
-  height: 200px;
-  width: 200px;
-}
+    .navbar-toggler {
+      border-color: #343a40;
+    }
+
+    .navbar-nav .nav-link {
+      color: #343a40;
+    }
+
+    .button {
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+    }
+
+    .button {
+      background-color: white;
+      color: black;
+      border: 2px solid #4CAF50;
+
+    }
+
+    #choice1 {
+      width: 200px;
+
+    }
+
+    .button1:hover {
+      background-color: rgb(63, 155, 112);
+      color: white;
+    }
 
 
-    </style>
-    
+    .product-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      max-width: 300px;
+      margin: 20px;
+    }
 
-    <script>
-      function addToWishlist(title, link, price, website, rating, image_url) {
-          // Assuming user_login is an object containing user information, including user ID
-  
-          const data = {
-              product_title: title,
-              product_link: link,
-              product_price: price,
-              product_website: website,
-              product_rating: rating,
-              product_image_url: image_url
-          };
-  
-          fetch('/add-to-wishlist', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(data),
-          })
-          .then(response => response.json())
-          .then(data => {
-              console.log('Success:', data);
-              // Handle success as needed, e.g., show a success message to the user
-          })
-          .catch((error) => {
-              console.error('Error:', error);
-              // Handle errors as needed
-          });
-      }
-  
-      
-  </script>
-   </head>
-   <body>   
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
-      <a class="navbar-brand" href="{{ url_for('landingpage') }}">
-          <img src="https://raw.githubusercontent.com/Yash-Chandrani/slash/main/src/modules/webapp/static/images/slash.png" alt="Slash Logo" width="90" height="50">
-      </a>
+    .product-card img {
+      max-width: 100%;
+      height: 250px;
+      border-radius: 8px;
+    }
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-              {% if current_user.is_authenticated %}
-              <li class="nav-item">
-                  <a class="nav-link text-dark">Logged in as {{ current_user.email }}</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link text-dark" href="{{ url_for('wishlist') }}">Wishlists</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link text-dark" href="{{ url_for('logout_page') }}">Logout</a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                  <a class="nav-link text-dark" href="{{ url_for('register_page') }}">Sign up</a>
-              </li>
-              {% endif %}
-          </ul>
-      </div>
+    h3 {
+      margin-top: 10px;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .price {
+      font-weight: bold;
+      color: #e44d26;
+      margin: 10px 0;
+    }
+
+    .description {
+      color: #777;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f8f8f8;
+    }
+
+    .product-img {
+      height: 200px;
+      width: 200px;
+    }
+
+    .checkbox-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .checkbox-dropdown input {
+      display: none;
+    }
+
+    .checkbox-dropdown label {
+      display: block;
+      padding: 8px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+    }
+
+    .checkbox-dropdown ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      z-index: 1;
+      display: none;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkbox-dropdown ul li {
+      display: block;
+    }
+
+    .checkbox-dropdown input:checked+label+ul {
+      display: block;
+    }
+  </style>
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light"
+    style="background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
+    <a class="navbar-brand" href="{{ url_for('landingpage') }}">
+      <img src="https://raw.githubusercontent.com/Yash-Chandrani/slash/main/src/modules/webapp/static/images/slash.png"
+        alt="Slash Logo" width="90" height="50">
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        {% if current_user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link text-dark">Logged in as {{ current_user.email }}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{{ url_for('wishlist') }}">Wishlists</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{{ url_for('logout_page') }}">Logout</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="{{ url_for('register_page') }}">Sign up</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
   </nav>
-    <div class="container" id="abc">
-        <div class="row">
-          <div class="col-sm">
-            <div class="form-group">
-               <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
-                <div class="col-sm-6 col-md-4">
-                  <form action = "/filter?product_name={{prod}}" method = "post" id="filter1">
-                  <select id="choice1" name="sort" class="form-control">
-                    <option value="default" >Sort by</option>
-                    <option value="rades" >Rating High to Low</option>
-                    <option value="raasc" >Rating Low to High</option>
-                    <option value="pasc">Price Low to High</option>
-                    <option value="pdes">Price High to Low</option>
-                    <br>
-                  </select>
-                </div>
-              </div>
+  <div class="container" id="abc">
+    <div class="row">
+      <div class="col-sm">
+        <div class="form-group">
+          <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+          <div class="col-sm-6 col-md-4">
+            <form action="/filter?product_name={{prod}}" method="post" id="filter1">
+              <select id="choice1" name="sort" class="form-control">
+                <option value="default">Sort by</option>
+                <option value="rades">Rating High to Low</option>
+                <option value="raasc">Rating Low to High</option>
+                <option value="pasc">Price Low to High</option>
+                <option value="pdes">Price High to Low</option>
+                <br>
+              </select>
+          </div>
+        </div>
 
-              <div class="col-sm">
-                <div class="form-group">
-                   <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
-                    <div class="col-sm-6 col-md-4">
-                      <form action = "/filter?product_name={{prod}}" method = "post" id="filter2">
-                      <select id="choice1" name="filter-by-rating" class="form-control">
-                        <option value="default" >Filter By Rating</option>
-                        <option value="4.5">4.5 and Above</option>
-                        <option value="4.0">4.0 and Above</option>
-                        <option value="3.5">3.5 and Above</option>
-                        <option value="3.0">3.0 and Above</option>
-                        <option value="2.5">2.5 and Above</option>
-                        <option value="2.0">2.0 and Above</option>
-                        <option value="1.5">1.5 and Above</option>
-                        <br>
-                      </select>
-                    </div>
-                  </div>
-              </div>        
+        <div class="col-sm">
+          <div class="form-group">
+            <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+            <div class="col-sm-6 col-md-4">
+              <form action="/filter?product_name={{prod}}" method="post" id="filter2">
+                <select id="choice1" name="filter-by-rating" class="form-control">
+                  <option value="default">Filter By Rating</option>
+                  <option value="4.5">4.5 and Above</option>
+                  <option value="4.0">4.0 and Above</option>
+                  <option value="3.5">3.5 and Above</option>
+                  <option value="3.0">3.0 and Above</option>
+                  <option value="2.5">2.5 and Above</option>
+                  <option value="2.0">2.0 and Above</option>
+                  <option value="1.5">1.5 and Above</option>
+                  <br>
+                </select>
+            </div>
           </div>
-          <div class="col-sm">
-            <div class="form-group">
-               <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
-                <div class="col-sm-6 col-md-4">
-                  <select id="choice1" name="currency" class="form-control">
-                    <option value="usd" >USD</option>
-                    <option value="inr">INR</option>
-                    <option value="euro">EURO</option>
-                    <option value="yuan">YUAN</option>
-                    <option value="aud">AUD</option>
-                    <option value="pound">POUND</option>
-                    <br>
-                  </select>
-                </div>
-              </div>
-          </div>
-          <div class="col-sm">
-    
-            <div class="form-group">
-               <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
-                <div class="col-sm-6 col-md-4">
-                  <input id="choice1" name="num" class="form-control" placeholder="Add a value">
-                </input>
-                </div>
-              </div>
-
-          </div>
-          <div class="col-sm">
-            <br>
-            <input type = "submit" class="button" name ="filter-search" value = "Filter Search" />
-            <br>
-            <input type = "submit" class="button" name ="convert-to-csv" value = "Convert into CSV" />
-            <br>
-            <input type = "submit" class="button" name ="convert-to-pdf" value = "Convert into PDF" />
-         </form>  
-         </div>
         </div>
       </div>
-   </form>
-   <hr>
-    
-   <br>
-      <div class="results">
-        <div class="grid">
-          {% for product in data %}
-            <div class="product-card">
-                <img class="product-img" src={{product.image_url}} alt="Product 1">
-                <h3><a href={{product.link}} target="_blank">{{product.title}}</a></h3>
-                <p class="price">{{product.price}}</p>
-                <p class="description">{{product.website}}</p>
-                <h3>{{product.rating}}</h3>
-                {% if product['no of ratings'] != '' %}
-                    <p>No. of Ratings: {{ product['no of ratings'] }}</p>
-                {% endif %}
-                {% if user_login %}
-                  <form action="/filter?product_name={{ product.title }}" method="POST">
-                      <input type="text" name="link" value="{{ product.link }}" style="display:none;">
-                      <input type="text" name="title" value="{{ product.title }}" style="display:none;">
-                      <input type="text" name="price" value="{{ product.price }}" style="display:none;">
-                      <input type="text" name="website" value="{{ product.website }}" style="display:none;">
-                      <input type="text" name="rating" value="{{ product.rating }}" style="display:none;">
-                      <input type="text" name="image_url" value="{{ product.image_url }}" style="display:none;">
-                  </form>
-                  <button onclick="addToWishlist('{{ product.title }}', '{{ product.link }}', '{{ product.price }}', '{{ product.website }}', '{{ product.rating }}', '{{ product.image_url }}')">Add to Wishlist</button>
-
-                {% endif %}
-                
-            </div>
-          {% endfor %}
+      <div class="col-sm">
+        <div class="form-group">
+          <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+          <div class="col-sm-6 col-md-4">
+            <select id="choice1" name="currency" class="form-control">
+              <option value="usd">USD</option>
+              <option value="inr">INR</option>
+              <option value="euro">EURO</option>
+              <option value="yuan">YUAN</option>
+              <option value="aud">AUD</option>
+              <option value="pound">POUND</option>
+              <br>
+            </select>
+          </div>
         </div>
-     </div>
+      </div>
+      
+      <div class="col-sm">
+        <div class="form-group">
+          <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
+          <div class="col-sm-6 col-md-4">
+            <select id="choice1" name="num" class="form-control">
+              <option value="default">Result Length</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHECK-BOX -->
+      <div class="col-sm">
+        <div class="form-group">
+          <form action="/filter?product_name={{prod}}" method="post" id="filter3">
+            <label><input type="checkbox" name="amazon" value="amazon" >
+              Amazon</label><br>
+            <label><input type="checkbox" name="walmart" value="walmart">
+              Walmart</label><br>
+            <label><input type="checkbox" name="etsy" value="etsy">
+              Etsy</label><br>
+            <label><input type="checkbox" name="google" value="google">
+              Google</label><br>
+            <label><input type="checkbox" name="bj" value="bj"> BJ</label>
+            <!-- <input type="submit" class="button" name="filter-search" value="Filter Search" /> -->
+
+        </div>
+      </div>
+      <!-- CHECK-BOX -->
+      <div class="col-sm">
+        <br>
+        <input type="submit" class="button" name="filter-search" value="Filter Search" />
+        <br>
+        <input type="submit" class="button" name="convert-to-csv" value="Convert into CSV" />
+        <br>
+        <input type="submit" class="button" name="convert-to-pdf" value="Convert into PDF" />
+        </form>
+      </div>
+    </div>
+  </div>
+  </form>
+  <hr>
+
+  <br>
+  <div class="results">
+    <div class="grid">
+      {% if websites and websites|length %}
+      {% for product in data %}
+      {% if product.website and product.website in websites %}
+      <div class="product-card">
+        <img class="product-img" src={{product.image_url}} alt="Product 1">
+        <h3><a href={{product.link}} target="_blank">{{product.title}}</a></h3>
+        <p class="price">{{product.price}}</p>
+        <p class="description">{{product.website}}</p>
+        <h3>{{product.rating}}</h3>
+        {% if product['no of ratings'] != '' %}
+        <p>No. of Ratings: {{ product['no of ratings'] }}</p>
+        {% endif %}
+        {% if user_login %}
+        <form action="/filter?product_name={{ product.title }}" method="POST">
+          <input type="text" name="link" value="{{ product.link }}" style="display:none;">
+          <input type="text" name="title" value="{{ product.title }}" style="display:none;">
+          <input type="text" name="price" value="{{ product.price }}" style="display:none;">
+          <input type="text" name="website" value="{{ product.website }}" style="display:none;">
+          <input type="text" name="rating" value="{{ product.rating }}" style="display:none;">
+          <input type="text" name="image_url" value="{{ product.image_url }}" style="display:none;">
+          <Button type="submit" class="button button1" value="Add to wishlist" name="add-to-wishlist">Add to
+            Wishlist</Button>
+        </form>
+        {% endif %}
+      </div>
+      {% endif %}
+      {% endfor %}
+      {% else %}
+      {% for product in data %}
+      <div class="product-card">
+        <img class="product-img" src={{product.image_url}} alt="Product 1">
+        <h3><a href={{product.link}} target="_blank">{{product.title}}</a></h3>
+        <p class="price">{{product.price}}</p>
+        <p class="description">{{product.website}}</p>
+        <h3>{{product.rating}}</h3>
+        {% if product['no of ratings'] != '' %}
+        <p>No. of Ratings: {{ product['no of ratings'] }}</p>
+        {% endif %}
+        {% if user_login %}
+        <form action="/filter?product_name={{ product.title }}" method="POST">
+          <input type="text" name="link" value="{{ product.link }}" style="display:none;">
+          <input type="text" name="title" value="{{ product.title }}" style="display:none;">
+          <input type="text" name="price" value="{{ product.price }}" style="display:none;">
+          <input type="text" name="website" value="{{ product.website }}" style="display:none;">
+          <input type="text" name="rating" value="{{ product.rating }}" style="display:none;">
+          <input type="text" name="image_url" value="{{ product.image_url }}" style="display:none;">
+          <Button type="submit" class="button button1" value="Add to wishlist" name="add-to-wishlist">Add to
+            Wishlist</Button>
+        </form>
+        {% endif %}
+      </div>
+      {% endfor %}
+      {% endif %}
+
+    </div>
+  </div>
+  </div>
 
 </body>
+
 </html>
