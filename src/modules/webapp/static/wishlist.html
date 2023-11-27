@@ -114,13 +114,13 @@
                     var product_website = button.getAttribute('data-product-website');
 
                     var email = button.getAttribute('data-email');
-                    
+
                     // Create a FormData object and append form data
                     var formData = new FormData();
 
                     formData.append('product_price', targetPrice);
                     formData.append('product_url', producturl);
-                    formData.append('product_website',product_website)
+                    formData.append('product_website', product_website)
                     formData.append('email', email);
 
                     // Make an asynchronous request to the server to set the price alert
@@ -175,9 +175,6 @@
                 });
             });
         });
-
-
-
     </script>
 </head>
 
@@ -185,7 +182,8 @@
     <!-- nav bar -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
         <a class="navbar-brand" href="{{ url_for('landingpage') }}">
-            <img src="https://github.com/bhavya180301/slash/blob/main/src/modules/webapp/static/images/slash.png?raw=true" alt="Slash Logo" width="90" height="50">
+            <img src="https://github.com/bhavya180301/slash/blob/main/src/modules/webapp/static/images/slash.png?raw=true"
+                alt="Slash Logo" width="90" height="50">
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -198,7 +196,7 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark">Logged in as {{ current_user.email }}</a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link text-dark" href="{{ url_for('logout_page') }}">Logout</a>
                 </li>
@@ -224,7 +222,8 @@
                 <form class="price-check-form" action="/checkpricedrop" method="post">
                     <input type="text" name="product_url" value="{{product.product_link}}" style="display: none;">
                     <input type="text" name="product_price" value="{{product.product_price}}" style="display: none;">
-                    <input type="text" name="product_website" value="{{product.product_website}}" style="display: none;">
+                    <input type="text" name="product_website" value="{{product.product_website}}"
+                        style="display: none;">
                     <button type="button" class="btn btn-primary check-price-button" id="checkPriceButton">Check
                         Price</button>
                     <div class="spinner" style="display: none;">
@@ -233,13 +232,14 @@
                     <div class="result-message" style="display: none;"></div>
                 </form>
                 <button class="set-price-alert" data-target-price="{{ product.product_price }}"
-                        data-product-url="{{ product.product_link }}" data-email="{{ current_user.email }}" data-product-website="{{product.product_website}}">Set Price
-                        Alert</button>
-                    <button class="stop-price-alert" data-product-url="{{ product.product_link }}">Stop Price
-                        Alert</button>
+                    data-product-url="{{ product.product_link }}" data-email="{{ current_user.email }}"
+                    data-product-website="{{product.product_website}}">Set Price
+                    Alert</button>
+                <button class="stop-price-alert" data-product-url="{{ product.product_link }}">Stop Price
+                    Alert</button>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
     </div>
 
     <!-- flash message handling in case of error -->
@@ -250,15 +250,12 @@
         <button type="button" class="m1-2 mb-1 close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-
+        
         {{ message }}
-
     </div>
     {% endfor %}
     {% endif %}
     {% endwith %}
-
 </body>
-
 
 </html>

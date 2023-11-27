@@ -8,7 +8,7 @@ from src.modules.data import categories
 from src.modules.data import category_images
 import pandas as pd
 import pdfkit
-from src.modules.product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
+from src.modules.src.modules.product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
 from src.modules.price_checker import check_price_drop
 path_wkhtmltopdf = "src/modules/wkhtmltopdf.exe"
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
@@ -63,7 +63,6 @@ class Users(db.Model, UserMixin):
 
 
 class Wishlist(db.Model):
-
     id=db.Column(db.Integer(),primary_key=True,autoincrement=True)
     user_id=db.Column(db.Integer(),db.ForeignKey('users.id'))
     product_title=db.Column(db.String(length=1000),nullable=False)
@@ -73,13 +72,13 @@ class Wishlist(db.Model):
     product_image_url=db.Column(db.String(length=10000),nullable=False)
     product_rating=db.Column(db.String(length=10),nullable=True)
 
-
-
+# Default landing page
 @app.route("/")
 def landingpage():
     data = category_images
     return render_template("./webapp/static/landing.html", data=data)
 
+# Route - POST call to check the price drop for products
 @app.route("/checkpricedrop", methods=["POST"])
 def checkpricedrop():
     product_url = request.form.get("product_url")
@@ -104,6 +103,7 @@ def checkpricedrop():
 
 job_registry = {}
 
+# Automated price check (every 30 secs) to notify users on drop in price for selected products
 def scheduled_price_check(**kwargs):
     with app.app_context():
         price_drop = check_price_drop(kwargs['product_url'],kwargs['product_price'],kwargs['product_website'])
@@ -114,8 +114,6 @@ def scheduled_price_check(**kwargs):
             msg.body= "New Price Drop recorded in " + kwargs['product_url']
             mail.send(msg)
         
-
-
 @app.route('/set_price_alert', methods=['POST'])
 def initiate_price_check():
     product_url = request.form.get('product_url')
@@ -150,13 +148,13 @@ def stop_price_check():
     else:
         return jsonify({'status': 'error', 'message': 'Job not found in the registry'})
 
-
+# Route - Choose Category for products
 @app.route("/category/<category_query>", methods=["GET"])
 def category_result(category_query):
     data = categories[category_query]
     return render_template("./webapp/static/category_result.html", data=data)
 
-
+# Route - Search products
 @app.route("/search", methods=["POST", "GET"])
 def product_search(new_product="", sort=None, currency=None, num=None, filter_by_rating=None, csv=None, websites=None):
     product = request.args.get("product_name")
@@ -167,7 +165,7 @@ def product_search(new_product="", sort=None, currency=None, num=None, filter_by
 
     return render_template("./webapp/static/result.html", data=data, prod=product, currency=currency, sort=sort, num=num, user_login=current_user.is_authenticated,websites=websites)
 
-
+# Route - Apply filter on products results
 @app.route("/filter", methods=["POST", "GET"])
 def product_search_filtered():
     product = request.args.get("product_name")
@@ -188,23 +186,18 @@ def product_search_filtered():
         filter_by_rating = None
     
     if "filter-search" in request.form:
-        print("Filter Search Detected and Websites found")
         amazon=-1
         walmart=-1
         etsy=-1
         bj=-1
         google=-1
-        print(request.form)
+
         amazon=request.form.get("amazon")
-        print(amazon)
         etsy=request.form.get("etsy")
-        print(etsy)
         walmart=request.form.get("walmart")
-        print(walmart)
         bj=request.form.get("bj")
-        print(bj)
         google=request.form.get("google")
-        print(google)
+
         if amazon!=-1:
             websites.append(amazon)
         if walmart!=-1:
@@ -240,12 +233,10 @@ def product_search_filtered():
             f"./pdfs/{file_name}",
             as_attachment=True)
 
+
+# Route - Add products to Wishlist
 @app.route("/add-to-wishlist", methods=["POST", "GET"])
 def add_to_wishlist():
-    # Retrieve user ID from the session
-
-    
-
     # Retrieve product details from the request JSON
     product_title = request.json.get("product_title")
     product_link = request.json.get("product_link")
@@ -253,8 +244,6 @@ def add_to_wishlist():
     product_website = request.json.get("product_website")
     product_rating = request.json.get("product_rating")
     product_image_url = request.json.get("product_image_url")
-
-    
 
     # Assuming you have a Wishlist model
     wishlist_product = Wishlist(
@@ -269,11 +258,19 @@ def add_to_wishlist():
 
     db.session.add(wishlist_product)
     db.session.commit()
-    
-
     return "true"
 
+# Route - To render the wishlist page for a given user
+@app.route("/wishlist", methods=['GET'])
+def wishlist():
+    # Check if the current user is authenticated (logged in)
+    if current_user.is_authenticated:
+        wishlists = Wishlist.query.filter_by(user_id=current_user.id).all()
+        return render_template("./webapp/static/wishlist.html", user=current_user.id, data=wishlists)
+    # If the user is not authenticated, redirect to the login page
+    return login_page()
 
+# Routes - User authentication
 @app.route('/register', methods=['GET', 'POST'])
 def register_page():
     from src.modules.forms import RegisterForm
@@ -283,6 +280,7 @@ def register_page():
             user_to_create = Users(name=form.name.data,
                                    email=form.email.data,
                                    passwordInput=form.password1.data)
+            # Add the new user to the database
             db.session.add(user_to_create)
             db.session.commit()
             flash('Registered successfully! Login to create wishlists', category='success')
@@ -295,7 +293,7 @@ def register_page():
             flash(f'There was an error with creating user: {err_msg}', category='danger')
     return render_template("./webapp/static/register.html", form=form)
 
-
+# Route - For user login
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
 
@@ -303,7 +301,9 @@ def login_page():
     form=LoginForm()
 
     if form.validate_on_submit():
+        # Attempt to find the user in the database based on the entered email
         attempted_user = Users.query.filter_by(email=form.email.data).first()
+        # Check if the user exists and the entered password is correct
         if attempted_user and attempted_user.check_password_correction(
                 attempted_password=form.password.data
         ):
@@ -316,17 +316,10 @@ def login_page():
 
     return render_template("./webapp/static/login.html", form=form)
 
-
+# Route - For user logout
 @app.route('/logout')
 def logout_page():
     logout_user()
     flash("You have been logged out!", category='info')
     return redirect(url_for('landingpage'))
 
-
-@app.route("/wishlist", methods=['GET'])
-def wishlist():
-    if current_user.is_authenticated:
-        wishlists = Wishlist.query.filter_by(user_id=current_user.id).all()
-        return render_template("./webapp/static/wishlist.html", user=current_user.id, data=wishlists)
-    return login_page()

@@ -180,34 +180,32 @@
       // Assuming user_login is an object containing user information, including user ID
       console.log("aa gaye aa gaye");
       const data = {
-          product_title: title,
-          product_link: link,
-          product_price: price,
-          product_website: website,
-          product_rating: rating,
-          product_image_url: image_url
+        product_title: title,
+        product_link: link,
+        product_price: price,
+        product_website: website,
+        product_rating: rating,
+        product_image_url: image_url
       };
 
       fetch('/add-to-wishlist', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
       })
-      .then(response => response.json())
-      .then(data => {
+        .then(response => response.json())
+        .then(data => {
           console.log('Success:', data);
           // Handle success as needed, e.g., show a success message to the user
-      })
-      .catch((error) => {
+        })
+        .catch((error) => {
           console.error('Error:', error);
           // Handle errors as needed
-      });
-  }
-
-
-</script>
+        });
+    }
+  </script>
 </head>
 
 <body>
@@ -264,9 +262,10 @@
               </select>
           </div>
         </div>
+  <!-- SORTING BY RATING-->
 
 
-        <!-- filter by rating -->
+  <!-- FILTER BY RATING -->
         <div class="col-sm">
           <div class="form-group">
             <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
@@ -287,8 +286,10 @@
           </div>
         </div>
       </div>
+  <!-- FILTER BY RATING -->
 
-      <!-- currency filter -->
+
+  <!-- CHANGE CURRENCY -->
       <div class="col-sm">
         <div class="form-group">
           <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
@@ -305,8 +306,10 @@
           </div>
         </div>
       </div>
-      
-      <!-- result length -->
+  <!-- CHANGE CURRENCY -->
+
+
+  <!-- LIMIT LENGTH OF RESULTS -->
       <div class="col-sm">
         <div class="form-group">
           <label class="control-label col-sm-offset-2 col-sm-2" for="company"></label>
@@ -321,12 +324,14 @@
           </div>
         </div>
       </div>
+  <!-- LIMIT LENGTH OF RESULTS -->
 
-      <!-- checkbox to select websites -->
+
+  <!-- WEBSITE FILTER -->
       <div class="col-sm">
         <div class="form-group">
           <form action="/filter?product_name={{prod}}" method="post" id="filter3">
-            <label><input type="checkbox" name="amazon" value="amazon" >
+            <label><input type="checkbox" name="amazon" value="amazon">
               Amazon</label><br>
             <label><input type="checkbox" name="walmart" value="walmart">
               Walmart</label><br>
@@ -335,11 +340,11 @@
             <label><input type="checkbox" name="google" value="google">
               Google</label><br>
             <label><input type="checkbox" name="bj" value="bj"> BJ</label>
-            <!-- <input type="submit" class="button" name="filter-search" value="Filter Search" /> -->
-
         </div>
       </div>
-      <!-- filter submit button, convert results to csv and pdf  -->
+  <!-- WEBSITE FILTER -->
+
+<!-- filter submit button, convert results to csv and pdf  -->
       <div class="col-sm">
         <br>
         <input type="submit" class="button" name="filter-search" value="Filter Search" />
@@ -349,6 +354,7 @@
         <input type="submit" class="button" name="convert-to-pdf" value="Convert into PDF" />
         </form>
       </div>
+
     </div>
   </div>
   </form>
@@ -359,6 +365,7 @@
   <!-- displaying webscarpped results -->
   <div class="results">
     <div class="grid">
+      <!-- IF FILTERS HAVE BEEN SELECTED -->
       {% if websites and websites|length %}
       {% for product in data %}
       {% if product.website and product.website in websites %}
@@ -380,12 +387,15 @@
           <input type="text" name="rating" value="{{ product.rating }}" style="display:none;">
           <input type="text" name="image_url" value="{{ product.image_url }}" style="display:none;">
         </form>
-        <button onclick="addToWishlist('{{ product.title }}', '{{ product.link }}', '{{ product.price }}', '{{ product.website }}', '{{ product.rating }}', '{{ product.image_url }}')">Add to Wishlist</button>
+        <button
+          onclick="addToWishlist('{{ product.title }}', '{{ product.link }}', '{{ product.price }}', '{{ product.website }}', '{{ product.rating }}', '{{ product.image_url }}')">Add
+          to Wishlist</button>
         {% endif %}
       </div>
       {% endif %}
       {% endfor %}
       {% else %}
+      <!-- IF FILTERS HAVE NOT BEEN SELECTED - DEFAULT PAGE -->
       {% for product in data %}
       <div class="product-card">
         <img class="product-img" src={{product.image_url}} alt="Product 1">
@@ -405,16 +415,15 @@
           <input type="text" name="rating" value="{{ product.rating }}" style="display:none;">
           <input type="text" name="image_url" value="{{ product.image_url }}" style="display:none;">
         </form>
-        <button onclick="addToWishlist('{{ product.title }}', '{{ product.link }}', '{{ product.price }}', '{{ product.website }}', '{{ product.rating }}', '{{ product.image_url }}')">Add to Wishlist</button>
+        <button
+          onclick="addToWishlist('{{ product.title }}', '{{ product.link }}', '{{ product.price }}', '{{ product.website }}', '{{ product.rating }}', '{{ product.image_url }}')">Add
+          to Wishlist</button>
         {% endif %}
       </div>
       {% endfor %}
       {% endif %}
-
     </div>
   </div>
   </div>
-
 </body>
-
 </html>

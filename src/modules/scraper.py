@@ -19,12 +19,18 @@ import pandas as pd
 import os
 from datetime import datetime
 
-
+# Setting headers and scraping URL 
 def httpsGet(URL):
     """
     The httpsGet function makes HTTP called to the requested URL with custom headers
+    Parameters:
+    - URL (str): The URL to make the HTTP request to.
+
+    Returns:
+    - BeautifulSoup: A BeautifulSoup object representing the parsed HTML content.
     """
 
+    # Custom headers to mimic a web browser's request
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36",
     "Accept-Encoding": "gzip, deflate",
@@ -33,13 +39,17 @@ def httpsGet(URL):
     "Connection": "close",
     "Upgrade-Insecure-Requests": "1",
     }
+
     s = requests.Session()
-    page = s.get(URL, headers=headers)
-    
+
+    # Make an HTTP GET request to the URL with custom headers
+    page = s.get(URL, headers=headers) 
+
     soup1 = BeautifulSoup(page.content, 'html.parser')
+
     return BeautifulSoup(soup1.prettify(), 'html.parser')
 
-
+# Scraping Amazon
 def searchAmazon(query, df_flag, currency):
     """
     The searchAmazon function scrapes amazon.com
@@ -83,10 +93,10 @@ def searchAmazon(query, df_flag, currency):
             image_url
         )
         products.append(product)
-    print(f"Amazon is {len(products)}")
+    print(f"Amazon products : {len(products)}")
     return products
 
-
+# Scraping Walmart
 def searchWalmart(query, df_flag, currency):
     """
     The searchWalmart function scrapes walmart.com
@@ -97,32 +107,36 @@ def searchWalmart(query, df_flag, currency):
     URL = f"https://www.walmart.com/search?q={query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"data-item-id": True})
-    # print(results)
     products = []
     pattern = re.compile(r"out of 5 Stars")
     for res in results:
+        # Extract relevant information such as titles, prices, links, etc.
         titles, prices, links = (
             res.select("span.lh-title"),
             res.select("div.lh-copy"),
             res.select("a"),
         )
+
+        # Extract the product image URL
         image = res.find("img", {"src": True})
    
         if image :
             image_url = image.get("src").strip()
         else :
             image_url = ""
-        # print("Generating Images...")
-        # print(image_url)
-        # print("Generating Prices...")
-        # print(prices)
+        
+        # Extract ratings information
         ratings = res.findAll("span", {"class": "w_DE"}, text=pattern)
         num_ratings = res.findAll("span", {"class": "sans-serif gray f7"})
+
+        # Extract trending badge information
         trending = res.select("span.w_Cs")
         if len(trending) > 0:
             trending = trending[0]
         else:
             trending = None
+
+        # Format the result and append to the products list
         product = formatResult(
             "walmart",
             titles,
@@ -136,10 +150,10 @@ def searchWalmart(query, df_flag, currency):
             image_url
         )
         products.append(product)
-    print(f"Walmart is {len(products)}")
+    print(f"Walmart products : {len(products)}")
     return products
 
-
+# Scraping Etsy
 def searchEtsy(query, df_flag, currency):
     """
     The searchEtsy function scrapes Etsy.com
@@ -151,29 +165,35 @@ def searchEtsy(query, df_flag, currency):
     products = []
     headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.6045.123 Safari/537.36",
-    #"User-Agent":"Adsbot-Google",
     "Accept-Encoding": "gzip, deflate",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "DNT": "1",
     "Connection": "close",
     "Upgrade-Insecure-Requests": "1",
-}
+}   
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.content, "lxml")
     for item in soup.select(".wt-grid__item-xs-6"):
+        # Extract the links, titles, and prices
         str = item.select("a")
         if str == []:
             continue
         else:
             links = str
         titles, prices = (item.select("h3")), (item.select(".currency-value"))
+
+        # Extract ratings information
         ratings = item.select("span.screen-reader-only")
         num_ratings = item.select("span.wt-text-body-01")
+
+        # Extract trending badge information
         trending = item.select("span.wt-badge")
         if len(trending) > 0:
             trending = trending[0]
         else:
             trending = None
+
+        # Format the result and append to the products list
         product = formatResult(
             "Etsy",
             titles,
@@ -186,10 +206,10 @@ def searchEtsy(query, df_flag, currency):
             currency,
         )
         products.append(product)
-    print(f"Etsy is {len(products)}")
+    print(f"Etsy products : {len(products)}")
     return products
 
-
+# Scraping Google
 def searchGoogleShopping(query, df_flag, currency):
     """
     The searchGoogleShopping function scrapes https://shopping.google.com/
@@ -203,28 +223,38 @@ def searchGoogleShopping(query, df_flag, currency):
     products = []
     pattern = re.compile(r"[0-9]+ product reviews")
     for res in results:
+        # Extract titles, prices, and links
         titles, prices, links = (
             res.select("h3"),
             res.select("span.a8Pemb"),
             res.select("a")
         )
+
+        # Extract the product image URL
         image = res.find("img", {"data-image-src": True})
         if image :
             image_url = image.get("data-image-src").strip()
         else :
             image_url = ""
+
+        # Extract ratings information
         ratings = res.findAll("span", {"class": "Rsc7Yb"})
+        # Extract the number of ratings using the regex pattern
         try:
             num_ratings = pattern.findall(str(res.findAll("span")[1]))[0].replace(
                 "product reviews", ""
             )
         except:
             num_ratings = 0
+
+        # Extract trending badge information
         trending = res.select("span.Ib8pOd")
         if len(trending) > 0:
             trending = trending[0]
         else:
             trending = None
+
+        # Format the result and append to the products list
         product = formatResult(
             "google",
             titles,
@@ -238,11 +268,11 @@ def searchGoogleShopping(query, df_flag, currency):
             image_url
         )
         products.append(product)
-    print(f"Google is {len(products)}")
+    print(f"Google products : {len(products)}")
     
     return products
 
-
+# Scraping BJ
 def searchBJs(query, df_flag, currency):
     """
     The searchBJs function scrapes https://www.bjs.com/
@@ -253,33 +283,52 @@ def searchBJs(query, df_flag, currency):
     URL = f"https://www.bjs.com/search/{query}"
     page = httpsGet(URL)
     results = page.findAll("div", {"class": "product"})
-    # print(results)
     products = []
+
     for res in results:
+        # Extract titles, prices, and links
         titles, prices, links = (
             res.select("p.no-select.d-none.d-sm-block.auto-height"),
             res.select("span.price"),
             res.select("a"),
         )
+
+        # Extract ratings information
         ratings = res.findAll("span", {"class": "on"})
         num_ratings = 0
+
+         # Extract trending badge information
         trending = res.select("p.instantSavings")
+
+        # Extract the product image URL
         image_url = res.select("img.img-link")[0].get('src')
         
+        # Check if there are ratings
         if len(trending) > 0:
             trending = trending[0]
         else:
             trending = None
+        
+        # Format the result and append to the products list
         product = formatResult(
-            "bjs", titles, prices, links, "", num_ratings, trending, df_flag, currency, image_url
+            "bjs", 
+            titles, 
+            prices, 
+            links, 
+            "", 
+            num_ratings, 
+            trending, 
+            df_flag, 
+            currency, 
+            image_url
         )
         if len(ratings) != 0:
             product["rating"] = len(ratings)
         products.append(product)
-    print(f"BJs is {len(products)}")
+    print(f"BJs products : {len(products)}")
     return products
 
-
+# Function to limit the number of entries in result
 def condense_helper(result_condensed, list, num):
     """This is a helper function to limit number of entries in the result"""
     for p in list:
@@ -289,21 +338,36 @@ def condense_helper(result_condensed, list, num):
             if p["title"] != None and p["title"] != "":
                 result_condensed.append(p)
 
-
+# Extracting price of a product from a given URL
 def product_price(product_url) :
     page = httpsGet(product_url)
     results = page.findAll("div", {"data-item-id": True})
-
     print(results)
 
-
-
+# Main driver function to collect all scraped data and process it to send relevant information
 def driver(
     product, currency, num=None, df_flag=0, csv=None, cd=None, ui=False, sort=None, filter_by_rating=None,websites=None
 ):
-    """Returns csv is the user enters the --csv arg,
-    else will display the result table in the terminal based on the args entered by the user"""
+    """
+    The driver function orchestrates the entire web scraping process.
 
+    Parameters:
+    - product (str): The search query for the product.
+    - currency (str): The currency type entered by the user.
+    - num (int): The number of results to display or save to CSV.
+    - df_flag (int): Flag variable.
+    - csv (bool): Flag to indicate whether to save results to CSV.
+    - cd (str): The current directory path.
+    - ui (bool): Flag to indicate whether to display results in the terminal or not.
+    - sort (str): The sorting criteria for the results.
+    - filter_by_rating (str): The minimum rating to filter results.
+    - websites (list): List of specific websites to search.
+
+    Returns:
+    - list or str: A list of condensed results or a CSV file path depending on user input.
+    """
+   
+    # Perform individual searches on multiple websites
     products_1 = searchAmazon(product, df_flag, currency)
     products_2 = searchWalmart(product, df_flag, currency)
     products_3 = searchEtsy(product, df_flag, currency)
@@ -311,6 +375,7 @@ def driver(
     products_5 = searchBJs(product, df_flag, currency)
     result_condensed = ""
     if not ui:
+        # Combine results from different websites into a single DataFrame
         results = products_1 + products_2 + products_3 + products_4 + products_5
         result_condensed = (
             products_1[:num]
@@ -321,9 +386,13 @@ def driver(
         )
         result_condensed = pd.DataFrame.from_dict(result_condensed, orient="columns")
         results = pd.DataFrame.from_dict(results, orient="columns")
+
+        # Drop converted price column if currency is not specified
         if currency == "" or currency == None:
             results = results.drop(columns="converted price")
             result_condensed = result_condensed.drop(columns="converted price")
+
+        # Check if the user wants to save results to CSV
         if csv == True:
             file_name = os.path.join(
                 cd, (product + datetime.now().strftime("%y%m%d_%H%M") + ".csv")
@@ -333,29 +402,25 @@ def driver(
             results.to_csv(file_name, index=False, header=results.columns)
     else:
         result_condensed = []
+        # Helper function to limit the number of entries in the result
         condense_helper(result_condensed, products_1, num)
         condense_helper(result_condensed, products_2, num)
         condense_helper(result_condensed, products_3, num)
         condense_helper(result_condensed, products_4, num)
         condense_helper(result_condensed, products_5, num)
 
+        # Convert prices to the specified currency
         if currency != None:
             for p in result_condensed:
                 p["price"] = getCurrency(currency, p["price"])
 
-        # Fix URLs so that they contain http before www
-        # TODO Fix issue with Etsy links -> For some reason they have www.Etsy.com prepended to the begining of the link
-        for p in result_condensed:
-            
+        # Additional processing based on the website
+        for p in result_condensed:      
             if p["website"] == "walmart":
-                print("getting price")
-                print(p["price"])
                 cleaned_price = p["price"].replace('$', '').replace(',', '').strip()
                 cleaned_price = cleaned_price.replace(' ', '')
                 p["price"] = float(cleaned_price)
                 p["price"] = "${:.2f}".format(p["price"])
-                print(p["price"])
-                print(type(p["price"]))
             link = p["link"]
             if p["website"] == "Etsy":
                 link = link[12:]
@@ -364,6 +429,7 @@ def driver(
                 link = "http://" + link
                 p["link"] = link
 
+        # Sort the results based on user input
         if sort != None:
             result_condensed = pd.DataFrame(result_condensed)
             if sort == "rades":
@@ -376,6 +442,7 @@ def driver(
                 result_condensed = sortList(result_condensed, "pr", True)
             result_condensed = result_condensed.to_dict(orient="records")
 
+        # Filter the results based on user-specified rating
         if filter_by_rating != None:
             result_condensed = pd.DataFrame(result_condensed)
             result_condensed = result_condensed[result_condensed['rating']!='']
