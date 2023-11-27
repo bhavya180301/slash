@@ -182,6 +182,7 @@
 </head>
 
 <body>
+    <!-- nav bar -->
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #f8f9fa; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px;">
         <a class="navbar-brand" href="{{ url_for('landingpage') }}">
             <img src="https://github.com/bhavya180301/slash/blob/main/src/modules/webapp/static/images/slash.png?raw=true" alt="Slash Logo" width="90" height="50">
@@ -209,7 +210,8 @@
             </ul>
         </div>
     </nav>
-    <!-- To-do: Change apperance of this webpage -->
+
+    <!-- product grid -->
     <div class="container">
         <div class="grid">
             {% for product in data %}
@@ -240,6 +242,7 @@
     </div>
     </div>
 
+    <!-- flash message handling in case of error -->
     {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
     {% for category, message in messages %}
