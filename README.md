@@ -3,15 +3,15 @@
 
 <p align="center"><img width="500" src="./assets/FrontPage.png"></p>
 
-[![GitHub license](https://img.shields.io/github/license/Yash-Chandrani/slash)](https://github.com/Yash-Chandrani/slash/blob/main/LICENSE)
-[![DOI](https://zenodo.org/badge/703241536.svg)](https://zenodo.org/doi/10.5281/zenodo.10023782)
+[![GitHub License](https://img.shields.io/github/license/bhavya180301/slash)](https://github.com/bhavya180301/slash/blob/main/LICENSE)
+[![DOI](https://zenodo.org/badge/720245102.svg)](https://zenodo.org/doi/10.5281/zenodo.10211733)
 ![Github](https://img.shields.io/badge/language-python-red.svg)
-[![GitHub issues](https://img.shields.io/github/issues/Yash-Chandrani/slash)](https://github.com/Yash-Chandrani/slash/issues)
-[![Github closes issues](https://img.shields.io/github/issues-closed-raw/Yash-Chandrani/slash)](https://github.com/Yash-Chandrani/slash/issues?q=is%3Aissue+is%3Aclosed)
-[![Github closed pull requests](https://img.shields.io/github/issues-pr-closed/Yash-Chandrani/slash)](https://github.com/Yash-Chandrani/slash/pulls?q=is%3Apr+is%3Aclosed)
-[![codecov](https://codecov.io/gh/Yash-Chandrani/slash/branch/main/graph/badge.svg?token=MGTU44PI4F)](https://codecov.io/gh/Yash-Chandrani/slash)
-[![Pylint](https://github.com/Yash-Chandrani/slash/actions/workflows/pylint.yml/badge.svg?branch=main)](https://github.com/Yash-Chandrani/slash/actions/workflows/pylint.yml)
-[![Python Style Checker](https://github.com/Yash-Chandrani/slash/actions/workflows/style_checker.yml/badge.svg?branch=main)](https://github.com/Yash-Chandrani/slash/actions/workflows/style_checker.yml)
+![GitHub issues](https://img.shields.io/github/issues/bhavya180301/slash)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/bhavya180301/slash)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/bhavya180301/bhavya180301/slash)
+[![codecov](https://codecov.io/gh/bhavya180301/slash/graph/badge.svg?token=32CLPLTENS)](https://codecov.io/gh/bhavya180301/slash)
+[![Build/Test](https://github.com/bhavya180301/slash/actions/workflows/python-app.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/python-app.yml)
+[![Python Style Checker](https://github.com/bhavya180301/slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/style_checker.yml)
 
 ## Introduction
 Meet Slash, not just a tool but a revolution in the world of online shopping. It's designed to transcend the conventional boundaries, promising not only utility but a seamless experience of effortless savings and unparalleled convenience.
@@ -68,7 +68,7 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
   <img src = "assets/ResultsPage2.png"/>
  - Wishlist Page
    We have improved the navigation and layout of the Wishlist page for a more user-friendly experience and added check price drop and start and stop price alert functionalities.
-  <img src = "assets/Wishlist.png"/>
+  <img src = "assets/Wishlistpage.png"/>
  - SignUp Page
    We have improved the layout and navbars to enhance user experience and navigation.
   <img src = "assets/Register.png"/>
