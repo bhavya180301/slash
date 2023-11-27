@@ -29,6 +29,7 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 - 🌐 Navigate effortlessly from product search to wishlist management, ensuring a smooth shopping journey.
 - 🚀 Slash transforms online shopping, making it faster, easier, and more personalized for users with diverse interests.
 
+
 ## Features Added In Phase 5
 
 ## Installation Steps 
