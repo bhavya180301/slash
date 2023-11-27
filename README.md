@@ -52,7 +52,7 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 ### Bugs Fixed:
 - 🐜🛠️ Add to Wishlist Function: Initially called inside the filter function, it now has a separate function to avoid filtering results each time a product is added to the wishlist.
 - 🚀🗺️ Enhanced UI Navigation: Improved navigation through the incorporation of a navbar to address and resolve existing bugs.
-- ✔️📊 Test Coverage: Rectified original test cases and added 10 more to achieve a test coverage of 80%.
+- ✔️📊 Test Coverage: The original test cases were not working, so we have rectified them and added 10 more to achieve a test coverage of 80%.
 
 ## Installation Steps 
 
@@ -90,8 +90,8 @@ python3 -m src.slash --search socks
 <p>
 
 
-## :robot: Increased Code Coverage
-We have increased the code coverage from `11%` to `70%`!
+## Code Coverage
+We have rectified the original test cases and added 10 more to achieve a test coverage of 80%.
 
 
 ## Future Scope
