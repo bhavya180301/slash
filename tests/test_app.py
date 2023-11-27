@@ -5,7 +5,7 @@ import sys
 from src.modules.app import app, scheduled_price_check
 from src.modules.app import Users, db, Wishlist
 from flask_login import current_user, login_user
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 @pytest.fixture
 def client():
@@ -37,7 +37,7 @@ def test_database_connection(client):
 def test_wishlist_database_connection(client):
     # Test the database connection by adding a sample wishlist item
     wishlist_item = Wishlist(
-        user_id=1,  # Assuming there's a user with ID 1 in your test database
+        user_id=1,  # Assuming there's a user with ID 1 in the database
         product_title='Test Product',
         product_link='http://example.com/product',
         product_price=19.99,
@@ -53,9 +53,7 @@ def test_wishlist_database_connection(client):
 
 
 def test_user_registration(client):
-    print("-------------------------------")
-    print(sys.path)
-    print("-------------------------------")
+   
     # Test user registration logic
     response = client.post('/register', data=dict(
         name='NewUser',
@@ -69,6 +67,7 @@ def test_user_registration(client):
 
 def test_user_login(client):
     # Test user login logic
+    #add a new user to the database by registering
     response = client.post('/register', data=dict(
         name='NewUser',
         email='newuser@example.com',
@@ -76,6 +75,7 @@ def test_user_login(client):
         password2='newpassword'
     ), follow_redirects=True)
 
+    #try logging in the with the same credentials
     response = client.post('/login', data=dict(
         email='newuser@example.com',
         password='newpassword'
@@ -103,9 +103,6 @@ def test_user_registration_existing_email(client):
         'password1': 'testpassword',
         'password2': 'testpassword',
     }, follow_redirects=True)
-
-    
-    print(response.data)
     
 
     # Check if the registration fails with an error message
@@ -124,10 +121,11 @@ def test_user_login_invalid_credentials(client):
 
 
 def test_add_to_wishlist(client):
-    # Define the request data
+    #Test if a product is successfully being added to the wishlist
     test_user = Users.query.first()
     with app.test_request_context():
         login_user(test_user)
+        # Define the request data
         request_data = {
             "user_id" : current_user.id,
             "product_title": "Test Product",
@@ -140,9 +138,6 @@ def test_add_to_wishlist(client):
 
         # Make a POST request to add the product to the wishlist
         response = client.post('/add-to-wishlist', json=request_data, content_type='application/json')
-        print(response.data)
-        # Check if the response is as expected
-
 
         # Check if the product is added to the database
         wishlist_product = Wishlist.query.first()
@@ -155,11 +150,14 @@ def test_add_to_wishlist(client):
         assert wishlist_product.product_rating == '4.5'
         assert wishlist_product.product_image_url == "http://example.com/product/image.jpg"
 
+#Tests for checkpricedrop method
         
 def test_checkpricedrop_bjs(client):
-    def mock_function(product_url):
+    
+    #define a mock fucntion for product_price_bjs
+    def mock_product_price_bjs(product_url):
         return "$15"
-    with patch('src.modules.app.product_price_bjs',mock_function):
+    with patch('src.modules.app.product_price_bjs', mock_product_price_bjs):
         
         
         response = client.post('/checkpricedrop', data=dict(
@@ -172,9 +170,10 @@ def test_checkpricedrop_bjs(client):
         assert json.loads(response.get_data(as_text=True)) == "true"
 
 def test_checkpricedrop_google(client):
-    def mock_function(product_url):
+    #define a mock fucntion for product_price_google
+    def mock_product_price_google(product_url):
         return "$25"
-    with patch('src.modules.app.product_price_google',mock_function):
+    with patch('src.modules.app.product_price_google',mock_product_price_google):
         
         
         response = client.post('/checkpricedrop', data=dict(
@@ -187,10 +186,11 @@ def test_checkpricedrop_google(client):
         assert json.loads(response.get_data(as_text=True)) == "true"
 
 def test_checkpricedrop_amazon(client):
-    def mock_function(product_url):
+    #define a mock fucntion for product_price_amazon
+    def mock_product_price_amazon(product_url):
         return "$45"
     
-    with patch("src.modules.app.product_price_amazon",mock_function):
+    with patch("src.modules.app.product_price_amazon",mock_product_price_amazon):
         
         
         response = client.post('/checkpricedrop', data=dict(
@@ -204,7 +204,7 @@ def test_checkpricedrop_amazon(client):
 
 
 def test_initiate_price_check(client):
-    # Replace this with actual test data
+    #Test for checking scheduler and add_job functionality
     test_data = {
         'product_url': 'http://example.com/product',
         'product_price': '19.99',
@@ -225,7 +225,7 @@ def test_initiate_price_check(client):
 
 
 def test_stop_price_check(client):
-    # Replace this with actual test data
+    #Test for stop_price_check function
     test_data = {
         'product_url': 'http://example.com/product'
     }
@@ -245,7 +245,7 @@ def test_stop_price_check(client):
 
 
 def test_scheduled_price_check():
-    # Replace this with actual test data
+    #Test for scheduled_price_check function
     test_data = {
         'product_url': 'http://example.com/product',
         'product_price': '19.99',

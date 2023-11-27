@@ -3,6 +3,8 @@ from unittest.mock import patch
 import pytest
 from src.modules.price_checker import check_price_drop
 
+#defining mock fucntions.
+
 @pytest.fixture
 def mock_product_price_bjs():
     with patch('src.modules.price_checker.product_price_bjs') as mock_bjs:
@@ -17,6 +19,8 @@ def mock_product_price_google():
 def mock_product_price_amazon():
     with patch('src.modules.price_checker.product_price_amazon') as mock_amazon:
         yield mock_amazon
+
+#Tests for check_price_drop function
 
 def test_check_price_drop_bjs(mock_product_price_bjs):
     mock_product_price_bjs.return_value = "$18.00"
