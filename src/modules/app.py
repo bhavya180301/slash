@@ -8,7 +8,7 @@ from src.modules.data import categories
 from src.modules.data import category_images
 import pandas as pd
 import pdfkit
-from src.modules.src.modules.product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
+from src.modules.product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
 from src.modules.price_checker import check_price_drop
 path_wkhtmltopdf = "src/modules/wkhtmltopdf.exe"
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
