@@ -30,6 +30,29 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 - 🚀 Slash transforms online shopping, making it faster, easier, and more personalized for users with diverse interests.
 
 ## Features Added In Phase 5
+### UI Improvements: 
+- 🔄 Sign Up Page / Login Page: Improved the layout of both pages and navbars to enhance user experience and navigation.
+- 🖼️🔍 Landing Page: Enhanced the user interface by incorporating images and suggesting product categories for user searches.
+- 🔄 Results Page: Improved the display of the results page by transitioning to a tile format and including product images along with relevant details.
+- 🛍️🔄 Wishlist Page: Modified the navigation and layout of the Wishlist page for a more user-friendly experience.
+- 🚀 Added Navbar: Introduced a navbar for smoother navigation across different pages.
+- 🗂️ Category Page: Implemented a new categories page to enhance the categorization of products.
+
+### Backend Calls:
+- 📉 Check Price Drop: Added functionality to check if the price of a wishlisted product has dropped.
+- ⏰ Set Price Alert and Stop Price Alert: Implemented the capability for periodic checks on potential price drops in wishlisted items.
+- 🌐✅ Website Category Filter: Added a feature to filter products based on one or more websites using checkboxes.
+- 📧 Automated Emails on Price Drop: Integrated with the set-price-alert method to notify users via automated email if the price of a wishlisted product drops during periodic checks.
+  
+### Additional Features: 
+- 📸 Image Scraping: Introduced image scraping along with other product details. 
+- ⭐🔢 Number of Ratings: Added a feature to check the number of ratings given to a product, in addition to displaying the rating.
+- 🗂️🔄 New Categories Page and Corresponding Backend Calls: Added a new categories page and the necessary backend calls to support it.
+
+### Bugs Fixed:
+- 🐜🛠️ Add to Wishlist Function: Initially called inside the filter function, it now has a separate function to avoid filtering results each time a product is added to the wishlist.
+- 🚀🗺️ Enhanced UI Navigation: Improved navigation through the incorporation of a navbar to address and resolve existing bugs.
+- ✔️📊 Test Coverage: Rectified original test cases and added 10 more to achieve a test coverage of 80%.
 
 ## Installation Steps 
 
