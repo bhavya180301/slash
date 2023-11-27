@@ -1,7 +1,7 @@
 
 
 
-<p align="center"><img width="500" src="./assets/slash.png"></p>
+<p align="center"><img width="500" src="./assets/FrontPage.png"></p>
 
 [![GitHub license](https://img.shields.io/github/license/Yash-Chandrani/slash)](https://github.com/Yash-Chandrani/slash/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/703241536.svg)](https://zenodo.org/doi/10.5281/zenodo.10023782)
@@ -43,7 +43,7 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 - ⏰ Set Price Alert and Stop Price Alert: Implemented the capability for periodic checks on potential price drops in wishlisted items.
 - 🌐✅ Website Category Filter: Added a feature to filter products based on one or more websites using checkboxes.
 - 📧 Automated Emails on Price Drop: Integrated with the set-price-alert method to notify users via automated email if the price of a wishlisted product drops during periodic checks.
-  
+
 ### Additional Features: 
 - 📸 Image Scraping: Introduced image scraping along with other product details. 
 - ⭐🔢 Number of Ratings: Added a feature to check the number of ratings given to a product, in addition to displaying the rating.
@@ -53,6 +53,47 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 - 🐜🛠️ Add to Wishlist Function: Initially called inside the filter function, it now has a separate function to avoid filtering results each time a product is added to the wishlist.
 - 🚀🗺️ Enhanced UI Navigation: Improved navigation through the incorporation of a navbar to address and resolve existing bugs.
 - ✔️📊 Test Coverage: The original test cases were not working, so we have rectified them and added 10 more to achieve a test coverage of 80%.
+
+## Preview
+ - Landing Page
+    We have enhanced the user interface by incorporating images and suggesting product categories for user searches.
+  <img src = "assets/LandingPage1.png"/>
+  <img src = "assets/LandingPage2.png"/>
+ - Category Page
+    We have implemented a new categories page to enhance the categorization of products.
+  <img src = "assets/Categories.png"/>
+ - Results Page
+   We have improved the display of the results page by transitioning to a tile format and including product images along with relevant details.
+  <img src = "assets/ResultsPage1.png"/>
+  <img src = "assets/ResultsPage2.png"/>
+ - Wishlist Page
+   We have improved the navigation and layout of the Wishlist page for a more user-friendly experience and added check price drop and start and stop price alert functionalities.
+  <img src = "assets/Wishlist.png"/>
+ - SignUp Page
+   We have improved the layout and navbars to enhance user experience and navigation.
+  <img src = "assets/Register.png"/>
+ - Login Page
+   We have improved the layout and navbars to enhance user experience and navigation.
+   <img src = "assets/Login.png"/>
+
+## Link to Phase 4 Video: 
+[Click here to view video]()
+
+We have used the following technologies were used for the development of this project:  
+<p align="left">
+  <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML" target="_blank"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg" alt="js" width="30" height="30"/>
+  </a>
+  <a href="https://www.python.org" target="_blank"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-plain.svg" alt="python" width="30" height="30"/>
+  </a>
+  <a href="https://developer.mozilla.org/en-US/docs/Glossary/CSS" target="_blank"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain.svg" alt="css" width="30" height="30"/>
+  </a>
+  <a href="https://flask.palletsprojects.com/" target="_blank"> 
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flask/flask-original.svg" alt="Flask" width="30" height="30"/>
+  </a>
+</p>  
 
 ## Installation Steps 
 
@@ -89,17 +130,14 @@ python3 -m src.slash --search socks
   * db.session.commit()
 <p>
 
-
 ## Code Coverage
 We have rectified the original test cases and added 10 more to achieve a test coverage of 80%.
-
 
 ## Future Scope
 - Can use selenium driver for smoother and faster scraping process.
 - Can include an option to check the availability of products in nearby stores.
 - Can shift to nosql database.
 - Increase the number of filters. Filter by price range and rating range. 
-
 
 ## Use Case
 * ***Students***: Students coming to university are generally on a budget and time constraint and generally spend hours wasting time to search for products on Websites. Slash is the perfect tool for these students that slashes all the unnecessary details on a website and helps them get prices for a product across multiple websites.Make the most of this tool in the upcoming Black Friday Sale.
