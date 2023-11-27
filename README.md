@@ -19,15 +19,15 @@ Meet Slash, not just a tool but a revolution in the world of online shopping. It
 ## What it Does
 Slash redefines how you shop online. No more tedious comparisons across e-commerce platforms—Slash accomplishes it within seconds, giving you back over 50% of your valuable time. Its user-friendly commands make navigating through deals an intuitive and enjoyable process, turning the search for the best deals into a breeze. More than a tool, Slash empowers you with customization, allowing you to tailor your search results instantly. And the excitement doesn't end there—explore our latest releases, the Mini Version and Full Version, ushering in a new era of convenience and efficiency in your online shopping endeavors. Embrace the future of online shopping with Slash, where every click brings you closer to a world of savings and unparalleled satisfaction. Try it now and elevate your online shopping experience!
 
-🔄 Easily compare deals across leading e-commerce websites with Slash, streamlining your shopping experience.
-⏰ Save over 50% of your time by accelerating product search and comparison processes with Slash.
-🤖 Use simple commands to filter, sort, and search items, ensuring a user-friendly and efficient experience.
-🎛️ Swiftly modify commands for precise search results, tailoring your shopping experience with ease.
-🆕 Explore enhanced features and improvements with the latest releases, catering to diverse user preferences.
-❤️ Easily add desired items to your wishlist for future reference or tracking.
-💰 Keep track of wishlist items and receive notifications when prices drop, ensuring you never miss a great deal.
-🌐 Navigate effortlessly from product search to wishlist management, ensuring a smooth shopping journey.
-🚀 Slash transforms online shopping, making it faster, easier, and more personalized for users with diverse interests.
+- 🔄 Easily compare deals across leading e-commerce websites with Slash, streamlining your shopping experience.
+- ⏰ Save over 50% of your time by accelerating product search and comparison processes with Slash.
+- 🤖 Use simple commands to filter, sort, and search items, ensuring a user-friendly and efficient experience.
+- 🎛️ Swiftly modify commands for precise search results, tailoring your shopping experience with ease.
+- 🆕 Explore enhanced features and improvements with the latest releases, catering to diverse user preferences.
+- ❤️ Easily add desired items to your wishlist for future reference or tracking.
+- 💰 Keep track of wishlist items and receive notifications when prices drop, ensuring you never miss a great deal.
+- 🌐 Navigate effortlessly from product search to wishlist management, ensuring a smooth shopping journey.
+- 🚀 Slash transforms online shopping, making it faster, easier, and more personalized for users with diverse interests.
 
 ## Features Added In Phase 5
 
