@@ -69,8 +69,6 @@ def formatResult(
                 .replace(",", "")
             )
             num_rating = num_ratings.strip()
-    # if df_flag==0: title=formatTitle(title)
-    # if df_flag==0: link=formatTitle(link)
     if currency:
         converted_cur = getCurrency(currency, price)
     product = {
