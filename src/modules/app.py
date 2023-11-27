@@ -8,7 +8,7 @@ from src.modules.data import categories
 from src.modules.data import category_images
 import pandas as pd
 import pdfkit
-from product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
+from src.modules.product_url_scraper import product_price_bjs, product_price_google, product_price_amazon
 from src.modules.price_checker import check_price_drop
 path_wkhtmltopdf = "src/modules/wkhtmltopdf.exe"
 config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
@@ -254,8 +254,7 @@ def add_to_wishlist():
     product_rating = request.json.get("product_rating")
     product_image_url = request.json.get("product_image_url")
 
-    print("here")
-    # Perform validation as needed
+    
 
     # Assuming you have a Wishlist model
     wishlist_product = Wishlist(
