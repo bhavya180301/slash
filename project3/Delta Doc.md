@@ -45,7 +45,8 @@ This feature enhances the user experience by offering a diverse selection of pro
 | ------------------------------------- | ------------------------------------- |
 | ![Phase 4 Landing Page](/assets/ui_landing_page.png) | ![Phase 5 Landing Page 2](/assets/LandingPage2.png) ![Category page](/assets/category2.png)|
 
-### Improvised search results (added image scraping)
+### Improvised search results preview
+Scraping images and other details of the product.
 | Phase 4                                   | Phase 5                                   |
 | ----------------------------------------- | ----------------------------------------- |
 | ![Phase 4 Search Result](/assets/old/old_searchResult.png) | ![Phase 5 Search Result 2](/assets/ResultsPage2.png)  |
