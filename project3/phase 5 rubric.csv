@@ -3,12 +3,11 @@ Criteria ,,Score ,Comments
 ,Workload Split,3,https://github.com/bhavya180301/slash/graphs/contributors
 ,Number of commits,3,565 commits
 ,Issues closed,3,4/6
-,DOI badge: exists,3,"https://github.com/bhavya180301/slash/blob/main/README.md
-
-and
- https://github.com/bhavya180301/slash/blob/main/project3/API%20Routes.pdf"
+,DOI badge: exists,3,https://github.com/bhavya180301/slash/blob/main/README.md
 Documentation ,Is the format of the document ugly?,3,Well defined README
-,Does the document talk about each functionality?,3,https://github.com/bhavya180301/slash/blob/main/README.md 
+,Does the document talk about each functionality?,3,"https://github.com/bhavya180301/slash/blob/main/README.md
+
+ https://github.com/bhavya180301/slash/blob/main/project3/API%20Routes.pdf  https://github.com/bhavya180301/slash/blob/main/project3/Delta%20Doc.md"
 ,"For common use cases, does the document have mini-tutorials?",3,Video and screenshots added for each functionality 
 ,"Does the document tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing?",3,Described well in README
 ,"Does it contain a short, animated video hosted on the repo that convinces people why they want to work on your code?",3,video present which indicates changes from previous phase and new features
@@ -29,7 +28,7 @@ Q1 - What your software does,"Does your website and documentation provide a clea
 ,Does your website and documentation clearly describe the type of user who should use your software?,yes,https://github.com/bhavya180301/slash/blob/main/README.md#use-case
 ,Do you publish case studies to show how your software has been used by yourself and others?,no,
 Q2 - Your project's and software's identity,"Is the name of your project/software unique?
-",no,
+",Yes,
 ,"Is your project/software name free from trademark violations?
 ",yes,
 Q3 - Availability of your software,Is your software available as a package that can be deployed without building it?,no,
@@ -57,7 +56,7 @@ Q5 - How do you support your software?,Does your software describe how a user ca
 Q6 - Your software's maintai0bility,Is your software’s architecture and design modular?,yes,Well defined code and file structure in GH
 ,Does your software use an accepted coding standard or convention?,yes,
 Q7 - Open standards and your software,"Does your software allow data to be imported and exported using open data formats? e.g. GIF, SVG, HTML, XML, tar, zip, CSV, JSON, NetCDF, or domain specific ones",yes,results can be converted to csv and pdf documents within the app
-,"Does your software allow communications using open communications protocols? e.g. HTTP, FTP, XMPP, SOAP over HTTP,  or domain-specific ones",yes,our software relies on webscarpping
+,"Does your software allow communications using open communications protocols? e.g. HTTP, FTP, XMPP, SOAP over HTTP,  or domain-specific ones",yes,The application uses REST APIs
 Q8 - Your software's portability,"Is your software cross-platform compatible? e.g. does it run under two or more of Windows, Unix/Linux and Mac OS X, or can be used from within two or more of Internet Explorer, Chrome, Firefox and Safari?",yes,The project uses Python language and Flask framework which can be installed on any platform and can be run on any system.
 Q9 - Your software and accessibility,Does your software adhere to appropriate accessibility conventions or standards?,yes,public repository on github
 ,Does your documentation adhere to appropriate accessibility conventions or standards?,yes,public repository on github
@@ -76,28 +75,29 @@ Q11 - Building and installing your software,Do you provide publicly-available in
 ,Do you have tests that can be run after your software has been built or deployed to show whether the build or deployment has been successful?,yes,https://github.com/bhavya180301/slash/tree/main/tests
 Q12 - How you test your software,"Do you have an automated test suite for your software?
 ",yes,https://github.com/bhavya180301/slash/actions
-,Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?,yes,https://github.com/bhavya180301/slash/tree/main/tests
-,"Do you use continuous integration, automatically running tests whenever changes are made to your source code?",yes,workflows are executed every time new code is added
+,Do you have a framework to periodically (e.g. nightly) run your tests on the latest version of the source code?,yes,https://github.com/bhavya180301/slash/actions
+,"Do you use continuous integration, automatically running tests whenever changes are made to your source code?",yes,https://github.com/bhavya180301/slash/actions
 ,Are your test results publicly visible?,yes,badges in README
 ,Does your website state how many projects and users are associated with your project?,yes,https://github.com/bhavya180301/slash#contributors
 ,Do you provide success stories on your website?,no,
 ,Do you list your important partners and collaborators on your website?,yes,https://github.com/bhavya180301/slash#contributors
 ,Do you list your project's publications on your website or link to a resource where these are available?,no,
 ,Do you list third-party publications that refer to your software on your website or link to a resource where these are available?,no,
-,Can users subscribe to notifications to changes to your source code repository?,yes,user notified when changes are made 
+,Can users subscribe to notifications to changes to your source code repository?,yes,user can subscribe to notifications for changes
 ,"If your software is developed as an open source project (and just a project developing open source software), do you have a governance model?",yes,https://github.com/bhavya180301/slash/blob/main/CONTRIBUTING.md
 Q14 - How you ma0ge contributions,"Do you accept contributions (e.g. bug fixes, enhancements, documentation updates, tutorials) from people who are not part of your project?",yes,open to contributions
 , Do you have a contributions policy?,yes,https://github.com/bhavya180301/slash/blob/main/CONTRIBUTING.md
 ,Is your contributions' policy publicly available,yes,https://github.com/bhavya180301/slash/blob/main/CONTRIBUTING.md
 ,Do contributors keep the copyright/IP of their contributions,yes,copyright info mentioned in source code files
 Q15 - Your software's copyright and licensing,Does your website and documentation clearly state the copyright owners of your software and documentation?,yes,
-,Does each of your source code files include a copyright statement?,no,not present in all files
+,Does each of your source code files include a copyright statement?,no,Present in main modules
 ,Does your website and documentation clearly state the licence of your software?,yes,https://github.com/bhavya180301/slash/blob/main/LICENSE
-,Is your software released under an open source licence?,yes,https://github.com/elric97/feature-hunt/blob/7f8e77835408cb6592f654bbf59caa952beaeb63/LICENSE
+,Is your software released under an open source licence?,yes,"MIT License
+https://github.com/bhavya180301/slash/blob/main/LICENSE"
 ,Is your software released under an OSI-approved open-source licence?,yes,"MIT License
 https://github.com/bhavya180301/slash/blob/main/LICENSE"
 ,Does each of your source code files include a licence header?,no,copyright info only in source files https://github.com/bhavya180301/slash/blob/main/LICENSE
 ,Do you have a recommended citation for your software?,yes,DOI badge
 Q16 - Your plans for the future,"Does your website or documentation include a project roadmap (a list of project and development milestones for the next 3, 6 and 12 months)?",yes,https://github.com/bhavya180301/slash#future-scope
-,"Does your website or documentation describe how your project is funded, and the period over which funding is guaranteed?",no,
+,"Does your website or documentation describe how your project is funded, and the period over which funding is guaranteed?",yes,https://github.com/bhavya180301/slash/blob/main/README.md#funding-information
 ,"Do you make timely announcements of the deprecation of components, APIs, etc.?",no,

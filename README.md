@@ -12,6 +12,7 @@
 [![codecov](https://codecov.io/gh/bhavya180301/slash/graph/badge.svg?token=32CLPLTENS)](https://codecov.io/gh/bhavya180301/slash)
 [![Build/Test](https://github.com/bhavya180301/slash/actions/workflows/python-app.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/python-app.yml)
 [![Python Style Checker](https://github.com/bhavya180301/slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/style_checker.yml)
+[![Lint Python](https://github.com/bhavya180301/slash/actions/workflows/pylint.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/pylint.yml)
 
 ## Introduction
 Meet Slash, not just a tool but a revolution in the world of online shopping. It's designed to transcend the conventional boundaries, promising not only utility but a seamless experience of effortless savings and unparalleled convenience.
@@ -79,6 +80,16 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 ## Link to Phase 5 Video: 
 [Link to video](https://www.youtube.com/watch?v=wJGMes7k6bc)
 
+## Link to Delta Document for additional Information: 
+[Link to Doc]()
+
+## Link to API Routes Documentation: 
+[Link to Doc](/project3/API%20Routes.pdf)
+
+## Link to Score Cards/Rubric: 
+[Link to Rubric](/project3/phase%205%20rubric.csv)
+
+
 We have used the following technologies were used for the development of this project:  
 <p align="left">
   <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML" target="_blank"> 
@@ -129,7 +140,22 @@ python3 -m src.slash --search socks
   * from app import Wishlist
   * db.session.commit()
 <p>
+4. After completing the Installation and all project dependencies are installed. 
+5. Make sure you are in the base directory. 
+6. Use the following commands 
 
+MAC 
+export FLASK_APP=./src/modules/app
+ ```python3 -m flask run``` 
+
+
+Windows
+set FLASK_APP=.\src\modules\app 
+ ```python3 -m flask run``` 
+
+
+5. Once flask is running, open your internet browser and type ```http://127.0.0.1:5000/``` into the search bar.
+   
 ## Code Coverage
 We have rectified the original test cases and added 10 more to achieve a test coverage of 80%.
 
