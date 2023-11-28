@@ -36,7 +36,7 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 - 🔄 Results Page: Improved the display of the results page by transitioning to a tile format and including product images along with relevant details.
 - 🛍️🔄 Wishlist Page: Modified the navigation and layout of the Wishlist page for a more user-friendly experience.
 - 🚀 Added Navbar: Introduced a navbar for smoother navigation across different pages.
-- 🗂️ Category Page: Implemented a new categories page to enhance the categorization of products.
+- 🗂️ Category Page: Added a new categories page to that lists popular items in that particular category to enhance the categorization of products.
 
 ### Backend Calls:
 - 📉 Check Price Drop: Added functionality to check if the price of a wishlisted product has dropped.
@@ -60,7 +60,7 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
   <img src = "assets/LandingPage1.png"/>
   <img src = "assets/LandingPage2.png"/>
  - Category Page
-    We have implemented a new categories page to enhance the categorization of products.
+    We have added a new categories page to that lists popular items in that particular category to enhance the categorization of products.
   <img src = "assets/Categories.png"/>
  - Results Page
    We have improved the display of the results page by transitioning to a tile format and including product images along with relevant details.
