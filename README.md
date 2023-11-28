@@ -81,7 +81,7 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 [Link to video](https://www.youtube.com/watch?v=wJGMes7k6bc)
 
 ## Link to Delta Document for additional Information: 
-[Link to Doc]()
+[Link to Doc](https://github.com/bhavya180301/slash/blob/main/project3/Delta%20Doc.md)
 
 ## Link to API Routes Documentation: 
 [Link to Doc](/project3/API%20Routes.pdf)
