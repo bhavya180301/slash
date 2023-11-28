@@ -80,6 +80,16 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 ## Link to Phase 5 Video: 
 [Link to video](https://www.youtube.com/watch?v=wJGMes7k6bc)
 
+## Link to Delta Document for additional Information: 
+[Link to Doc]()
+
+## Link to API Routes Documentation: 
+[Link to Doc](/project3/API%20Routes.pdf)
+
+## Link to Score Cards/Rubric: 
+[Link to Rubric](/project3/phase%205%20rubric.csv)
+
+
 We have used the following technologies were used for the development of this project:  
 <p align="left">
   <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML" target="_blank"> 
