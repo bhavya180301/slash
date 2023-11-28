@@ -1,6 +1,6 @@
 # Updates Made In Phase 5 ✨
 
-## Backend Improvisations 👩‍💻👨‍💻🥳  I 
+## Backend Improvisations 👩‍💻👨‍💻🥳 
 
 ### Wishlist Page
 | Phase 4                       | Phase 5                       |
