@@ -76,8 +76,8 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
    We have improved the layout and navbars to enhance user experience and navigation.
    <img src = "assets/Login.png"/>
 
-## Link to Phase 4 Video: 
-[Click here to view video]()
+## Link to Phase 5 Video: 
+[Link to video](https://www.youtube.com/watch?v=wJGMes7k6bc)
 
 We have used the following technologies were used for the development of this project:  
 <p align="left">
