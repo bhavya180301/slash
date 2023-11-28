@@ -56,24 +56,29 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 - ✔️📊 Test Coverage: The original test cases were not working, so we have rectified them and added 10 more to achieve a test coverage of 80%.
 
 ## Preview
- - Landing Page
+ - ### Landing Page
     We have enhanced the user interface by incorporating images and suggesting product categories for user searches.
   <img src = "assets/LandingPage1.png"/>
   <img src = "assets/LandingPage2.png"/>
- - Category Page
+ 
+ - ### Category Page
     We have added a new categories page to that lists popular items in that particular category to enhance the categorization of products.
   <img src = "assets/Categories.png"/>
- - Results Page
+ 
+ - ### Results Page
    We have improved the display of the results page by transitioning to a tile format and including product images along with relevant details.
   <img src = "assets/ResultsPage1.png"/>
   <img src = "assets/ResultsPage2.png"/>
- - Wishlist Page
+ 
+ - ### Wishlist Page
    We have improved the navigation and layout of the Wishlist page for a more user-friendly experience and added check price drop and start and stop price alert functionalities.
   <img src = "assets/Wishlistpage.png"/>
- - SignUp Page
+ 
+ - ### SignUp Page
    We have improved the layout and navbars to enhance user experience and navigation.
   <img src = "assets/Register.png"/>
- - Login Page
+ 
+ - ### Login Page
    We have improved the layout and navbars to enhance user experience and navigation.
    <img src = "assets/Login.png"/>
 
@@ -90,7 +95,7 @@ Slash redefines how you shop online. No more tedious comparisons across e-commer
 [Link to Rubric](/project3/phase%205%20rubric.csv)
 
 
-We have used the following technologies were used for the development of this project:  
+We have used the following technologies for the development of this project:  
 <p align="left">
   <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML" target="_blank"> 
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-plain.svg" alt="js" width="30" height="30"/>
