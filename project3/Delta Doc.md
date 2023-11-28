@@ -57,6 +57,11 @@ This functionality empowers users to tailor their search experience by choosing 
 | ----------------------------------------- | ----------------------------------------- |
 | ![Phase 4 Search Result](/assets/old/old_searchResult.png) | ![Phase 5 Search Result 1](/assets/ResultsPage1.png) |
 
+### Added No of ratings
+| Phase 4                               | Phase 5                               |
+| ------------------------------------- | ------------------------------------- |
+| ![Phase 4 Result](/assets/old/old_searchResult.png) | ![Phase 5 Results](/assets/No_of_ratings.png) |
+
 ### Improvised Wishlist page
 
 ### Check Price Drop (using Selenium webdriver for consistent results)
