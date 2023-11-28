@@ -12,6 +12,7 @@
 [![codecov](https://codecov.io/gh/bhavya180301/slash/graph/badge.svg?token=32CLPLTENS)](https://codecov.io/gh/bhavya180301/slash)
 [![Build/Test](https://github.com/bhavya180301/slash/actions/workflows/python-app.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/python-app.yml)
 [![Python Style Checker](https://github.com/bhavya180301/slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/style_checker.yml)
+[![Lint Python](https://github.com/bhavya180301/slash/actions/workflows/pylint.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/pylint.yml)
 
 ## Introduction
 Meet Slash, not just a tool but a revolution in the world of online shopping. It's designed to transcend the conventional boundaries, promising not only utility but a seamless experience of effortless savings and unparalleled convenience.
