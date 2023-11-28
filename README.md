@@ -129,7 +129,22 @@ python3 -m src.slash --search socks
   * from app import Wishlist
   * db.session.commit()
 <p>
+4. After completing the Installation and all project dependencies are installed. 
+5. Make sure you are in the base directory. 
+6. Use the following commands 
 
+MAC 
+export FLASK_APP=./src/modules/app
+ ```python3 -m flask run``` 
+
+
+Windows
+set FLASK_APP=.\src\modules\app 
+ ```python3 -m flask run``` 
+
+
+5. Once flask is running, open your internet browser and type ```http://127.0.0.1:5000/``` into the search bar.
+   
 ## Code Coverage
 We have rectified the original test cases and added 10 more to achieve a test coverage of 80%.
 
