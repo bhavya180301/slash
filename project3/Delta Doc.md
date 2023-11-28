@@ -1,6 +1,6 @@
 # Updates Made In Phase 5 ✨
 
-## Backend Improvisations
+## Backend Improvisations 👩‍💻👨‍💻🥳  I 
 
 ### Wishlist Page
 | Phase 4                       | Phase 5                       |
@@ -22,7 +22,7 @@
 | ----------------------------- | ----------------------------- |
 | Poor navigation across application. (for example no button to get back to home page) | Improved navigation by adding necessary buttons across the application. |
 
-## Frontend Improvisations 
+## Frontend Improvisations 👩‍💻👨‍💻🤩
 
 ### Improvised Register page
 | Phase 4                       | Phase 5                       |
