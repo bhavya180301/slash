@@ -8,7 +8,7 @@
 ![Github](https://img.shields.io/badge/language-python-red.svg)
 ![GitHub issues](https://img.shields.io/github/issues/bhavya180301/slash)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/bhavya180301/slash)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/bhavya180301/bhavya180301/slash)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/bhavya180301/slash)
 [![codecov](https://codecov.io/gh/bhavya180301/slash/graph/badge.svg?token=32CLPLTENS)](https://codecov.io/gh/bhavya180301/slash)
 [![Build/Test](https://github.com/bhavya180301/slash/actions/workflows/python-app.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/python-app.yml)
 [![Python Style Checker](https://github.com/bhavya180301/slash/actions/workflows/style_checker.yml/badge.svg)](https://github.com/bhavya180301/slash/actions/workflows/style_checker.yml)
